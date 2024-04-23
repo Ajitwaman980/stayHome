@@ -1,0 +1,48 @@
+<%- layout("/layout/biolerplate.ejs")%>
+    <!-- why used this condition becuse the flash message is in array -->
+    <% if (success && success.length>0) { %>
+        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <%= success %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+
+            <h3 style="
+  
+    width: auto;
+    font-family: monospace;
+    font-weight: 600;">All Listings</h3>
+            <!-- <form method="GET" action="/listings/new">
+      <button>Create New Listing</button>
+    </form> -->
+
+            <div class="Container">
+                <div class="listing-grid">
+                    <% for (const Listing of data) { %>
+                        <!-- a tag showing the info about this house  -->
+                        <a class="showing_data_a_tag_in_listing" href="/listings/<%= Listing._id %>">
+
+                            <div class="listing-card">
+
+                                <img src="<%= Listing.image %>" class="card-img-top rounded" alt="image styeHome">
+                                <div class="card-body">
+                                    <b>
+                                        <p class="card_text_title">
+                                            <%= Listing.title %>
+                                        </p>
+                                    </b>
+                                    <p class="card_text_price">
+                                        <%= Listing.price %><span>&#8377;</span>/Night
+                                    </p>
+                                </div>
+                            </div>
+                            <% } %>
+                        </a>
+                </div>
+            </div>
+
+
+
+
+
+            </body>

@@ -1,0 +1,41 @@
+<%- layout("/layout/biolerplate.ejs")%>
+
+
+  <h3 style="
+    margin-left: 3.2rem;
+    font-family: monospace;
+    font-weight: 600;">All Listings</h3>
+  <!-- <form method="GET" action="/listings/new">
+      <button>Create New Listing</button>
+    </form> -->
+
+  <div class="container">
+    <div class="listing-grid">
+      <% for (Listing of data) { %>
+        <!-- a tag showing the info about this house  -->
+        <a class="showing_data_a_tag_in_listing" href="/listings/<%= Listing._id %>">
+
+          <div class="listing-card">
+            <!-- used bootstrap for better design -->
+            <img src="<%= Listing.image %>" class="card-img-top" alt="image styeHome">
+            <div class="card-body">
+              <b>
+                <p class="card_text_title">
+                  <%= Listing.title %>
+                </p>
+              </b>
+              <p class="card_text_price">
+                <%= Listing.price %><span>&#8377;</span>/Night
+              </p>
+            </div>
+          </div>
+          <% } %>
+        </a>
+    </div>
+  </div>
+
+
+
+
+
+  </body>

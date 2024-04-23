@@ -1,0 +1,15 @@
+this is styeSimple (real estate ) web application 
+using express-generator
+used  express for route mongoose for database 
+require(npm install http-errors express path cookie-parser morgan method-override session flash 
+ Multer  joi connect-flash express-session)
+ejs-ejs mate
+crud 
+C-create
+R-read
+U -update
+d- delete
+Multer :
+which is primarily used for uploading files 
+npm i multer 
+Multer  is act as middleware or handling multipart/form-data

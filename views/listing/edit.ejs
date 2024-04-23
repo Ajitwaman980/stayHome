@@ -1,0 +1,74 @@
+<% layout("/layout/biolerplate.ejs")-%>
+
+  <style>
+    h3 {
+      text-decoration: none;
+      font-size: 2.2rem;
+      margin-left: 1.3rem;
+      font-family: auto;
+      font-weight: 600;
+      /* font-stretch: ultra-condensed; */
+      text-decoration-color: blueviolet;
+      color: black;
+    }
+  </style>
+
+  <body>
+    <h3>Update Your Data</h3>
+    <form novalidate method="POST" action="/listings/<%= listing_info._id %>?_method=PUT"
+      class="needs-validation m-2 Create_New_Listing_form">
+      <div class="mb-3">
+        <label for="title">Title</label>
+        <input class="form-control" type="text" value="<%= listing_info.title %>" name="title" required />
+        <div class="valid-feedback">Looks good!</div>
+        <div id="validationServer03Feedback" class="invalid-feedback">
+          Please provide a valid Title.
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description">Description</label>
+        <textarea class="form-control" placeholder="Enter Your description" rows="4" name="description">
+<%= listing_info.description %>
+</textarea>
+        <div id="validationServer03Feedback" class="invalid-feedback">
+          Please provide a valid information.
+        </div>
+
+        <div class="mb-3">
+          <label for="image">Image URL/Link</label>
+          <input class="form-control" type="text" value="<%= listing_info.image %>" name="image" required />
+          <!-- <div class="mb-3">
+        <input type="file" id="img" name="img_file_edit" accept="image/*" />
+      </div> -->
+        </div>
+
+        <div class="mb-3">
+          <label for="price">Price</label>
+          <input class="form-control" type="number" value="<%= listing_info.price %>" name="price" required />
+          <div id="validationServer03Feedback" class="invalid-feedback">
+            Please provide a valid Price.
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="location">Location</label>
+          <input class="form-control" type="text" value="<%= listing_info.location %>" name="location" required />
+          <div id="validationServer03Feedback" class="invalid-feedback">
+            Please provide a valid city.
+          </div>
+
+          <div class="mb-3">
+            <label for="country">Country</label>
+            <input class="form-control" type="text" value="<%= listing_info.country %>" name="country" required />
+            <div id="validationServer03Feedback" class="invalid-feedback">
+              Please provide a valid Country.
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-lg btn-outline-secondary text-white" type="submit" id="Edit_data">
+            Update
+          </button>
+    </form>
+    <script src="/javascripts/validationform.js"></script>
+  </body>

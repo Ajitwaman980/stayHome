@@ -1,0 +1,154 @@
+
+ 
+
+ 
+ .Container {
+  display: flex;
+ 
+  padding: 2rem;
+  width: 100%;
+}
+
+.listing-grid{
+  display: flex;
+  flex-wrap: wrap;
+   justify-content: center;
+  gap: 1rem;
+  width: 100%; 
+}
+
+.listing-card {
+
+  width: 20rem;
+  height: 25rem;
+  overflow: hidden;
+}
+
+.card-img-top {
+  width: 100%;
+  height: 18.75rem;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+
+  padding: 1rem;
+}
+
+.showing_data_a_tag_in_listing {
+  display: flex;
+  flex-wrap: wrap;
+  
+  text-decoration: none;
+  
+
+}
+
+.card_text_title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+}
+
+.card_text_price {
+  font-size: 1.2rem;
+  color: gray;
+  margin-top: 0.5rem;
+}
+
+ 
+
+ /* ------------------------------------------------------------ */
+/*  */
+.Details_Of_Hotel_titile{
+  text-align: center;
+}
+.information_showing_your_house img {
+  width: 100%;
+  height: 14rem;
+  object-fit: cover;
+}
+
+.title_house {
+  font-weight: bold;
+}
+.information_showing_your_house {
+  height: 30rem;
+}
+.information_showing_your_house {
+  background-color: beige;
+  color: rgb(0, 0, 0);
+  padding: 1.5rem;
+  line-height: 2rem;
+  margin: 0 auto;
+  font-size: 1.2rem;
+  max-width: 44rem; 
+  width: 100%; 
+
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  overflow: hidden; /
+}
+
+.information_showing_your_house b {
+  font-size: 1.4rem;
+  font-family: arial;
+  font-weight: 100;
+}
+
+/* Media query for screens smaller than 768px (tablets and below) */
+@media (max-width: 768px) {
+  .information_showing_your_house {
+    padding: 1rem; /* Decrease padding */
+  }
+}
+
+/* Delete Button */
+/* Edit Button */
+.button_edit_delete {
+  display: flex;
+  gap: 2rem;
+
+
+}
+#edit-button {
+  background-color: #007bff; 
+  color: #fff; 
+  border: none;
+  /* padding: 10px 20px; */
+  padding: 0rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#edit-button:hover {
+  background-color: #0056b3;
+}
+#delete-button {
+  background-color: #dc3545;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#delete-button:hover {
+  background-color: #c82333; 
+}
+/* review */
+.review{
+  width: 100%;
+  margin-top: -10px;
+}

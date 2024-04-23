@@ -1,0 +1,28 @@
+<% layout("/layout/biolerplate.ejs")-%>
+    <% if (error && error.length> 0) { %>
+        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+
+            <link rel="stylesheet" href="/stylesheets/login.css">
+            <div class="COntainer">
+                <form action="/login" method="post">
+                    <div class='username'>
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" required>
+                    </div>
+                    <div class="password">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required>
+                        <i class="toggle-password fa fa-fw fa-eye-slash" id="togglePassword"></i>
+                    </div>
+                    <button type="submit">Login</button>
+                    <div style="display: flex; justify-content: center; gap:1rem"> <a href="/signUp">signUp ?</a>
+                        <a href="/listings">Home </a>
+                    </div>
+
+                </form>
+            </div>
+            <script src="/javascripts/loginpassword.js"></script>

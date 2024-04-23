@@ -1,0 +1,16 @@
+<% layout("/layout/biolerplate.ejs")-%>
+    <link rel="stylesheet" href="/stylesheets/user.css" />
+
+
+
+
+    <div class="form-container">
+        <form action="/signUp" method="post" class="needs-validation">
+            <input class="form-control" type="text" placeholder="Enter your username" name="username" id="username"
+                required>
+            <input class="form-control" type="email" placeholder="Enter your email" name="email" id="email" required>
+            <input class="form-control" type="password" placeholder="Enter your password" name="password" id="password"
+                required>
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
