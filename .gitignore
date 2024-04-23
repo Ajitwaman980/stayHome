@@ -6,3 +6,4 @@ yarn-error.log
 
 # Express.js
 .env
+vscode/
