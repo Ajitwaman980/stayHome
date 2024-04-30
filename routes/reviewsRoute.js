@@ -20,18 +20,18 @@ const multer = require("multer"); //used to upload photo
 const upload = multer({ dest: "uploads/" });
 
 // reviews for place using post request req->show.ejs
-router.post("", isLogin, Review_Schema_validation, async (req, res) => {
+router.post("", isLogin, async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
     const { Rating, Comment } = req.body;
-    // console.log(Comment);
+    console.log("this is comment ", Comment);
     let New_review = new Review({
       Rating,
       comment: Comment,
     });
     // author
     New_review.author = req.user._id;
-    console.log(New_review.author);
+    // console.log(New_review.author);
     listing.Reviews.push(New_review);
     await listing.save();
     await New_review.save();
@@ -39,7 +39,7 @@ router.post("", isLogin, Review_Schema_validation, async (req, res) => {
     res.redirect(`/listings/${req.params.id}`);
   } catch (e) {
     console.log(e);
-    res.re("error.ejs");
+    res.render("error.ejs");
   }
 });
 // ---delete reviews
@@ -51,7 +51,7 @@ router.delete("/:reviewId", async (req, res) => {
     await Listing.findByIdAndUpdate(id, { $pull: { Reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
 
-    console.log("removed", id, reviewId);
+    // console.log("removed", id, reviewId);
     res.redirect(`/listings/${id}`);
   } catch (e) {
     res.redirect(`/listings/${id}`);

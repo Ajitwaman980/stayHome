@@ -2,7 +2,9 @@ const express = require("express");
 const router = express.Router();
 const Listing = require("../model/listing"); //Listing is model
 const multer = require("multer"); //used to upload photo
-const upload = multer({ dest: "uploads/" });
+const cloudinary_for_storage = require("../utility/cloudinary.js"); //Cloudinary is model
+
+const upload = multer({ storage: cloudinary_for_storage });
 const {
   Schema_validation,
   Review_Schema_validation,
@@ -44,9 +46,14 @@ router.get("/:id/edit", isLogin, isOwner, async function (req, res) {
   const listing_info = await Listing.findById(id);
   res.render("../views/listing/edit.ejs", { listing_info });
 });
-
 // Update data
-router.put("/:id", isLogin, isOwner, ListingEditDataById);
+router.put(
+  "/:id",
+  isLogin,
+  isOwner,
+  upload.single("image"),
+  ListingEditDataById
+);
 
 // Delete operation
 router.get("/:id/delete", isLogin, isOwner, ListingdeleteById);
