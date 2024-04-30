@@ -1,4 +1,6 @@
-const Listing = require("../model/listing.js"); //Listing is mod
+const error = require("mongoose/lib/error/index.js");
+const Listing = require("../model/listing.js"); // Listing is model
+
 async function handleRetrieveData(req, res) {
   try {
     const data = await Listing.find({});
@@ -9,9 +11,9 @@ async function handleRetrieveData(req, res) {
     res.render("../views/listing/error.ejs");
   }
 }
-async function GetlistingByid(req, res, err) {
-  let { id } = req.params; //to get id into the url
-  // to find exact data with help of id
+
+async function GetlistingByid(req, res, error) {
+  let { id } = req.params; // to get id into the url
   try {
     const listing_info = await Listing.findById(id)
       .populate({
@@ -20,12 +22,9 @@ async function GetlistingByid(req, res, err) {
       })
       .populate("owner");
 
-    // console.log(listing_info.owner.username
     return res.render("../views/listing/show.ejs", { listing_info });
   } catch (e) {
-    // res.redirect("/");
-    console.log(e);
-
+    console.log("error ", e);
     res.render("../views/listing/error.ejs");
   }
 }
@@ -33,11 +32,11 @@ async function GetlistingByid(req, res, err) {
 async function ListingNewDataInsert(req, res) {
   try {
     const { title, description, price, location, country } = req.body;
-    // let image = req.body.image;
-    // if (req.file) {
-    //   image = req.file.path;
-    // }
-    const image = req.file ? req.file.path : req.body.image;
+    if (req.file) {
+      image = req.file.path;
+    }
+    let Url = req.file.path;
+    let fileName = req.file.filename;
 
     const newListing = new Listing({
       title,
@@ -49,11 +48,13 @@ async function ListingNewDataInsert(req, res) {
       owner: req.user._id,
     });
 
+    newListing.image = { Url, fileName };
     await newListing.save();
+    console.log("images add in cloudinary");
     req.flash("success", "Successfully added");
     res.redirect("/listings");
   } catch (error) {
-    console.error(error);
+    console.log(error);
     res.render("../views/listing/error.ejs");
   }
 }
@@ -61,23 +62,32 @@ async function ListingNewDataInsert(req, res) {
 async function ListingEditDataById(req, res) {
   try {
     const { id } = req.params;
-    const { title, description, image, price, location, country } = req.body;
-
-    await Listing.findByIdAndUpdate(id, {
+    const { title, description, price, location, country } = req.body;
+    let Update_listing = await Listing.findByIdAndUpdate(id, {
       title,
       description,
-      image,
       price,
       location,
       country,
     });
+    let image;
+    if (req.file) {
+      image = req.file.path;
+      let Url = req.file.path;
+      let fileName = req.file.filename;
+      Update_listing.image = { Url, fileName };
+      await Update_listing.save();
+    }
+    console.log("this is image ", image);
 
     req.flash("success", "Successfully Updated List");
     res.redirect("/listings");
   } catch (error) {
+    console.log(error);
     res.render("../views/listing/error.ejs");
   }
 }
+
 const ListingdeleteById = async (req, res) => {
   try {
     let id = req.params.id;
@@ -89,6 +99,7 @@ const ListingdeleteById = async (req, res) => {
     res.render("../views/listing/error.ejs");
   }
 };
+
 module.exports = {
   handleRetrieveData,
   GetlistingByid,
