@@ -7,91 +7,88 @@
     </h2>
     <div class="continer_showing_card">
       <div class="card information_showing_your_house">
-        <% if (listing_info.image.startsWith('http')) { %>
-          <!-- If the image is an external URL -->
-          <img src="<%= listing_info.image %>" class="card-img-top" alt="Listing Image" />
-          <% } else { %>
-            <!-- If the image is a local upload -->
-            <img src="/<%= listing_info.image %>" class="card-img-top" alt="Listing Image" />
+
+        <!-- If the image is an external URL -->
+        <img src="<%= listing_info.image.Url %>" class="card-img-top" alt="Listing Image" />
+
+        <div class="card-body">
+          <span class="owner-info">Owner By: <%= listing_info.owner.username %></span>
+          <p class="description"><strong>Description:</strong>
+            <%= listing_info.description %>
+          </p>
+          <p class="price-location"><strong>Price:</strong>
+            <%= listing_info.price %> <span>&#8377;</span>
+          </p>
+          <p class="price-location"><strong>Location:</strong>
+            <%= listing_info.location %>
+          </p>
+          <p class="price-location"><strong>Country:</strong>
+            <%= listing_info.country %>
+          </p>
+          <% if (currentUser && currentUser._id.equals(listing_info.owner._id)) { %>
+            <div class="button_edit_delete">
+              <button id="edit-button" class="btn btn-primary edit" data-listing-id="<%= listing_info._id %>">
+                Edit
+              </button>
+              <button id="delete-button" class="btn btn-danger delete ms-2" data-listing-id="<%= listing_info._id %>">
+                Delete
+              </button>
+            </div>
             <% } %>
+              <hr>
 
-              <div class="card-body">
-                <span class="owner-info">Owner By: <%= listing_info.owner.username %></span>
-                <p class="description"><strong>Description:</strong>
-                  <%= listing_info.description %>
-                </p>
-                <p class="price-location"><strong>Price:</strong>
-                  <%= listing_info.price %> <span>&#8377;</span>
-                </p>
-                <p class="price-location"><strong>Location:</strong>
-                  <%= listing_info.location %>
-                </p>
-                <p class="price-location"><strong>Country:</strong>
-                  <%= listing_info.country %>
-                </p>
-                <% if (currentUser && currentUser._id.equals(listing_info.owner._id)) { %>
-                  <div class="button_edit_delete">
-                    <button id="edit-button" class="btn btn-primary edit" data-listing-id="<%= listing_info._id %>">
-                      Edit
-                    </button>
-                    <button id="delete-button" class="btn btn-danger delete ms-2"
-                      data-listing-id="<%= listing_info._id %>">
-                      Delete
-                    </button>
-                  </div>
-                  <% } %>
-                    <hr>
-
-                    <% if (currentUser) { %>
-                      <div class="review-form">
-                        <h4>Give Review</h4>
-                        <div class="star-rating">
-                          <input type="radio" id="star5" name="rating" value="5">
-                          <label for="star5">&#9733;</label>
-                          <input type="radio" id="star4" name="rating" value="4">
-                          <label for="star4">&#9733;</label>
-                          <input type="radio" id="star3" name="rating" value="3">
-                          <label for="star3">&#9733;</label>
-                          <input type="radio" id="star2" name="rating" value="2">
-                          <label for="star2">&#9733;</label>
-                          <input type="radio" id="star1" name="rating" value="1">
-                          <label for="star1">&#9733;</label>
-                        </div>
-                        <div class="mb-3">
-                          <textarea class="form-control review-comment" placeholder="Write your review here"
-                            name="Comment" id="comment" cols="20" rows="6"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-outline-info btn-review">Submit Review</button>
-                      </div>
-                      <% } %>
-                        <hr class="all-reviews">
-                        <h3>All Reviews</h3>
-                        <div class="container comment-container">
-                          <% for(let review of listing_info.Reviews) { %>
-                            <div class="card col-12 mb-4 review-card">
-                              <div class="card-body">
-                                <p class="review-author">@<%= review.author.username %>
-                                </p>
-                                <p class="review-rating">
-                                  <% for(let i=0; i < review.Rating; i++) { %>
-                                    <span class="fa fa-star checked"></span>
-                                    <% } %>
-                                </p>
-                                <p class="review-comment">
-                                  <%= review.comment %>
-                                </p>
-                                <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
-                                  <form method="post"
-                                    action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                    class="delete-btn">
-                                    <button class="btn btn-sm btn-dark">Delete</button>
-                                  </form>
-                                  <% } %>
-                              </div>
-                            </div>
+              <% if (currentUser) { %>
+                <div class="review-form">
+                  <h4>Give Review</h4>
+                  <form action="/listings/<%= listing_info._id %>/reviews" method="post">
+                    <div class="star-rating">
+                      <input type="radio" id="star5" name="Rating" value="5">
+                      <label for="star5">&#9733;</label>
+                      <input type="radio" id="star4" name="Rating" value="4">
+                      <label for="star4">&#9733;</label>
+                      <input type="radio" id="star3" name="Rating" value="3">
+                      <label for="star3">&#9733;</label>
+                      <input type="radio" id="star2" name="Rating" value="2">
+                      <label for="star2">&#9733;</label>
+                      <input type="radio" id="star1" name="Rating" value="1">
+                      <label for="star1">&#9733;</label>
+                    </div>
+                    <div class="mb-3">
+                      <textarea class="form-control review-comment" placeholder="Write your review here" name="Comment"
+                        id="comment" cols="20" rows="6"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-outline-info btn-review">Submit Review</button>
+                </div>
+                </form>
+                <% } %>
+                  <hr class="all-reviews">
+                  <h3>All Reviews</h3>
+                  <div class="container comment-container">
+                    <% for(let review of listing_info.Reviews) { %>
+                      <div class="card col-12 mb-4 review-card">
+                        <div class="card-body">
+                          <p class="review-author">@<%= review.author.username %>
+                          </p>
+                          <p class="review-rating">
+                            <% for(let i=0; i < review.Rating; i++) { %>
+                              <span class="fa fa-star checked"></span>
+                              <% } %>
+                          </p>
+                          <p class="review-comment">
+                            <%= review.comment %>
+                          </p>
+                          <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
+                            <form method="post"
+                              action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
+                              class="delete-btn">
+                              <button class="btn btn-sm btn-dark">Delete</button>
+                            </form>
                             <% } %>
                         </div>
-              </div>
+                      </div>
+                      <% } %>
+                  </div>
+        </div>
       </div>
     </div>
     <script src="/javascripts/editbutton.js"></script>
