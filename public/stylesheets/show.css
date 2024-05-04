@@ -116,3 +116,6 @@
   flex-wrap: wrap;
   gap: 20px;
 }
+#map {
+  width: 100%;
+}

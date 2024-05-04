@@ -1,72 +1,9 @@
-
- 
-
- 
- .Container {
-  display: flex;
- 
-  padding: 2rem;
-  width: 100%;
-}
-
-.listing-grid{
-  display: flex;
-  flex-wrap: wrap;
-   justify-content: center;
-  gap: 1rem;
-  width: 100%; 
-}
-
-.listing-card {
-
-  width: 20rem;
-  height: 25rem;
-  overflow: hidden;
-}
-
-.card-img-top {
-  width: 100%;
-  height: 18.75rem;
-  border-radius: 1rem;
-  object-fit: cover;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-
-  padding: 1rem;
-}
-
-.showing_data_a_tag_in_listing {
-  display: flex;
-  flex-wrap: wrap;
-  
-  text-decoration: none;
-  
-
-}
-
-.card_text_title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: black;
-  text-decoration: none;
-  margin-bottom: 0.5rem;
-}
-
-.card_text_price {
-  font-size: 1.2rem;
-  color: gray;
-  margin-top: 0.5rem;
-}
-
- 
-
- /* ------------------------------------------------------------ */
+/* ------------------------------------------------------------ */
 /*  */
-.Details_Of_Hotel_titile{
+.Details_Of_Hotel_titile {
+  margin-top: 10px;
   text-align: center;
+  font-family: "Times New Roman", Times, serif;
 }
 .information_showing_your_house img {
   width: 100%;
@@ -87,16 +24,16 @@
   line-height: 2rem;
   margin: 0 auto;
   font-size: 1.2rem;
-  max-width: 44rem; 
-  width: 100%; 
+  max-width: 44rem;
+  width: 100%;
 
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   font-family: sans-serif;
   font-style: normal;
   font-weight: 400;
-  overflow: hidden; /
+  overflow: hidden;
 }
 
 .information_showing_your_house b {
@@ -117,12 +54,10 @@
 .button_edit_delete {
   display: flex;
   gap: 2rem;
-
-
 }
 #edit-button {
-  background-color: #007bff; 
-  color: #fff; 
+  background-color: #007bff;
+  color: #fff;
   border: none;
   /* padding: 10px 20px; */
   padding: 0rem 2rem;
@@ -145,10 +80,10 @@
 }
 
 #delete-button:hover {
-  background-color: #c82333; 
+  background-color: #c82333;
 }
 /* review */
-.review{
+.review {
   width: 100%;
   margin-top: -10px;
 }
