@@ -54,6 +54,16 @@ router.put(
   upload.single("image"),
   ListingEditDataById
 );
+// searching data
+// /listings/user/search
+router.post("/user/search", async (req, res) => {
+  let { search_content } = req.body;
+  // console.log(search_content);
+  let regex = new RegExp(search_content, "i");
+  let search_content_new = await Listing.find({ title: regex });
+  // console.log(search_content_new);
+  res.render("../views/listing/searchdata", { data: search_content_new });
+});
 
 // Delete operation
 router.get("/:id/delete", isLogin, isOwner, ListingdeleteById);
