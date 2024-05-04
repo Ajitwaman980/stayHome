@@ -5,7 +5,6 @@ async function handleRetrieveData(req, res) {
   try {
     const data = await Listing.find({});
     const success = req.flash("success");
-
     res.render("../views/listing/listing.ejs", { data, success });
   } catch (e) {
     res.render("../views/listing/error.ejs");
@@ -13,7 +12,7 @@ async function handleRetrieveData(req, res) {
 }
 
 async function GetlistingByid(req, res, error) {
-  let { id } = req.params; // to get id into the url
+  let { id } = req.params;
   try {
     const listing_info = await Listing.findById(id)
       .populate({
@@ -78,7 +77,7 @@ async function ListingEditDataById(req, res) {
       Update_listing.image = { Url, fileName };
       await Update_listing.save();
     }
-    console.log("this is image ", image);
+    // console.log("this is image ", image);
 
     req.flash("success", "Successfully Updated List");
     res.redirect("/listings");
@@ -94,7 +93,7 @@ const ListingdeleteById = async (req, res) => {
     let del = await Listing.findByIdAndDelete(id);
     req.flash("success", "Successfully Deleted");
     res.redirect("/listings");
-    console.log("this is delete data ", del);
+    // console.log("this is delete data ", del);
   } catch (e) {
     res.render("../views/listing/error.ejs");
   }
