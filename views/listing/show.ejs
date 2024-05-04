@@ -11,7 +11,7 @@
         <!-- If the image is an external URL -->
         <img src="<%= listing_info.image.Url %>" class="card-img-top" alt="Listing Image" />
 
-        <div class="card-body">
+        <div class="card-body col-12">
           <span class="owner-info">Owner By: <%= listing_info.owner.username %></span>
           <p class="description"><strong>Description:</strong>
             <%= listing_info.description %>
@@ -35,7 +35,6 @@
               </button>
             </div>
             <% } %>
-              <hr>
 
               <% if (currentUser) { %>
                 <div class="review-form">
@@ -58,39 +57,108 @@
                         id="comment" cols="20" rows="6"></textarea>
                     </div>
                     <button type="submit" class="btn btn-outline-info btn-review">Submit Review</button>
+                  </form>
                 </div>
-                </form>
                 <% } %>
-                  <hr class="all-reviews">
-                  <h3>All Reviews</h3>
-                  <div class="container comment-container">
-                    <% for(let review of listing_info.Reviews) { %>
-                      <div class="card col-12 mb-4 review-card">
-                        <div class="card-body">
-                          <p class="review-author">@<%= review.author.username %>
-                          </p>
-                          <p class="review-rating">
-                            <% for(let i=0; i < review.Rating; i++) { %>
-                              <span class="fa fa-star checked"></span>
-                              <% } %>
-                          </p>
-                          <p class="review-comment">
-                            <%= review.comment %>
-                          </p>
-                          <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
-                            <form method="post"
-                              action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
-                              class="delete-btn">
-                              <button class="btn btn-sm btn-dark">Delete</button>
-                            </form>
-                            <% } %>
-                        </div>
+
+                  <% if ( listing_info.Reviews.length>0) { %>
+                    <hr class="all-reviews">
+                    <h3>All Reviews</h3>
+                    <% } %>
+
+                      <div class="container comment-container">
+                        <% for(let review of listing_info.Reviews) { %>
+                          <div class="card col-12 mb-4 review-card">
+                            <div class="card-body">
+                              <p class="review-author">@<%= review.author.username %>
+                              </p>
+                              <p class="review-rating">
+                                <% for(let i=0; i < review.Rating; i++) { %>
+                                  <span class="fa fa-star checked"></span>
+                                  <% } %>
+                              </p>
+                              <p class="review-comment">
+                                <%= review.comment %>
+                              </p>
+                              <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
+                                <form method="post"
+                                  action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                  class="delete-btn">
+                                  <button class="btn btn-sm btn-dark">Delete</button>
+                                </form>
+                                <% } %>
+                            </div>
+                          </div>
+                          <% } %>
                       </div>
-                      <% } %>
-                  </div>
+
         </div>
       </div>
     </div>
+
+    <!-- map -->
+    <div id="main_map">
+      <div id="map" style="height: 400px;"></div>
+    </div>
+
     <script src="/javascripts/editbutton.js"></script>
     <script src="/javascripts/delete.js"></script>
+
+    <!-- map locations code  -->
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
+      function geocodeLocation(locationName, callback) {
+        const nominatimUrl = new URL("https://nominatim.openstreetmap.org/search");
+        nominatimUrl.searchParams.set("q", locationName);
+        nominatimUrl.searchParams.set("format", "json");
+        nominatimUrl.searchParams.set("limit", 1);
+
+        fetch(nominatimUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.length > 0) {
+              const coordinates = [parseFloat(data[0].lat), parseFloat(data[0].lon)];
+              callback(null, coordinates);
+            } else {
+              callback("Location not found.", null);
+            }
+          })
+          .catch((error) => {
+            callback(error, null);
+          });
+      }
+
+      try {
+        var map = L.map("map").setView([0, 0], 2);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // Assuming listing_info.location is a string containing the location name
+        const locationName = "<%= listing_info.location %>";
+
+        geocodeLocation(locationName, (error, coordinates) => {
+          if (error) {
+            console.error("Error:", error);
+            document.getElementById("map").innerHTML =
+              "<p>Unable to display map location.</p>";
+          } else {
+            map.setView(coordinates, 13);
+
+
+            L.marker(coordinates)
+              .addTo(map)
+              .bindPopup("<%= listing_info.location %>")
+              .openPopup();
+          }
+        });
+      } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("map").innerHTML =
+          "<p>Unable to display map location.</p>";
+      }
+
+    </script>
   </body>

@@ -1,26 +1,110 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-body-light sticky-top border-bottom">
+<nav class="navbar navbar-expand-sm navbar-light bg-body-light  border-bottom">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#"><i class="fa-regular fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <style>
+      .fa-regular {
+        font-size: 3rem;
+        color: rgb(42, 41, 41);
+      }
+
+      .navbar {
+        background-color: #f8f9fa;
+      }
+
+      .search-container {
+        /* position: relative; */
+        display: flex;
+        position: relative;
+        align-items: center;
+        justify-content: center;
+        left: 150px;
+        /* margin-right: 20rem; */
+
+        /* border: 2px solid gray; */
+      }
+
+      .search-input {
+        width: 550px;
+        padding: 10px 20px;
+        border: 2px solid #ddd;
+        border-radius: 25px;
+        outline: none;
+        font-size: 16px;
+        transition: border-color 0.3s ease;
+      }
+
+      .search-input:focus {
+        border-color: #007bff;
+      }
+
+      .search-icon {
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        /* right: auto; */
+        transform: translateY(-50%);
+
+        color: #aaa;
+        cursor: pointer;
+      }
+
+      .brand-text {
+        font-size: 1.5rem;
+        margin-left: 5px;
+      }
+
+      .navbar-nav .nav-link {
+        font-size: 1rem;
+        color: #333;
+        margin-right: 20px;
+      }
+
+      .navbar-nav .nav-link:hover {
+        color: #007bff;
+      }
+
+      .auth-links .nav-link {
+        margin-right: 0;
+      }
+    </style>
+    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"><span
+          style="font-size: 1.5rem;">StayHome</span></i></a>
+
+    <div class="search-container">
+      <form action="/listings/user/search" method="post">
+        <input type="text" name="search_content" class="search-input" placeholder="Search Your Hotel">
+        <div class="search-icon">
+          <button style="outline: none; background: none; border: none; text-decoration: none;" type="submit"><i
+              class="fa-solid fa-search"></i></button>
+        </div>
+      </form>
+
+    </div>
+
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link" href="/">Home</a>
-        <a class="nav-link" href="/listings">All Listings</a>
-        <a class="nav-link" href="/listings/new">Add New Listing</a>
+        <a class="nav-link" href="/listings">Home</a>
 
-        <div class="collapse navbar-collapse">
-          <% if (!currentUsser) { %>
-            <a class="nav-link" href="/login">Login</a>
-            <a class="nav-link" href="/signUp">SignUp</a>
-            <% } %>
-              <% if (currentUsser) { %>
-                <a class="nav-link" href="/logout">LogOut</a>
+        <!-- <a class="nav-link" href="/listings">All Listings</a> -->
+        <% if (currentUsser) { %>
+          <a class="nav-link" href="/listings/new">Add New Listing</a>
+          <% } %>
+            <style>
+              .collapse {
+                display: flex;
+                justify-content: end;
+              }
+            </style>
+            <div class="collapse navbar-collapse">
+              <% if (!currentUsser) { %>
+                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/signUp">SignUp</a>
                 <% } %>
+                  <% if (currentUsser) { %>
+                    <a class="nav-link" href="/logout">LogOut</a>
+                    <% } %>
 
 
-        </div>
+            </div>
       </div>
     </div>
   </div>
