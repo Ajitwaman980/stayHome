@@ -1,48 +1,55 @@
 <%- layout("/layout/biolerplate.ejs") %>
-    <link rel="stylesheet" href="/stylesheets/listing.css">
-    <div class="navbar2">
-        <div class="icon_navbar2">
-            <ul>
-                <li><i class="fa-solid fa-house"></i> House</li>
-                <li><i class="fa-solid fa-bed"></i> Bedroom</li>
-                <li><i class="fa-solid fa-bath"></i> Bathroom</li>
-                <li><i class="fa-solid fa-door-closed"></i> Door</li>
-                <li><i class="fa-solid fa-couch"></i> Living Room</li>
-                <li><i class="fa-solid fa-swimmer"></i> Pool</li>
-                <li><i class="fa-solid fa-mountain"></i> Mountain House</li>
-                <li><i class="fa-solid fa-umbrella-beach"></i> Beach House</li>
-                <li><i class="fa-solid fa-tree"></i> Treehouse</li>
-            </ul>
+    <!-- why used this condition becuse the flash message is in array -->
+    <% if (success && success.length>0) { %>
+        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <%= success %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        <div class="form-check form-switch toggle_tax" id="taxes">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Total before taxes</label>
-            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-        </div>
-    </div>
+        <% } %>
+            <link rel="stylesheet" href="/stylesheets/listing.css">
+            <div class="navbar2">
+                <div class="icon_navbar2">
+                    <ul>
+                        <li><i class="fa-solid fa-house"></i> House</li>
+                        <li><i class="fa-solid fa-bed"></i> Bedroom</li>
+                        <li><i class="fa-solid fa-bath"></i> Bathroom</li>
+                        <li><i class="fa-solid fa-door-closed"></i> Door</li>
+                        <li><i class="fa-solid fa-couch"></i> Living Room</li>
+                        <li><i class="fa-solid fa-swimmer"></i> Pool</li>
+                        <li><i class="fa-solid fa-mountain"></i> Mountain House</li>
+                        <li><i class="fa-solid fa-umbrella-beach"></i> Beach House</li>
+                        <li><i class="fa-solid fa-tree"></i> Treehouse</li>
+                    </ul>
+                </div>
+                <div class="form-check form-switch toggle_tax" id="taxes">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Total before taxes</label>
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                </div>
+            </div>
 
-    <div class="Container">
-        <div class="listing-grid">
-            <% for (const Listing of data) { %>
-                <!-- a tag showing the info about this house  -->
-                <a class="showing_data_a_tag_in_listing" href="/listings/<%= Listing._id %>">
-                    <div class="listing-card">
-                        <img src="<%= Listing.image.Url%>" class="card-img-top rounded" alt="image styeHome">
-                        <div class="card-body">
-                            <p class="card_text_title">
-                                <%= Listing.title %>
-                            </p>
-                            <p class="card_text_price">
-                                <%= Listing.price %><span>&#8377;</span>/Night
-                                    <span class="GST">
-                                        <%= ((Listing.price * 18) / 100) + Listing.price %>&#8377;
-                                            With GST
-                                    </span>
-                            </p>
-                        </div>
-                    </div>
-                </a>
-                <% } %>
-        </div>
-    </div>
+            <div class="Container">
+                <div class="listing-grid">
+                    <% for (const Listing of data) { %>
+                        <!-- a tag showing the info about this house  -->
+                        <a class="showing_data_a_tag_in_listing" href="/listings/<%= Listing._id %>">
+                            <div class="listing-card">
+                                <img src="<%= Listing.image.Url%>" class="card-img-top rounded" alt="image styeHome">
+                                <div class="card-body">
+                                    <p class="card_text_title">
+                                        <%= Listing.title %>
+                                    </p>
+                                    <p class="card_text_price">
+                                        <%= Listing.price %><span>&#8377;</span>/Night
+                                            <span class="GST">
+                                                <%= ((Listing.price * 18) / 100) + Listing.price %>&#8377;
+                                                    With GST
+                                            </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </a>
+                        <% } %>
+                </div>
+            </div>
 
-    <script src="/javascripts/gst.js"> </script>
+            <script src="/javascripts/gst.js"> </script>
