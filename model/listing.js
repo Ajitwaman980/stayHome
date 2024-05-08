@@ -5,7 +5,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 // console.log(process.env);
 mongoose
-  .connect(process.env.mongodb_database_url, {})
+  .connect(process.env.MongodbAtlas, {})
   .then(() => console.log("Connected to MongoDB"))
   .catch((error) => console.error("Could not connect to MongoDB", error));
 
