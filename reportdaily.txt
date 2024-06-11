@@ -1,31 +1,53 @@
-20/2/2024 layout and styling
-ejs mate used for layout
-24/2/2024 styling cards
-28/2/24  style and finding some error
-29/2/24 {all styling done
-multer used for file handling  uploading files
-Multer  is act as middleware 
+Development Timeline
+20/2/2024
+Layout and styling using EJS Mate for layout.
+24/2/2024
+Styling cards.
+28/2/2024
+Style adjustments and error fixing.
+29/2/2024
+Completion of styling.
+Utilized Multer for file handling, acting as middleware.
+javascript
+Copy code
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
-passport
-}
-7/3/24 img not showing error solved used if condition 
-8/3/24 validations  client side or server side 
-npm i joi this is used for schema validation this is help  for validate the model schema
-14/3/2024 new model review 
-15/3/2024 debugging code find some error
-16/3/24 validation review client side or server side 
-23/3/24 review delete using pull 
-26 /3/24 resructing route listing
-5/4/24 cookies and session 
-6/4/24 flash ,session ,cookies error handling 
-11/4/24  login/logout 
-13/4/24 authication and 
-14/4/24  flash done all routers 
-16/4/24 authication done all routers
-17/4/24 login and singUp nav bar done  some issue  
-all error solved 
-21/2/24 owner property and ui  authurization 
-only wner deletd listing  
-Only owner permission to edit
-onlu login user give review  and only thos give reivew only those delete review
+7/3/2024
+Resolved image not showing error using if condition.
+8/3/2024
+Implemented validations, both client-side and server-side.
+Installed Joi for schema validation.
+bash
+Copy code
+npm i joi
+14/3/2024
+Reviewed new model.
+15/3/2024
+Debugged code, identified and fixed errors.
+16/3/2024
+Reviewed validations, both client-side and server-side.
+23/3/2024
+Reviewed delete functionality using pull.
+26/3/2024
+Restructured route listing.
+5/4/2024
+Implemented cookies and session handling.
+6/4/2024
+Implemented flash, session, and cookies error handling.
+11/4/2024
+Implemented login/logout functionality.
+13/4/2024
+Implemented authentication.
+14/4/2024
+Implemented flash for all routers.
+16/4/2024
+Completed authentication for all routers.
+17/4/2024
+Implemented login and signUp nav bar with some issues resolved.
+21/2/2024
+Implemented owner property and UI authorization.
+Only owner can delete listings.
+Only owner has permission to edit.
+26/4/2024
+Setup Cloudinary for image upload.
+Uploaded images to the cloud and processed data to create a project summary.

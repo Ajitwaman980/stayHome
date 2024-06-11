@@ -8,9 +8,10 @@ mongoose
   .catch((error) => console.error("Could not connect to MongoDB", error));
 const initialize_data_base = async function () {
   await Listing.deleteMany({});
-  // initialized_data.data = initialized_data.data.map(function (obj) {
-  //   return { ...obj, owner: "6626a9fa9d428e9364254127" };
-  // });
+  console.log("data deletd");
+  initialized_data.data = initialized_data.data.map(function (obj) {
+    return { ...obj, owner: "6626a9fa9d428e9364254127" };
+  });
 
   await Listing.insertMany(initialized_data.data);
   console.log("data was initialized");

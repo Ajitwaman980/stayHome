@@ -8,6 +8,6 @@ taxes.addEventListener("click", function () {
       tax.style.display = "none";
     }
   }
-  console.log("clicked");
-  console.log(GST);
+  // console.log("clicked");
+  // console.log(GST);
 });

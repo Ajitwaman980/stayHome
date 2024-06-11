@@ -1,4 +1,4 @@
-.COntainer {
+.login-container {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -12,17 +12,8 @@
   border-radius: 20px;
 }
 
-.footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #f8f9fa;
-  padding: 10px 0;
-  text-align: center;
-}
-
-.username,
-.password {
+.login-container .username,
+.login-container .password {
   margin-bottom: 20px;
   border: 2px solid black;
   display: flex;
@@ -30,19 +21,19 @@
   padding-left: 6px;
 }
 
-input[type="text"],
-input[type="password"] {
+.login-container input[type="text"],
+.login-container input[type="password"] {
   height: 1.4rem;
   width: 100%;
   border: none;
   outline: none;
 }
 
-.fa-eye {
+.login-container .fa-eye {
   cursor: pointer;
 }
 
-button[type="submit"] {
+.login-container button[type="submit"] {
   width: 100%;
   padding: 10px;
   background-color: #007bff;
@@ -52,18 +43,27 @@ button[type="submit"] {
   cursor: pointer;
 }
 
-button[type="submit"]:hover {
+.login-container button[type="submit"]:hover {
   background-color: #0056b3;
 }
 
-a {
+.login-container a {
   display: block;
   margin-top: 20px;
   text-align: center;
 }
 
-#togglePassword {
+.login-container #togglePassword {
   float: right;
   cursor: pointer;
   margin-right: 10px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+  padding: 10px 0;
+  text-align: center;
 }
