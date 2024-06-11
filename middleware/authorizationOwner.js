@@ -7,7 +7,7 @@ const isOwner = async (req, res, next) => {
   const listing = await Listing.findById(id);
   if (!listing.owner._id.equals(res.locals.currentUser._id)) {
     req.flash("success", "Only owner permission to edit");
-    console.log("this is owner side");
+    // console.log("this is owner side");
     return res.redirect(`/listings`);
   }
   next();
