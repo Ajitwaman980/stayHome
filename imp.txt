@@ -1,7 +1,0 @@
-why used this ?   req.session.redirectUrl = req.originalUrl;
- session stored the information 
-
-bez we need to make sure that user redirect originalUrl path  ex. when the user 
-go to add new listing but user can not login then firstly we need to login the user and 
-then its going to actul path so we need to save the user redirectUrl path  
-
