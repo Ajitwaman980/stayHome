@@ -6,8 +6,8 @@ require("dotenv").config();
 // console.log(process.env);
 mongoose
   .connect(process.env.MongodbAtlas, {})
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((error) => console.error("Could not connect to MongoDB", error));
+  .then(() => console.log("Database connection established"))
+  .catch((error) => console.error("Database connection error:", error));
 
 const ListingSchema = mongoose.Schema({
   title: {
