@@ -62,10 +62,21 @@ router.post("/user/search", async (req, res) => {
   let regex = new RegExp(search_content, "i");
   let search_content_new = await Listing.find({ title: regex });
   // console.log(search_content_new);
+  // res.json(search_content_new);
   res.render("../views/listing/searchdata", { data: search_content_new });
 });
 
 // Delete operation
 router.get("/:id/delete", isLogin, isOwner, ListingdeleteById);
+// /companydata privacy about and term and condition
+// router.get("/companydata/privacy", (req, res) => {
 
+//   res.render("../views/companydata/privacy.ejs");
+// });
+// router.get("/companydata/about", (req, res) => {
+//   res.render("../views/companydata/about.ejs");
+// });
+// router.get("/companydata/terms", (req, res) => {
+//   res.render("../views/companydata/terms.ejs");
+// });
 module.exports = router;
