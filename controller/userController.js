@@ -5,7 +5,7 @@ const NewUserCrete = async (req, res) => {
 
   try {
     // check alredy persent or not
-    const exiting_user_email = await User_model.find({ email: email });
+    const exiting_user_email = await User_model.findOne({ email });
     if (exiting_user_email) {
       req.flash("error", "Email already in use");
       return res.redirect("/signUp");

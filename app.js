@@ -12,13 +12,19 @@ const upload = multer({ dest: "uploads/" });
 const listingRoute = require("./routes/listingroute");
 const reviewRoute = require("./routes/reviewsRoute");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const passport_local_mongoose = require("passport-local-mongoose");
 const Localpassport = require("passport-local");
 const User_model = require("./model/user");
 const userRoute = require("./routes/usersRoute");
+const { env } = require("process");
 const app = express();
+// clustring
+const cluster = require("cluster");
+const os = require("os");
+const dotenv = require("dotenv");
 
 // View engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -32,13 +38,21 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-
+// store in atlas
+const store = MongoStore.create({
+  mongoUrl: process.env.MongodbAtlas,
+  crypto: {
+    secret: process.env.SESSION_SCERT,
+  },
+  touchAfter: 24 * 3600, // time period in seconds
+});
 // Session setup
 app.use(
   session({
+    store,
     resave: false,
     saveUninitialized: true,
-    secret: "Ajit waman",
+    secret: process.env.SESSION_SCERT,
     cookie: {
       maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     },
@@ -84,5 +98,20 @@ app.use(function (err, req, res, next) {
   // res.send("this is erroro");
   return res.render("listing/error.ejs");
 });
-
+// ........... cluster.........
+// const total_number_of_cpus = os.cpus().length;
+// if (cluster.isPrimary) {
+//   for (let i = 0; i < total_number_of_cpus; i++) {
+//     cluster.fork();
+//   }
+//   cluster.on("exit", (worker, code, signal) => {
+//     console.log(`worked died ${process.worker.pid}`);
+//     cluster.fork();
+//   });
+// } else {
+//   const PORT = process.env.PORT || 3000;
+//   app.listen(PORT, () => {
+//     console.log(`Server running on port ${PORT}`);
+//   });
+// }
 module.exports = app;
