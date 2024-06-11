@@ -24,7 +24,7 @@ router.post("", isLogin, async (req, res) => {
   try {
     const listing = await Listing.findById(req.params.id);
     const { Rating, Comment } = req.body;
-    console.log("this is comment ", Comment);
+    // console.log("this is comment ", Comment);
     let New_review = new Review({
       Rating,
       comment: Comment,
@@ -35,10 +35,10 @@ router.post("", isLogin, async (req, res) => {
     listing.Reviews.push(New_review);
     await listing.save();
     await New_review.save();
-    console.log("data stored in database");
+    // console.log("data stored in database");
     res.redirect(`/listings/${req.params.id}`);
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     res.render("error.ejs");
   }
 });
