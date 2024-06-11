@@ -7,7 +7,8 @@ const redirect_originalUrl = require("../middleware/redirect_originalUrl.js");
 const NewUserCrete = require("../controller/userController");
 // Sign-up routes to render the page
 router.get("/signUp", async (req, res) => {
-  return res.render("../views/user/signUp.ejs");
+  const error = req.flash("error");
+  return res.render("../views/user/signUp.ejs", { error });
 });
 
 // Get data from the client and handle sign-up
