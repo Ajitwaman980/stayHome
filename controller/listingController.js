@@ -23,7 +23,7 @@ async function GetlistingByid(req, res, error) {
 
     return res.render("../views/listing/show.ejs", { listing_info });
   } catch (e) {
-    console.log("error ", e);
+    // console.log("error ", e);
     res.render("../views/listing/error.ejs");
   }
 }
@@ -49,7 +49,7 @@ async function ListingNewDataInsert(req, res) {
 
     newListing.image = { Url, fileName };
     await newListing.save();
-    console.log("images add in cloudinary");
+    // console.log("images add in cloudinary");
     req.flash("success", "Successfully added");
     res.redirect("/listings");
   } catch (error) {
@@ -57,18 +57,22 @@ async function ListingNewDataInsert(req, res) {
     res.render("../views/listing/error.ejs");
   }
 }
-
+// edit data
 async function ListingEditDataById(req, res) {
   try {
     const { id } = req.params;
     const { title, description, price, location, country } = req.body;
-    let Update_listing = await Listing.findByIdAndUpdate(id, {
-      title,
-      description,
-      price,
-      location,
-      country,
-    });
+    let Update_listing = await Listing.findByIdAndUpdate(
+      id,
+      {
+        title,
+        description,
+        price,
+        location,
+        country,
+      },
+      { new: true }
+    );
     let image;
     if (req.file) {
       image = req.file.path;
@@ -82,7 +86,7 @@ async function ListingEditDataById(req, res) {
     req.flash("success", "Successfully Updated List");
     res.redirect("/listings");
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.render("../views/listing/error.ejs");
   }
 }
