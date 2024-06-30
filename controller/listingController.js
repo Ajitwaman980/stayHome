@@ -1,11 +1,12 @@
 const error = require("mongoose/lib/error/index.js");
 const Listing = require("../model/listing.js"); // Listing is model
-
+const flash = require("connect-flash");
 async function handleRetrieveData(req, res) {
   try {
     const data = await Listing.find({});
     const success = req.flash("success");
-    res.render("../views/listing/listing.ejs", { data, success });
+    const error = req.flash("error");
+    res.render("../views/listing/listing.ejs", { data, success, error });
   } catch (e) {
     res.render("../views/listing/error.ejs");
   }
@@ -21,7 +22,11 @@ async function GetlistingByid(req, res, error) {
       })
       .populate("owner");
 
-    return res.render("../views/listing/show.ejs", { listing_info });
+    return res.render("../views/listing/show.ejs", {
+      listing_info,
+      error: req.flash("error"),
+      success: req.flash("success"),
+    });
   } catch (e) {
     // console.log("error ", e);
     res.render("../views/listing/error.ejs");
@@ -87,7 +92,9 @@ async function ListingEditDataById(req, res) {
     res.redirect("/listings");
   } catch (error) {
     // console.log(error);
-    res.render("../views/listing/error.ejs");
+    // res.render("../views/listing/error.ejs");
+    req.flash("error", "something is wrong ");
+    res.redirect("/listings");
   }
 }
 
