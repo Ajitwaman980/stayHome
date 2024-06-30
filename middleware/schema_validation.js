@@ -8,7 +8,7 @@ const Schema_validation = function (req, res, next) {
   console.log(result);
   if (result.error) {
     // If there are validation errors, handle them accordingly
-    console.error(result.error);
+    // console.error(result.error);
     res.redirect("/listings");
   } else {
     next();
@@ -22,7 +22,7 @@ const Review_Schema_validation = function (req, res, next) {
   );
   // console.log(result_Review_Schema_validation);
   if (result_Review_Schema_validation.error) {
-    console.error(result_Review_Schema_validation.error);
+    // console.error(result_Review_Schema_validation.error);
     res.redirect("/listings");
   } else {
     next();
