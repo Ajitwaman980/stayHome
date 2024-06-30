@@ -11,7 +11,7 @@ const {
 } = require("../middleware/schema_validation.js");
 const isLogin = require("../middleware/LoginAuthenticate.js");
 const isOwner = require("../middleware/authorizationOwner.js");
-
+const flash = require("connect-flash");
 const {
   handleRetrieveData,
   GetlistingByid,
@@ -19,6 +19,8 @@ const {
   ListingEditDataById,
   ListingdeleteById,
 } = require("../controller/listingController.js");
+const { card_details, verifyuser } = require("../controller/payment.js");
+const stripe = require("stripe")(process.env.Secret_key);
 
 // List all data
 router.get("", handleRetrieveData);
@@ -30,6 +32,15 @@ router.get("/new", isLogin, function (req, res) {
 
 // Show listing by id
 router.get("/:id", GetlistingByid);
+
+// payment
+router.get("/:id/payment", isLogin, function (req, res) {
+  res.render("../views/payments/userpayment", { id: req.params.id });
+});
+router.post("/:id/create_customer", isLogin, verifyuser);
+
+// card details
+router.post("/:id/card_details", isLogin, card_details);
 
 // Insert new data into database
 router.post(
@@ -68,15 +79,5 @@ router.post("/user/search", async (req, res) => {
 
 // Delete operation
 router.get("/:id/delete", isLogin, isOwner, ListingdeleteById);
-// /companydata privacy about and term and condition
-// router.get("/companydata/privacy", (req, res) => {
 
-//   res.render("../views/companydata/privacy.ejs");
-// });
-// router.get("/companydata/about", (req, res) => {
-//   res.render("../views/companydata/about.ejs");
-// });
-// router.get("/companydata/terms", (req, res) => {
-//   res.render("../views/companydata/terms.ejs");
-// });
 module.exports = router;
