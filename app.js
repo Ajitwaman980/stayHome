@@ -21,6 +21,8 @@ const User_model = require("./model/user");
 const userRoute = require("./routes/usersRoute");
 const { env } = require("process");
 const app = express();
+// csp helmet
+
 // clustring
 const cluster = require("cluster");
 const os = require("os");
@@ -38,6 +40,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
+
+// helmet csp  Content Security Policy
+
 // store in atlas
 const store = MongoStore.create({
   mongoUrl: process.env.MongodbAtlas,
