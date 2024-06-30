@@ -1,0 +1,72 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<body>
+    <% if (warning && warning.length>0) { %>
+        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+            <%= warning %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+            <div class="container mt-5">
+
+
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <h1 class="text-center mb-2 ">Add Card Details</h1>
+                        <form action="/listings/<%= id %>/card_details" method="POST">
+                            <input type="hidden" name="customer_id" value="<%= paymentid %>">
+
+                            <div class="mb-3 row">
+                                <label for="card_Name" class="col-sm-2 col-form-label">Card Name:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="card_Name" name="card_Name" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="card_Number" class="col-sm-2  col-form-label">Card Number:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="card_Number" name="card_Number"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="card_ExpMonth" class="col-sm-2  col-form-label">Expiration Month:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="card_ExpMonth" name="card_ExpMonth"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="card_ExpYear" class="col-sm-2  col-form-label">Expiration Year:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="card_ExpYear" name="card_ExpYear"
+                                        required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3 row">
+                                <label for="card_CVC" class="col-sm-2  col-form-label">CVC:</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" id="card_CVC" name="card_CVC" required>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="offset-sm-2  col-sm-6">
+                                    <button type="submit" class="btn btn-primary w-100">Payment </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous">
+                </script>
+</body>
