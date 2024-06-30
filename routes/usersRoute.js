@@ -16,6 +16,7 @@ router.post("/signUp", NewUserCrete);
 
 router.get("/login", async (req, res) => {
   const error = req.flash("error");
+  res.cookie("__stripe_mid", "");
   return res.render("../views/user/login.ejs", { error });
 });
 
