@@ -1,5 +1,6 @@
 const GST = document.getElementsByClassName("GST");
-consttaxes = document.getElementById("taxes");
+const taxes = document.getElementById("taxes");
+
 taxes.addEventListener("click", function () {
   for (tax of GST) {
     if (tax.style.display != "inline") {
