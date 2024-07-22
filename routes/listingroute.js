@@ -27,7 +27,8 @@ router.get("", handleRetrieveData);
 
 // Render new data form
 router.get("/new", isLogin, function (req, res) {
-  return res.render("../views/listing/new.ejs");
+  error = req.flash("error");
+  return res.render("../views/listing/new.ejs", { error: error });
 });
 
 // Show listing by id

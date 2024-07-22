@@ -11,11 +11,7 @@ const {
 
 // List all data
 router.get("/", handleRetrieveData);
-/* GET home page. */
-// router.get("/", async function (req, res) {
-//   res.send("<a href='/signUp'><button> Sign Up</button></a>");
-//   // res.send(data)
-// });
+
 router.get("/companydata/privacy", (req, res) => {
   res.render("../views/companydata/privacy.ejs");
 });
@@ -24,6 +20,10 @@ router.get("/companydata/about", (req, res) => {
 });
 router.get("/companydata/terms", (req, res) => {
   res.render("../views/companydata/terms.ejs");
+});
+
+router.get("/companydata/Contact", (req, res) => {
+  res.send("working ........");
 });
 
 module.exports = router;

@@ -1,8 +1,24 @@
 const error = require("mongoose/lib/error/index.js");
 const Listing = require("../model/listing.js"); // Listing is model
 const flash = require("connect-flash");
+const NodeCache = require("node-cache"); //cache module
+let mycache = new NodeCache(); //cache instance is created
 async function handleRetrieveData(req, res) {
   try {
+    // mycache.set("listing", data);
+    // console.log(mycache.has("Listing"));
+    // // console.log("Cache Data:", mycache.get("Listing"));
+    // if (!mycache.has("Listing")) {
+    //   data = await Listing.find({});
+    //   // data = data[0]?.image?.Url;
+    //   mycache.set("Listing", data); //set
+    //   console.log("data", data);
+    //   console.log("cache is set ");
+    // } else {
+    //   data = mycache.get("Listing");
+    // }
+    // res.send(data);
+    // console.log("Data to be rendered:", data);
     const data = await Listing.find({});
     const success = req.flash("success");
     const error = req.flash("error");
@@ -58,7 +74,7 @@ async function ListingNewDataInsert(req, res) {
     req.flash("success", "Successfully added");
     res.redirect("/listings");
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.render("../views/listing/error.ejs");
   }
 }

@@ -20,6 +20,7 @@ const Localpassport = require("passport-local");
 const User_model = require("./model/user");
 const userRoute = require("./routes/usersRoute");
 const { env } = require("process");
+const ConnectDB = require("./config/mogoConnection_config");
 const app = express();
 // csp helmet
 
