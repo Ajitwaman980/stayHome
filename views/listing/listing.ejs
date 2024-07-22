@@ -1,5 +1,6 @@
 <%- layout("/layout/biolerplate.ejs") %>
-    <!-- why used this condition becuse the flash message is in array -->
+
+    <!-- Flash Messages -->
     <% if (success && success.length>0 ) { %>
         <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
             <%= success %>
@@ -12,51 +13,109 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <% } %>
-                    <link rel="stylesheet" href="/stylesheets/listing.css">
-                    <div class="navbar2">
-                        <div class="icon_navbar2">
-                            <ul>
-                                <li><a href="#"><i class="fa-solid fa-house"></i> House</a></li>
-                                <li><a href="#"><i class="fa-solid fa-bed"></i> Bedroom</a></li>
-                                <li><a href="#"><i class="fa-solid fa-bath"></i> Bathroom</a></li>
-                                <li><a href="#"><i class="fa-solid fa-door-closed"></i> Door</a></li>
-                                <li><a href="#"><i class="fa-solid fa-couch"></i> Living Room</a></li>
-                                <li><a href="#"><i class="fa-solid fa-swimmer"></i> Pool</a></li>
-                                <li><a href="#"><i class="fa-solid fa-mountain"></i> Mountain House</a></li>
-                                <li><a href="#"><i class="fa-solid fa-umbrella-beach"></i> Beach House</a></li>
-                                <li><a href="#"><i class="fa-solid fa-tree"></i> Treehouse</a></li>
-                            </ul>
-                        </div>
-                        <div class="form-check form-switch toggle_tax" id="taxes">
-                            <label class="form-check-label" for="flexSwitchCheckDefault">Total before taxes</label>
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+
+                    <!-- Navbar -->
+                    <div class="bg-zinc-400 text-gray-500 p-2">
+                        <div class="flex justify-between gap-3 items-center">
+                            <div class="flex gap-4 px-2">
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="fa-solid fa-house text-xl"></i>
+                                    <span class="text-sm">House</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="fa-solid fa-couch text-xl"></i>
+                                    <span class="text-sm">Living</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="material-icons text-xl">home</i>
+                                    <span class="text-sm">Bungalow</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="fa-solid fa-swimmer text-xl"></i>
+                                    <span class="text-sm">Pool</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="fa-solid fa-mountain text-xl"></i>
+                                    <span class="text-sm">Mountain</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="fa-solid fa-umbrella-beach text-xl"></i>
+                                    <span class="text-sm">Beach</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="fa-solid fa-tree text-xl"></i>
+                                    <span class="text-sm">Treehouse</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="material-icons text-xl">home</i>
+                                    <span class="text-sm">Cabin</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <span class="material-icons text-xl">warehouse</span>
+                                    <span class="text-sm">Warehouse</span>
+                                </a>
+                                <a href="#" class="flex flex-col items-center text-black">
+                                    <i class="material-icons text-xl">business</i>
+                                    <span class="text-sm">Studio</span>
+                                </a>
+                            </div>
+                            <div class="flex items-center" id="taxes">
+                                <button id="taxToggle"
+                                    class="relative inline-flex items-center px-4 py-2 border  border-gray-300 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500">
+                                    Total before taxes
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="Container">
-                        <div class="listing-grid">
+                    <!-- Listings -->
+                    <div class=" bg-pink-50 scroll-smooth px-2 py-4 ">
+                        <div class="flex flex-wrap justify-center gap-4 ">
                             <% for (const Listing of data) { %>
-                                <!-- a tag showing the info about this house  -->
-                                <a class="showing_data_a_tag_in_listing" href="/listings/<%= Listing._id %>">
-                                    <div class="listing-card">
-                                        <img src="<%= Listing.image.Url%>" class="card-img-top rounded"
-                                            alt="image styeHome">
-                                        <div class="card-body">
-                                            <p class="card_text_title">
-                                                <%= Listing.title %>
-                                            </p>
-                                            <p class="card_text_price">
-                                                <%= Listing.price %><span>&#8377;</span>/Night
-                                                    <span class="GST">
-                                                        <%= ((Listing.price * 18) / 100) + Listing.price %>&#8377;
-                                                            With GST
+                                <a href="/listings/<%= Listing._id %>"
+                                    class="block rounded-lg shadow-lg overflow-hidden h-96" style="width: 300px; ">
+                                    <img src="<%= Listing.image.Url %>" class="w-full h-72 object-cover" alt="image">
+                                    <div class="p-2 py-3 bg-zinc-200 h-full w-full">
+                                        <!-- ------------------------------check price -------------------------------------------- -->
+                                        <% let basePrice; if (Listing.price> 2000) {
+                                            bestPrice = Listing.price - 2000;
+
+                                            }
+                                            else {
+                                            bestPrice = Listing.price - 100;
+                                            }
+
+                                            %>
+                                            <!-- end -->
+                                            <p class="text-black text-xl font-bold mb-1">
+                                                <%= bestPrice %> &#8377;
+                                                    <span class="text-sm text-gray-500 inline-block "
+                                                        style="margin: -7px;">
+                                                        Night</span>
+                                                    <span
+                                                        class=" text-balck-500 items-end px-12 line-through text-lg font-normal  justify-end inline-block">
+                                                        <%= Listing.price %>&#8377;%>
+                                                    </span>
+                                                    <span>
+                                                        <!-- total price with gst -->
+                                                        <p class="text-green-600 GST hidden">
+                                                            <%=((bestPrice *18)/100)+bestPrice %>
+                                                                &#8377; With
+                                                                GST
+                                                        </p>
                                                     </span>
                                             </p>
-                                        </div>
+
+                                            <p class="text-xl text-wrap font-semibold text-black font-serif ">
+                                                <%= Listing.title %>
+                                            </p>
+
                                     </div>
                                 </a>
                                 <% } %>
                         </div>
                     </div>
-
-                    <script src="/javascripts/gst.js"> </script>
+                    <!-- <div class="bg-green-300 w-20 h-20 rounded-full border flex items-center justify-center">
+                        <div>ask me</div>
+                    </div> -->
+                    <script src="/javascripts/gst.js"></script>

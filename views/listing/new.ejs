@@ -1,75 +1,61 @@
-<% layout("/layout/biolerplate.ejs")-%>
-  <style>
-    button {
-      margin-left: 1.3rem;
-      border-radius: none;
-      padding-left: 2rem;
-    }
-  </style>
+<%- layout("/layout/biolerplate.ejs") %>
+  <% if (error && error.length> 0) { %>
+    <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+      <%= error %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
 
-  <body>
-    <h3 class="Create_New_Listing_title">List Your House</h3>
-    <form novalidate action="/listings" method="post" class="needs-validation m-3 Create_New_Listing_form"
-      enctype="multipart/form-data">
-      <div class="mb-3">
-        <label for="title">Title</label>
-        <input class="form-control" type="text" placeholder="Enter Your title" name="title" required />
-        <div class="valid-feedback">
-          Looks good!
+      <body class="bg-pink-200">
+        <div class="max-w-lg mx-auto my-8 p-6 bg-white shadow-md rounded-lg">
+          <h3 class="text-2xl font-semibold text-gray-800 mb-6">List Your House</h3>
+          <form novalidate action="/listings" method="post" class="space-y-6" enctype="multipart/form-data">
+
+            <!-- Title -->
+            <div class="mb-4">
+              <label for="title" class="block text-sm font-medium text-gray-700 mb-1">Title</label>
+              <input id="title" class="form-control w-full border-gray-300 rounded-md shadow-sm" type="text"
+                placeholder="Enter Your title" name="title" required />
+            </div>
+
+            <!-- Description -->
+            <div class="mb-4">
+              <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+              <textarea id="description" class="form-control w-full border-gray-300 rounded-md shadow-sm"
+                placeholder="Enter Your description" name="description" rows="4" required></textarea>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="mb-4">
+              <label for="img" class="block text-sm font-medium text-gray-700 mb-1">Upload Image</label>
+              <input type="file" id="img" name="img_file" accept="image/*"
+                class="block w-full text-sm text-gray-500 border border-gray-300 rounded-md cursor-pointer focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-opacity-50" />
+            </div>
+
+            <!-- Price -->
+            <div class="mb-4">
+              <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Price</label>
+              <input id="price" class="form-control w-full border-gray-300 rounded-md shadow-sm"
+                placeholder="Enter Your price" name="price" type="number" min="0" step="0.01" required />
+            </div>
+
+            <!-- Location -->
+            <div class="mb-4">
+              <label for="location" class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+              <input id="location" class="form-control w-full border-gray-300 rounded-md shadow-sm" type="text"
+                placeholder="Enter Your location" name="location" />
+            </div>
+
+            <!-- Country -->
+            <div class="mb-4">
+              <label for="country" class="block text-sm font-medium text-gray-700 mb-1">Country</label>
+              <input id="country" class="form-control w-full border-gray-300 rounded-md shadow-sm" type="text"
+                placeholder="Enter Your country" name="country" />
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+              class="w-full bg-pink-500 text-white py-2 px-4 rounded-md shadow-sm hover:bg-pink-600">Submit</button>
+          </form>
         </div>
-        <div id="validationServer03Feedback" class="invalid-feedback">
-          Please provide a valid Title.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="description">Description</label>
-        <textarea class="form-control" placeholder="Enter Your description" name="description" rows="4"
-          required></textarea>
-        <div id="validationServer03Feedback" class="invalid-feedback">
-          Please provide a valid information.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="image">Upload Img</label>
-        <!-- <input
-        class="form-control"
-        type="text"
-        placeholder="Enter Your URL/Link"
-        name="image"
-      /> -->
-        <div class="mb-3 image_upload">
-          <input type="file" id="img" name="img_file" accept="image/*" />
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="price">Price</label>
-        <input class="form-control" placeholder="Enter Your price" name="price" required />
-        <div id="validationServer03Feedback" class="invalid-feedback">
-          Please provide a valid Price.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="location">Location</label>
-        <input class="form-control" type="text" placeholder="Enter Your location" name="location" />
-        <div id="validationServer03Feedback" class="invalid-feedback">
-          Please provide a valid city.
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <label for="country">Country</label>
-        <input class="form-control" type="text" placeholder="Enter Your country" name="country" />
-        <div id="validationServer03Feedback" class="invalid-feedback">
-          Please provide a valid Country.
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-primary btn-lg">submit</button>
-    </form>
-    <script src="/javascripts/validationform.js"></script>
-
-  </body>
+      </body>

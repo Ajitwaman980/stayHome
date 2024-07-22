@@ -1,46 +1,79 @@
-<nav class="navbar navbar-expand-sm navbar-light bg-body-light  border-bottom">
-  <div class="container-fluid">
-
-    <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"><span
-          style="font-size: 1.5rem;">StayHome</span></i></a>
-
-    <div class="search-container">
-      <form action="/listings/user/search" method="post">
-        <input type="text" name="search_content" class="search-input" placeholder="Search Your Hotel">
-        <div class="search-icon">
-          <button style="outline: none; background: none; border: none; text-decoration: none;" type="submit"><i
-              class="fa-solid fa-search"></i></button>
-        </div>
+<nav class="w-full h-20 bg-gray-100 border-b">
+  <div class=" flex items-center justify-between  h-full  px-3">
+    <a id="logo" class=" text-xl font-bold flex items-center  justify-center" href="/listings">
+      <i class="fa-regular logo_symbol fa-compass text-3xl text-gray-700"></i>
+      <span class="ml-2 text-4xl">StayHome</span>
+    </a>
+    <!-- search -->
+    <div class="search-container justify-center relative flex items-center w-2/3 h-full">
+      <form action="/listings/user/search" method="post" class="flex items-center w-full max-w-lg">
+        <input type="text" name="search_content"
+          class="flex-grow p-2 border border-gray-300 rounded-l-full focus:border-blue-500 outline-none"
+          placeholder="Search Your Hotel">
+        <button type="submit" class="p-2 border  rounded-r-full hover:text-gray-800 focus:outline-none">
+          <i class="fa-solid fa-search"></i>
+        </button>
       </form>
-
     </div>
+    <div class=" flex gap-4 items-center  justify-center ">
+      <!-- <a class="nav-link h-full text-gray-700  text-xl hover:text-black" href="/listings">Home</a> -->
+      <!-- <a id="notifications" class="relative flex items-center p-2">
+        <i class="fa-solid fa-bell text-xl"></i>
+        <span id="notification-badge"
+          class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-2 py-1 hidden">3</span>
+      </a> -->
+      <% if (currentUsser) { %>
+        <a class="nav-link w-40 flex  text-1xl font-sans font-bold text-gray-700 hover:text-black"
+          href="/listings/new">Add New
+          House</a>
+        <% } %>
+          <% if (!currentUsser) { %>
 
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Home</a>
+            <a class="nav-link text-gray-700 text-xl px-2 py-2 rounded transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white"
+              href="/login">
+              Login
+            </a>
+            <a class="nav-link text-gray-700 text-xl px-2 py-2 rounded transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white"
+              href="/signUp">
+              Sign Up
+            </a>
 
-        <!-- <a class="nav-link" href="/listings">All Listings</a> -->
-        <% if (currentUsser) { %>
-          <a class="nav-link" href="/listings/new">Add New Listing</a>
-          <% } %>
-            <style>
-              .collapse {
-                display: flex;
-                justify-content: end;
-              }
-            </style>
-            <div class="collapse navbar-collapse">
-              <% if (!currentUsser) { %>
-                <a class="nav-link" href="/login">Login</a>
-                <a class="nav-link" href="/signUp">SignUp</a>
+            <% } %>
+              <% if (currentUsser) { %>
+                <a class="nav-link text-gray-700 hover:text-black" href="/logout">
+                  <i class="fa-solid  fa-right-to-bracket text-4xl text-red-600"></i>
+                </a>
                 <% } %>
-                  <% if (currentUsser) { %>
-                    <a class="nav-link" href="/logout">LogOut</a>
-                    <% } %>
-
-
-            </div>
-      </div>
     </div>
   </div>
 </nav>
+
+
+<script>
+
+  // design logo
+  const logo = document.getElementById("logo");
+  logo.addEventListener("mouseenter", function () {
+    this.style.transition = "all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+    this.style.color = "#007bff";
+    this.style.transform = "scale(1.1)";
+  });
+
+  logo.addEventListener("mouseleave", function () {
+
+    this.style.transition = "";
+    this.style.color = "";
+    this.style.transform = "scale(1)";
+  });
+
+  function updateNotificationBadge(count) {
+    const badge = document.getElementById("notification-badge");
+    if (count > 0) {
+      badge.textContent = count;
+      badge.classList.remove("hidden");
+    } else {
+      badge.classList.add("hidden");
+    }
+  }
+  // updateNotificationBadge(1);
+</script>

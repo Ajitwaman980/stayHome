@@ -1,28 +1,37 @@
-<% layout("/layout/biolerplate.ejs")-%>
+<% layout("/layout/biolerplate.ejs") -%>
     <style>
         /* Scoping styles specifically for login page to avoid conflicts */
     </style>
+
     <% if (error && error.length> 0) { %>
-        <div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
+        <div class="alert alert-warning alert-dismissible fade show text-center mb-4 bg-red-500 text-white p-3 rounded">
             <%= error %>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         <% } %>
+            <div class="h-screen  bg-zinc-300  py-20">
+                <div class="p-6 rounded-lg shadow-lg w-full max-w-sm mx-auto mt-8">
+                    <h1 class="text-2xl font-bold mb-4 text-center">Login</h1>
+                    <form action="/login" method="post">
+                        <div class=" mb-4">
 
-            <div class="login-container">
-                <form action="/login" method="post">
-                    <div class="username">
-                        <input type="text" name="username" id="username" placeholder="Username" required>
-                    </div>
-                    <div class="password">
-                        <input type="password" id="password" name="password" placeholder="Password" required>
-                        <i class="toggle-password fa fa-fw fa-eye-slash" id="togglePassword"></i>
-                    </div>
-                    <button type="submit">Login</button>
-                    <div style="display: flex; justify-content: center; gap:1rem">
-                        <a href="/signUp">SignUp?</a>
-                        <a href="/listings">Home</a>
-                    </div>
-                </form>
+                            <input type="text" name="username" id="username" placeholder="Username"
+                                class="pl-10 w-full p-2 border border-gray-300 rounded-lg focus:border-blue-500 outline-none">
+                        </div>
+                        <div class="relative mb-6">
+
+                            <input type="password" id="password" name="password" placeholder="Password"
+                                class="pl-10 w-full p-2 border border-gray-300 rounded-lg focus:border-blue-500 outline-none">
+                            <i id="togglePassword"
+                                class="toggle-password togglePassword fas fa-eye-slash absolute top-1/2 right-3 transform -translate-y-1/2 cursor-pointer"></i>
+                        </div>
+
+                        <button type="submit" class="w-full py-2 bg-green-500 text-white rounded-lg">Login</button>
+                        <div class="flex justify-center gap-4 mt-4">
+                            <a href="/signUp" class="text-blue-500 hover:underline">SignUp?</a>
+                            <a href="/listings" class="text-blue-500 hover:underline">Home</a>
+                        </div>
+                    </form>
+                </div>
             </div>
             <script src="/javascripts/loginpassword.js"></script>

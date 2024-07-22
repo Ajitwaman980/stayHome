@@ -1,42 +1,22 @@
 <% layout("/layout/biolerplate.ejs")-%>
 
-  <style>
-    h3 {
-      text-decoration: none;
-      font-size: 2.2rem;
-      margin-left: 1.3rem;
-      font-family: auto;
-      font-weight: 600;
-      /* font-stretch: ultra-condensed; */
-      text-decoration-color: blueviolet;
-      color: black;
-    }
-  </style>
-
-  <body>
-    <h3>Update Your Data</h3>
-    <form novalidate method="POST" action="/listings/<%= listing_info._id %>?_method=PUT"
+  <div class="bg-yellow-100">
+    <h3 class="font-sans font-semibold text-wrap text-center text-3xl">Update Your Data</h3>
+    <form class="px-3" novalidate method="POST" action="/listings/<%= listing_info._id %>?_method=PUT"
       class="needs-validation m-2 Create_New_Listing_form" enctype="multipart/form-data">
       <div class="mb-3">
-        <label for="title">Title</label>
+        <label class="text-2xl text-cyan-950 font-semibold" for="title">Title</label>
         <input class="form-control" type="text" value="<%= listing_info.title %>" name="title" required />
-        <div class="valid-feedback">Looks good!</div>
-        <div id="validationServer03Feedback" class="invalid-feedback">
-          Please provide a valid Title.
-        </div>
       </div>
 
       <div class="mb-3">
-        <label for="description">Description</label>
+        <label class="text-2xl text-cyan-950 font-semibold text-wrap" for="description">Description</label>
         <textarea class="form-control" placeholder="Enter Your description" rows="4" name="description">
 <%= listing_info.description %>
 </textarea>
-        <div id="validationServer03Feedback" class="invalid-feedback">
-          Please provide a valid information.
-        </div>
 
         <div class="mb-3">
-          <label for="image">Image </label>
+          <label class="text-2xl text-cyan-950 font-semibold" for="image">Image </label>
           <!-- <img class="img" style="width: 100px; height: 100px; border-radius: 10px;" src="<%= listing_info.image.Url %>" -->
           <!-- alt=""> -->
           <!-- <input class="form-control" type="file" value="<%= listing_info.image %>" name="image" required /> -->
@@ -46,31 +26,25 @@
         </div>
 
         <div class="mb-3">
-          <label for="price">Price</label>
+          <label class="text-2xl text-cyan-950 font-semibold" for="price">Price</label>
           <input class="form-control" type="number" value="<%= listing_info.price %>" name="price" required />
-          <div id="validationServer03Feedback" class="invalid-feedback">
-            Please provide a valid Price.
-          </div>
+
         </div>
 
         <div class="mb-3">
-          <label for="location">Location</label>
+          <label class="text-2xl text-cyan-950 font-semibold" for="location">Location</label>
           <input class="form-control" type="text" value="<%= listing_info.location %>" name="location" required />
-          <div id="validationServer03Feedback" class="invalid-feedback">
-            Please provide a valid city.
-          </div>
+
 
           <div class="mb-3">
-            <label for="country">Country</label>
+            <label class="text-2xl text-cyan-950 font-semibold" for="country">Country</label>
             <input class="form-control" type="text" value="<%= listing_info.country %>" name="country" required />
-            <div id="validationServer03Feedback" class="invalid-feedback">
-              Please provide a valid Country.
-            </div>
+
           </div>
 
-          <button class="btn btn-primary btn-lg btn-outline-secondary text-white" type="submit" id="Edit_data">
-            Update
+          <button class="btn btn-primary justify-center rounded-full" type="submit" id="Edit_data">
+            Save changes
           </button>
     </form>
-    <script src="/javascripts/validationform.js"></script>
-  </body>
+  </div>
+  <script src="/javascripts/validationform.js"></script>
