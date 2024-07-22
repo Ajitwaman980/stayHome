@@ -4,6 +4,7 @@ const Listing = require("../model/listing"); //Listing is model
 //  owner delete edit  data
 const isOwner = async (req, res, next) => {
   let { id } = req.params;
+  // console.log("owner id is ..............", id);
   const listing = await Listing.findById(id);
   if (!listing.owner._id.equals(res.locals.currentUser._id)) {
     req.flash("success", "Only owner permission to edit");

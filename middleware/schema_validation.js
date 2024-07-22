@@ -2,14 +2,14 @@ const {
   ListingSchema_validation,
   ReviewSchema_validation,
 } = require("../schema_data_Validation.js");
+const flash = require("connect-flash");
 // middleware user schema validation
 const Schema_validation = function (req, res, next) {
   let result = ListingSchema_validation.validate(req.body);
-  console.log(result);
+  // console.log(result);
   if (result.error) {
-    // If there are validation errors, handle them accordingly
-    // console.error(result.error);
-    res.redirect("/listings");
+    req.flash("error", "Data is incomplete Please fill all data fields");
+    res.redirect("/listings/new");
   } else {
     next();
   }
@@ -23,6 +23,7 @@ const Review_Schema_validation = function (req, res, next) {
   // console.log(result_Review_Schema_validation);
   if (result_Review_Schema_validation.error) {
     // console.error(result_Review_Schema_validation.error);
+    req.flash("error", "Somthing is wrong");
     res.redirect("/listings");
   } else {
     next();
