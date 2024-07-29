@@ -1,79 +1,53 @@
-<nav class="w-full h-20 bg-gray-100 border-b">
-  <div class=" flex items-center justify-between  h-full  px-3">
-    <a id="logo" class=" text-xl font-bold flex items-center  justify-center" href="/listings">
-      <i class="fa-regular logo_symbol fa-compass text-3xl text-gray-700"></i>
+<nav id="Navbar" class=" w-full h-20 bg-gray-100">
+  <div id="mainnavbar" class="flex items-center justify-between h-full px-3">
+    <a id="logo" class="text-xl font-bold flex items-center justify-center" href="/listings">
+      <i class="fa-solid fa-house logo_symbol text-3xl text-pink-400"></i>
       <span class="ml-2 text-4xl">StayHome</span>
     </a>
-    <!-- search -->
     <div class="search-container justify-center relative flex items-center w-2/3 h-full">
       <form action="/listings/user/search" method="post" class="flex items-center w-full max-w-lg">
         <input type="text" name="search_content"
           class="flex-grow p-2 border border-gray-300 rounded-l-full focus:border-blue-500 outline-none"
           placeholder="Search Your Hotel">
-        <button type="submit" class="p-2 border  rounded-r-full hover:text-gray-800 focus:outline-none">
+        <button type="submit" class="p-2 border rounded-r-full hover:text-gray-800 focus:outline-none">
           <i class="fa-solid fa-search"></i>
         </button>
       </form>
     </div>
-    <div class=" flex gap-4 items-center  justify-center ">
-      <!-- <a class="nav-link h-full text-gray-700  text-xl hover:text-black" href="/listings">Home</a> -->
-      <!-- <a id="notifications" class="relative flex items-center p-2">
-        <i class="fa-solid fa-bell text-xl"></i>
-        <span id="notification-badge"
-          class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full px-2 py-1 hidden">3</span>
-      </a> -->
+    <div id="newlisting" class="flex gap-4 items-center justify-center">
+      <!-- desktop view -->
       <% if (currentUsser) { %>
-        <a class="nav-link w-40 flex  text-1xl font-sans font-bold text-gray-700 hover:text-black"
-          href="/listings/new">Add New
-          House</a>
-        <% } %>
-          <% if (!currentUsser) { %>
+        <a id="addlist" class="nav-link w-40 flex text-1xl font-sans font-bold text-gray-700 hover:text-black"
+          href="/listings/new">List Your Property</a>
 
-            <a class="nav-link text-gray-700 text-xl px-2 py-2 rounded transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white"
-              href="/login">
-              Login
-            </a>
-            <a class="nav-link text-gray-700 text-xl px-2 py-2 rounded transition duration-300 ease-in-out hover:bg-indigo-600 hover:text-white"
-              href="/signUp">
-              Sign Up
+        <a id="desklogout" class="nav-link text-gray-700 hover:text-black" href="/logout">
+          <i class="fa-solid fa-right-to-bracket text-4xl text-red-600"></i>
+        </a>
+        <% } %>
+
+
+          <!-- mobile view  -->
+
+          <% if (currentUsser) { %>
+
+            <a id="addlistmobile" class="nav-link w-40 flex text-1xl font-sans font-bold text-gray-700 hover:text-black"
+              href="/listings/new">Add</a>
+
+            <a id="logoutmobile" class="nav-link text-gray-700 hover:text-black" href="/logout">
+              <i class="fa-solid fa-right-to-bracket text-4xl text-red-600"></i>
             </a>
 
             <% } %>
-              <% if (currentUsser) { %>
-                <a class="nav-link text-gray-700 hover:text-black" href="/logout">
-                  <i class="fa-solid  fa-right-to-bracket text-4xl text-red-600"></i>
+
+              <!-- user not login -->
+              <% if (!currentUsser) { %>
+                <a id="login" class="nav-link text-gray-700 text-xl" href="/login">Login</a>
+                <a style="padding-left: 1rem; " id="loginmedia" class="nav-link" href="/login">
+                  <i class="fa-regular fa-user text-2xl"></i>
                 </a>
+                <a id="singup" class="nav-link text-gray-700 text-xl" href="/signUp">Sign Up</a>
                 <% } %>
+
     </div>
   </div>
 </nav>
-
-
-<script>
-
-  // design logo
-  const logo = document.getElementById("logo");
-  logo.addEventListener("mouseenter", function () {
-    this.style.transition = "all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
-    this.style.color = "#007bff";
-    this.style.transform = "scale(1.1)";
-  });
-
-  logo.addEventListener("mouseleave", function () {
-
-    this.style.transition = "";
-    this.style.color = "";
-    this.style.transform = "scale(1)";
-  });
-
-  function updateNotificationBadge(count) {
-    const badge = document.getElementById("notification-badge");
-    if (count > 0) {
-      badge.textContent = count;
-      badge.classList.remove("hidden");
-    } else {
-      badge.classList.add("hidden");
-    }
-  }
-  // updateNotificationBadge(1);
-</script>
