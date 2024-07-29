@@ -1,0 +1,313 @@
+#loginmedia {
+  display: none;
+}
+#addlistmobile{
+  display: none;
+}
+
+#logoutmobile{
+  display: none; 
+}
+
+@media (max-width: 500px) {
+  #Navbar {
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+    border-bottom: 1px solid violet;
+  }
+  #logo {
+    display: none;
+  }
+  #login {
+    display: none;
+  }
+  #loginmedia {
+    display: block;
+
+    align-items: center;
+    color: black;
+  }
+
+  #singup {
+    display: none;
+  }
+
+  .search-container {
+    display: flex;
+    width: 80%;
+    justify-content: start;
+  }
+
+  .search-container form {
+    width: 100%;
+  }
+  #signup_page{
+      padding: 0;
+  }
+  #addlist{
+      display: none;
+  }
+  #desklogout{
+      display: none;
+  }
+  #addlistmobile{
+      display: block;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+      font-size: 1rem;
+
+  }
+  #logoutmobile{
+      display: block;
+     
+  }
+  #newlisting {
+      display: flex !important;
+      justify-content: space-evenly !important;
+      align-items: center;
+      font-size: small;
+       }
+
+
+}
+/* 400 */
+@media (min-width:550px) and (max-width:680px){
+
+#Navbar {
+  height: 100%;
+  width: 100%;
+  padding: 0.8rem;
+  background-color: white;
+  border-bottom: 1px solid violet;
+}
+#logo {
+  /* display: none; */
+  font-size: 1rem !important;
+  display: flex !important;;
+}
+#login {
+  display: none;
+}
+#loginmedia {
+  display: block;
+  align-items: center;
+  color: black;
+}
+
+#singup {
+  display: none;
+}
+
+.search-container {
+  display: flex;
+  width: 80%;
+  justify-content: start;
+}
+
+.search-container form {
+  width: 80%;
+}
+#signup_page{
+    padding: 0;
+}
+#about #privacy #terms{
+    font-size: 1rem;
+}
+#newlisting {
+ display: flex;
+ justify-content: space-around;
+ align-items: center;
+ /* width: 100%; */
+ font-size: small;
+  }
+  #addlist{
+    display: none;
+}
+#desklogout{
+    display: none;
+}
+#addlistmobile{
+    display: block;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    font-size: 1rem;
+
+}
+#logoutmobile{
+    display: block;
+   
+}
+#newlisting {
+    display: flex !important;
+    justify-content: flex-start !important;
+    align-items: center;
+    font-size: small;
+    gap: 11px !important;
+     }
+
+}
+@media (min-width:400px) and (max-width:550px){
+
+      #Navbar {
+        height: 100%;
+        width: 100%;
+        padding: 0.8rem;
+        background-color: white;
+        border-bottom: 1px solid violet;
+      }
+      #logo {
+        display: none;
+      }
+      #login {
+        display: none;
+      }
+      #newlisting #loginmedia {
+        display: flex;
+        justify-self: center !important;
+       
+      }
+  
+      #singup {
+        display: none;
+      }
+  
+      .search-container {
+        display: flex;
+        width: 80%;
+        justify-content: start;
+      }
+  
+      .search-container form {
+        width: 80%;
+      }
+      #signup_page{
+          padding: 0;
+      }
+      #about #privacy #terms{
+          font-size: 1rem;
+      }
+      #newlisting {
+       display: flex;
+       justify-content: space-around;
+       align-items: center;
+       /* width: 100%; */
+       font-size: small;
+        }
+        #addlist{
+          display: none;
+      }
+      #desklogout{
+          display: none;
+      }
+      #addlistmobile{
+          display: block;
+          justify-content: space-evenly;
+          align-items: center;
+          width: 100%;
+          font-size: 1rem;
+  
+      }
+      #logoutmobile{
+          display: block;
+         
+      }
+      #newlisting {
+          display: flex !important;
+          justify-content: flex-start !important;
+          align-items: center;
+          font-size: small;
+          gap: 11px !important;
+           }
+    }
+/* 330 to 450  */
+@media (min-width: 290px) and (max-width: 430px){
+#Navbar {
+  height:100%;
+  width: 100%;
+  display: flex;
+
+  padding: 1rem;
+  background-color: white;
+  border-bottom: 1px solid violet;
+}
+#logo, #login, #singup {
+  display: none;
+}
+#loginmedia {
+ padding-left:3.4rem !important ;
+}
+.search-container  {
+  /* display: flex; */
+  width: 50% !important;
+  border-radius: none;
+  border: none !important;
+
+  justify-content: start;
+}
+.search-container button  {
+ display: none !important;
+}
+.search-container input {
+  display: flex;
+  /* border: 24px; */
+  border-radius: none;
+  border: none !important;
+}
+.search-container form {
+  width: 70%;
+  border-radius: none;
+  border: none !important;
+
+  margin-right: 100px;
+  /* border: 24px; */
+  /* display: none !important;
+  display:none; */
+}
+#addlist, #desklogout {
+  display: none;
+}
+
+#addlistmobile{
+width: 2rem !important;
+}
+#logoutmobile{
+font-size: 1rem !important;
+}
+#newlisting {
+  display: flex !important;
+  justify-content: start !important;
+  align-items: center;
+  gap: 12px !important;
+  font-size: small;
+  width: 50%;
+}
+
+ 
+
+#category {
+  display: flex;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  white-space: nowrap; /* Prevents wrapping of items */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
+}
+
+/* Optional: Style for the scrollbar */
+#category::-webkit-scrollbar {
+  width: 8px;
+}
+
+#category::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 4px;
+}
+#category::-webkit-scrollbar {
+  display: none;
+}
+#category::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+}
