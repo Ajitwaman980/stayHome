@@ -15,7 +15,7 @@
                 <% } %>
 
                     <!-- Navbar -->
-                    <div class="bg-zinc-400 text-gray-500 p-2">
+                    <div id="category" class="bg-zinc-400 text-gray-500 p-2">
                         <div class="flex justify-between gap-3 items-center">
                             <div class="flex gap-4 px-2">
                                 <a href="#" class="flex flex-col items-center text-black">
@@ -69,7 +69,7 @@
                     </div>
 
                     <!-- Listings -->
-                    <div class=" bg-pink-50 scroll-smooth px-2 py-4 ">
+                    <div id="cardmain" class=" bg-pink-50 scroll-smooth px-2 py-4 ">
                         <div class="flex flex-wrap justify-center gap-4 ">
                             <% for (const Listing of data) { %>
                                 <a href="/listings/<%= Listing._id %>"
