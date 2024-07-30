@@ -1,5 +1,5 @@
-<nav id="Navbar" class=" w-full h-20 bg-gray-100">
-  <div id="mainnavbar" class="flex items-center justify-between h-full px-3">
+<nav id="Navbar" class=" w-full h-20 bg-gray-100 text-gray-800">
+  <div id="mainnavbar" class="flex items-center justify-between w-full h-full px-3">
     <a id="logo" class="text-xl font-bold flex items-center justify-center" href="/listings">
       <i class="fa-solid fa-house logo_symbol text-3xl text-pink-400"></i>
       <span class="ml-2 text-4xl">StayHome</span>
@@ -20,7 +20,7 @@
         <a id="addlist" class="nav-link w-40 flex text-1xl font-sans font-bold text-gray-700 hover:text-black"
           href="/listings/new">List Your Property</a>
 
-        <a id="desklogout" class="nav-link text-gray-700 hover:text-black" href="/logout">
+        <a id="desklogout" class="nav-link  text-gray-700 hover:text-black" href="/logout">
           <i class="fa-solid fa-right-to-bracket text-4xl text-red-600"></i>
         </a>
         <% } %>
@@ -41,7 +41,7 @@
 
               <!-- user not login -->
               <% if (!currentUsser) { %>
-                <a id="login" class="nav-link text-gray-700 text-xl" href="/login">Login</a>
+                <a id="login" class="nav-link border-black border-2 text-gray-700 text-xl" href="/login">Login</a>
                 <a style="padding-left: 1rem; " id="loginmedia" class="nav-link" href="/login">
                   <i class="fa-regular fa-user text-2xl"></i>
                 </a>
