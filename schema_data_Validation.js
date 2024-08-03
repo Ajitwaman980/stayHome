@@ -8,6 +8,10 @@ module.exports.ListingSchema_validation = Joi.object({
   location: Joi.string().required(),
   country: Joi.string().required(),
   image: Joi.string().uri().allow(''),
+  bed:Joi.number().required(),
+  bathroom: Joi.number().required(),
+  areaHousewidth: Joi.number().required(),
+  areaHouseheight: Joi.number().required(),
 }).required();
 module.exports.ReviewSchema_validation = Joi.object({
   Comment: Joi.string().required(),
