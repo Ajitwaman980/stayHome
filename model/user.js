@@ -5,7 +5,22 @@ const User_Schema=new mongoose.Schema({
         type:'String',
         required:true,
         unique:true
-    } 
+    } ,
+    // discoun for new user 
+    discount:{
+        type:Boolean,//true or flase
+        default:true
+
+    },
+    discountCode:{
+type: String,
+    default: null,
+    },
+    discountUsed:{
+        type:Boolean,//true or flase
+        default:false,
+
+    }
     
 });
 User_Schema.plugin(passport_local_mongoose);
