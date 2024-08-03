@@ -45,7 +45,7 @@
 /* Media query for screens smaller than 768px (tablets and below) */
 @media (max-width: 768px) {
   .information_showing_your_house {
-    padding: 1rem; /* Decrease padding */
+    padding: 1rem; 
   }
 }
 
