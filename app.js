@@ -83,7 +83,7 @@ app.use((req, res, next) => {
 });
 // Routes
 app.use("/", indexRouter);
-app.use("/uploads", express.static("uploads"));
+
 app.use("/listings", listingRoute); //listing Route
 app.use("/listings/:id/reviews", reviewRoute); //Review route
 app.use("/", userRoute); //user router
