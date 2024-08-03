@@ -67,6 +67,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- discount pop show  -->
 
                     <!-- Listings -->
                     <div id="cardmain" class="bg-gray-100 scroll-smooth px-2 py-4 ">
@@ -76,7 +77,7 @@
                                     class="block rounded-lg shadow-lg overflow-hidden "
                                     style="height: 25rem; width: 300px; ">
                                     <img src="<%= Listing.image.Url %>" class="w-full h-64 object-cover" alt="image">
-                                    <div class="p-1 py-2 bg-zinc-200 h-full w-full">
+                                    <div class="p-1 px-2 py-2 bg-zinc-200 h-full w-full">
                                         <!-- ------------------------------check price -------------------------------------------- -->
                                         <% let basePrice; if (Listing.price> 2000) {
                                             bestPrice = Listing.price - 2000;
@@ -89,25 +90,39 @@
                                             %>
                                             <!-- end -->
                                             <p class="text-black text-xl font-bold mb-1">
-                                                <%= bestPrice %>&#8377;
-                                                    <span class="text-sm text-gray-500 inline-block "
-                                                        style="margin: -7px;">
-                                                        /Night</span>
-                                                    <span
-                                                        class="  text-gray-500 items-end px-8  line-through text-lg font-normal  justify-end inline-block">
-                                                        <span>
-                                                            <%= Listing.price %>&#8377;<span>Night</span>
+                                                <!-- discount user new price  -->
+                                                <% if (currentUsser && currentUsser.discountCode &&
+                                                    !currentUsser.discountUsed) { %>
+                                                    <%= (Listing.price / 2) %>&#8377;
+                                                        <span class="text-sm text-gray-500 inline-block"
+                                                            style="margin: -7px;">
+                                                            /Night
                                                         </span>
-                                                    </span>
-                                                    <span>
-                                                        <!-- total price with gst -->
-                                                        <p class="text-green-600 GST hidden">
-                                                            <%=((bestPrice *18)/100)+bestPrice %>
-                                                                &#8377; With
-                                                                GST
-                                                        </p>
-                                                    </span>
+                                                        <% } else { %>
+                                                            <%= bestPrice %>&#8377;
+                                                                <span class="text-sm text-gray-500 inline-block"
+                                                                    style="margin: -7px;">
+                                                                    /Night
+                                                                </span>
+                                                                <% } %>
+
+                                                                    <span
+                                                                        class="  text-gray-500 items-end px-8  line-through text-lg font-normal  justify-end inline-block">
+                                                                        <span>
+                                                                            <%= Listing.price %>
+                                                                                &#8377;<span>Night</span>
+                                                                        </span>
+                                                                    </span>
+                                                                    <span>
+                                                                        <!-- total price with gst -->
+                                                                        <p class="text-green-600 GST hidden">
+                                                                            <%=((bestPrice *18)/100)+bestPrice %>
+                                                                                &#8377; With
+                                                                                GST
+                                                                        </p>
+                                                                    </span>
                                             </p>
+
 
                                             <p class="text-xl text-wrap  text-black font-bold ">
                                                 <%= Listing.title %>
@@ -117,9 +132,15 @@
                                             </p>
                                             <div
                                                 class="flex justify-between w-full py-1  border-t-2  border-yellow-800">
-                                                <div> <i class="fas fa-bath text-green-500 mr-2"></i>3</div>
-                                                <div><i class="fas fa-bed text-purple-500 mr-2"></i>2</div>
-                                                <div><i class="fas  fa-square text-blue-500 mr-2"></i>30X40</div>
+                                                <div> <i class="fas fa-bath text-green-500 mr-2"></i>
+                                                    <%=Listing.bathroom%>
+                                                </div>
+                                                <div><i class="fas fa-bed text-purple-500 mr-2"></i>
+                                                    <%=Listing.bed%>
+                                                </div>
+                                                <div><i class="fas  fa-square text-blue-500 mr-2"></i>
+                                                    <%=Listing. areaHousewidth %>X<%=Listing.areaHouseheight%>
+                                                </div>
                                             </div>
                                     </div>
 
@@ -129,7 +150,29 @@
                         </div>
 
                     </div>
-                    <!-- <div class="bg-green-300 w-20 h-20 rounded-full border flex items-center justify-center">
-                        <div>ask me</div>
-                    </div> -->
+                    <!-- releted comapnay details -->
+
+                    <div class="flex flex-col text-wrap justify-start bg-gray-100 px-4 py-6">
+
+                        <div class="text-3xl justify-start font-bold mb-1 px-3">
+                            <h3>Start Your Real Estate Journey Today</h3>
+                        </div>
+
+                        <!-- Paragraph -->
+                        <div class="text-xl mb-8 w-full  text-gray-400 px-3">
+                            <p>Your dream property is just a click away. Whether you're looking for a new
+                                home,
+                                a
+                                strategic investment, or expert real estate advice, Estatein is here to
+                                assist
+                                you every
+                                step of the way. Take the first step towards your real estate goals and
+                                explore
+                                our
+                                available properties or get in touch with our team for personalized
+                                assistance.
+                            </p>
+                        </div>
+                    </div>
+
                     <script src="/javascripts/gst.js"></script>

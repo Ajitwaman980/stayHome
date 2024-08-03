@@ -23,7 +23,14 @@
                 <%= listing_info.description %>
               </p>
               <p class="price-location"><strong>Price:</strong>
-                <%= listing_info.price %> <span>&#8377;</span>
+                <%if(currentUsser && currentUsser.discountCode &&!currentUsser.discountUsed) {%>
+                  <%=(listing_info.price) /2 %>
+                    <span>&#8377;</span>
+                    <span>You get 50% off on </span>
+                    <%}%>
+
+                      <%=listing_info.price %>
+                        <span>&#8377;</span>
               </p>
               <p class="price-location"><strong>Location:</strong>
                 <%= listing_info.location %>
@@ -36,6 +43,8 @@
                 <a href="/listings/<%= listing_info._id %>/payment"><button class="btn btn-primary">Book
                     Now</button></a>
               </div>
+
+
               <% if (currentUser && currentUser._id.equals(listing_info.owner._id)) { %>
                 <div class="button_edit_delete">
                   <button id="edit-button" class="btn btn-primary edit" data-listing-id="<%= listing_info._id %>">
