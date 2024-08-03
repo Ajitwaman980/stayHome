@@ -10,8 +10,12 @@ const NewUserCrete = async (req, res) => {
       req.flash("error", "Email already in use");
       return res.redirect("/signUp");
     }
+
+    // dicount code generated
+    const discountCode = Math.floor(Math.random() * 10000);
     // new user create using username and email
-    const newUser = new User_model({ username, email });
+    const newUser = new User_model({ username, email ,discountCode,discount: true,});
+
 
     const register_User = await User_model.register(newUser, password);
     console.log("register user", register_User);
@@ -20,6 +24,8 @@ const NewUserCrete = async (req, res) => {
         return next(err);
       }
       // req.flash("success", "User Login Success");
+      req.flash("success",`User Login Success. You get 50% off on your first booking with code: ${discountCode}`)
+
       res.redirect("/listings");
     });
   } catch (err) {

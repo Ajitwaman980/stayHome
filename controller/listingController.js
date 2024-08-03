@@ -1,25 +1,28 @@
 const error = require("mongoose/lib/error/index.js");
 const Listing = require("../model/listing.js"); // Listing is model
+const User=require("../model/user.js")// user model
 const flash = require("connect-flash");
+// loadsh
+const cloneDeep = require("lodash/cloneDeep"); //
 const NodeCache = require("node-cache"); //cache module
+const { populate } = require("dotenv");
+
 let mycache = new NodeCache(); //cache instance is created
+// working
 async function handleRetrieveData(req, res) {
   try {
-    // mycache.set("listing", data);
-    // console.log(mycache.has("Listing"));
-    // // console.log("Cache Data:", mycache.get("Listing"));
-    // if (!mycache.has("Listing")) {
-    //   data = await Listing.find({});
-    //   // data = data[0]?.image?.Url;
-    //   mycache.set("Listing", data); //set
-    //   console.log("data", data);
-    //   console.log("cache is set ");
+    // let data;
+    // if (mycache.has("listing")) {
+    //   data = mycache.get("listing");
     // } else {
-    //   data = mycache.get("Listing");
+    //   data = await Listing.find({});
+    //   mycache.set("listing", cloneDeep(data));
     // }
     // res.send(data);
-    // console.log("Data to be rendered:", data);
     const data = await Listing.find({});
+    //  const user=await User.find({});
+    //  console.log("this is user mdel ",user);
+
     const success = req.flash("success");
     const error = req.flash("error");
     res.render("../views/listing/listing.ejs", { data, success, error });
@@ -28,7 +31,7 @@ async function handleRetrieveData(req, res) {
   }
 }
 
-async function GetlistingByid(req, res, error) {
+async function GetlistingByid(req, res) {
   let { id } = req.params;
   try {
     const listing_info = await Listing.findById(id)
@@ -36,7 +39,12 @@ async function GetlistingByid(req, res, error) {
         path: "Reviews",
         populate: { path: "author" },
       })
-      .populate("owner");
+      .populate("owner", "username");
+    // console.log(listing_info);
+    // let data = await Listing.findById(id).populate("owner", "username");
+    // console.log(data);
+
+    if (!listing_info) return res.status(4040).send("something went wrong");
 
     return res.render("../views/listing/show.ejs", {
       listing_info,
@@ -51,7 +59,8 @@ async function GetlistingByid(req, res, error) {
 
 async function ListingNewDataInsert(req, res) {
   try {
-    const { title, description, price, location, country } = req.body;
+    
+    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight} = req.body;
     if (req.file) {
       image = req.file.path;
     }
@@ -65,6 +74,10 @@ async function ListingNewDataInsert(req, res) {
       price,
       location,
       country,
+      bed,
+      bathroom,
+      areaHousewidth,
+      areaHouseheight,
       owner: req.user._id,
     });
 
@@ -82,7 +95,11 @@ async function ListingNewDataInsert(req, res) {
 async function ListingEditDataById(req, res) {
   try {
     const { id } = req.params;
-    const { title, description, price, location, country } = req.body;
+    if (!id) {
+      return res.status(404).send("Not Found");
+    }
+
+    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight } = req.body;
     let Update_listing = await Listing.findByIdAndUpdate(
       id,
       {
@@ -91,6 +108,10 @@ async function ListingEditDataById(req, res) {
         price,
         location,
         country,
+        bed,
+        bathroom,
+        areaHousewidth,
+        areaHouseheight,
       },
       { new: true }
     );
@@ -117,6 +138,10 @@ async function ListingEditDataById(req, res) {
 const ListingdeleteById = async (req, res) => {
   try {
     let id = req.params.id;
+
+    if (!id) {
+      return res.status(404).send("Not Found");
+    }
     let del = await Listing.findByIdAndDelete(id);
     req.flash("success", "Successfully Deleted");
     res.redirect("/listings");

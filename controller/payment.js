@@ -1,16 +1,34 @@
 const stripe = require("stripe")(process.env.Secret_key);
+const customerschema=require("../model/customerschema");
+const User=require("../model/user.js")// user model
+// const Payment = require("../model/Payment");
+
+
 async function verifyuser(req, res, next) {
-  //   console.log(req.body);
-  //   console.log("working ");
+
   try {
+    // console.log(req.user);
+    // check discount used or not
+    if(req.user && req.user.discountCode && !req.user.discountUsed){
+      req.user.discountUsed = true;
+      await req.user.save();
+
+      };
     const customer = await stripe.customers.create({
       name: req.body.name,
       email: req.body.email,
     });
+   const data=new customerschema({
+    name: req.body.name,
+      email: req.body.email,
+      stripeCustomerId: customer.id,
+   })
+   await data.save();
     req.flash("warning", "We do not store your personal details ");
     res.render("../views/payments/carddetails.ejs", {
       paymentid: customer.id,
       id: req.params.id,
+      
       warning: req.flash("warning"),
     });
   } catch (error) {
