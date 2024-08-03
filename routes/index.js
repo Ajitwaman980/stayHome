@@ -1,15 +1,13 @@
 var express = require("express");
 var router = express.Router();
-const Listing = require("../model/listing");
+
 const {
   handleRetrieveData,
-  GetlistingByid,
-  ListingNewDataInsert,
-  ListingEditDataById,
-  ListingdeleteById,
+
 } = require("../controller/listingController.js");
 
 // List all data
+router.get("", handleRetrieveData);
 router.get("/", handleRetrieveData);
 
 router.get("/companydata/privacy", (req, res) => {

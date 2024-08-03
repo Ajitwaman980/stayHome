@@ -70,6 +70,9 @@ router.put(
 // /listings/user/search
 router.post("/user/search", async (req, res) => {
   let { search_content } = req.body;
+  if(!search_content){
+    res.redirect("/listings")
+  }
   // console.log(search_content);
   let regex = new RegExp(search_content, "i");
   let search_content_new = await Listing.find({ title: regex });
