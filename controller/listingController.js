@@ -60,7 +60,7 @@ async function GetlistingByid(req, res) {
 async function ListingNewDataInsert(req, res) {
   try {
     
-    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight} = req.body;
+    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight,categories} = req.body;
     if (req.file) {
       image = req.file.path;
     }
@@ -78,6 +78,7 @@ async function ListingNewDataInsert(req, res) {
       bathroom,
       areaHousewidth,
       areaHouseheight,
+      categories,
       owner: req.user._id,
     });
 
@@ -99,7 +100,7 @@ async function ListingEditDataById(req, res) {
       return res.status(404).send("Not Found");
     }
 
-    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight } = req.body;
+    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight ,categories} = req.body;
     let Update_listing = await Listing.findByIdAndUpdate(
       id,
       {
@@ -112,6 +113,7 @@ async function ListingEditDataById(req, res) {
         bathroom,
         areaHousewidth,
         areaHouseheight,
+        categories
       },
       { new: true }
     );
