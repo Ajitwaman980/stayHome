@@ -22,39 +22,50 @@
                                     <i class="fa-solid fa-house text-xl"></i>
                                     <span class="text-sm">House</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black">
+                                <a href="/user/search" data-category="Living" value="Living"
+                                    class="category-link flex flex-col items-center text-black">
                                     <i class="fa-solid fa-couch text-xl"></i>
                                     <span class="text-sm">Living</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black">
+                                <a href="/user/search" data-category="Bungalow" value="Bungalow"
+                                    class=" category-link flex flex-col items-center text-black">
                                     <i class="material-icons text-xl">home</i>
                                     <span class="text-sm">Bungalow</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black hover:text-violet-400">
+                                <a href="" data-category="Pool" value="Pool"
+                                    class="category-link flex flex-col items-center text-black hover:text-violet-400">
                                     <i class="fa-solid fa-swimmer text-xl"></i>
                                     <span class="text-sm">Pool</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black">
+
+
+                                <a href="/user/search" data-category="Mountain" value="Mountain"
+                                    class="category-link flex flex-col items-center text-black">
                                     <i class="fa-solid fa-mountain text-xl"></i>
                                     <span class="text-sm">Mountain</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black">
+                                <a href="/user/search" data-category="Beach" value="Beach"
+                                    class="category-link flex flex-col items-center text-black">
                                     <i class="fa-solid fa-umbrella-beach text-xl"></i>
                                     <span class="text-sm">Beach</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black">
+                                <a href="/user/search" data-category="Treehouse" value="Treehouse"
+                                    class="category-link flex flex-col items-center text-black">
                                     <i class="fa-solid fa-tree text-xl"></i>
                                     <span class="text-sm">Treehouse</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black">
+                                <a href="/user/search" data-category="Cabin" value="Cabin"
+                                    class="category-link flex flex-col items-center text-black">
                                     <i class="material-icons text-xl">home</i>
                                     <span class="text-sm">Cabin</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black">
+                                <a href="/user/search" value="Warehouse" data-category="warehouse"
+                                    class="category-link flex flex-col items-center text-black">
                                     <span class="material-icons text-xl">warehouse</span>
                                     <span class="text-sm">Warehouse</span>
                                 </a>
-                                <a href="#" class="flex flex-col items-center text-black">
+                                <a href="/user/search" data-category="Studio" value="Studio"
+                                    class="category-link flex flex-col items-center text-black">
                                     <i class="material-icons text-xl">business</i>
                                     <span class="text-sm">Studio</span>
                                 </a>
@@ -68,7 +79,6 @@
                         </div>
                     </div>
                     <!-- discount pop show  -->
-
                     <!-- Listings -->
                     <div id="cardmain" class="bg-gray-100 scroll-smooth px-2 py-4 ">
                         <div class="flex flex-wrap h-full justify-center gap-4  ">
@@ -93,7 +103,7 @@
                                                 <!-- discount user new price  -->
                                                 <% if (currentUsser && currentUsser.discountCode &&
                                                     !currentUsser.discountUsed) { %>
-                                                    <%= (Listing.price / 2) %>&#8377;
+                                                    <%= Math.trunc((Listing.price / 2)) %>&#8377;
                                                         <span class="text-sm text-gray-500 inline-block"
                                                             style="margin: -7px;">
                                                             /Night
@@ -176,3 +186,4 @@
                     </div>
 
                     <script src="/javascripts/gst.js"></script>
+                    <script src="/javascripts/category.js"></script>

@@ -1,16 +1,15 @@
 {
-    "version": 2,
-"builds": [
-  {
- "src": "node ./bin/www",
-
- "use": "@vercel/node"
-  }
-],
-"routes": [
-  {
- "src": "/(.*)",
- "dest": "/bin/www"
-  }
-]
- }
+  "version": 2,
+  "builds": [
+    {
+      "src": "bin/www",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/bin/www"
+    }
+  ]
+}
