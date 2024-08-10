@@ -21,7 +21,8 @@ const {
 } = require("../controller/listingController.js");
 const { card_details, verifyuser } = require("../controller/payment.js");
 const stripe = require("stripe")(process.env.Secret_key);
-
+// limit
+const Limit = require("../middleware/services/limiter.js");
 // List all data
 router.get("", handleRetrieveData);
 
@@ -35,13 +36,13 @@ router.get("/new", isLogin, function (req, res) {
 router.get("/:id", GetlistingByid);
 
 // payment
-router.get("/:id/payment", isLogin, function (req, res) {
+router.get("/:id/payment", isLogin,Limit, function (req, res) {
   res.render("../views/payments/userpayment", { id: req.params.id });
 });
-router.post("/:id/create_customer", isLogin, verifyuser);
+router.post("/:id/create_customer", isLogin,Limit, verifyuser);
 
 // card details
-router.post("/:id/card_details", isLogin, card_details);
+router.post("/:id/card_details", isLogin,Limit, card_details);
 
 // Insert new data into database
 router.post(
@@ -51,6 +52,8 @@ router.post(
   Schema_validation,
   ListingNewDataInsert
 );
+
+
 
 // Render edit form
 router.get("/:id/edit", isLogin, isOwner, async function (req, res) {
@@ -67,17 +70,43 @@ router.put(
   ListingEditDataById
 );
 // searching data
-// /listings/user/search
+
+router.get("/user/search/:category", async (req, res) => {
+  const category = req.params.category;
+
+  if (!category) {
+      return res.redirect("/listings");
+  }
+  // console.log("This is the query of category:", category);
+
+// insensitive regex for the category
+  const data_cat = new RegExp(category, "i");
+
+  try {
+
+      const search_content_new = await Listing.find({ categories: { $all: [data_cat] } });
+      // console.log("Searching content:", search_content_new);
+
+      res.json(search_content_new);
+  } catch (error) {
+      console.error("Error fetching data:", error);
+      res.status(500).send("Server Error");
+  }
+});
+
+
+// /listings/user/search 
 router.post("/user/search", async (req, res) => {
   let { search_content } = req.body;
-  if(!search_content){
+
+  if(!search_content ){
     res.redirect("/listings")
   }
-  // console.log(search_content);
+
   let regex = new RegExp(search_content, "i");
+
   let search_content_new = await Listing.find({ title: regex });
-  // console.log(search_content_new);
-  // res.json(search_content_new);
+
   res.render("../views/listing/searchdata", { data: search_content_new });
 });
 
