@@ -45,6 +45,10 @@ const ListingSchema = mongoose.Schema({
    
     min: 0,
   },
+  categories:{    
+    type:[String],
+    default: ["Home"],
+  },
 }, { timestamps: true });
 
 const Listing = mongoose.model("Listing", ListingSchema);
