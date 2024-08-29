@@ -28,6 +28,7 @@ const app = express();
 const cluster = require("cluster");
 const os = require("os");
 const dotenv = require("dotenv");
+const limiterConfig = require("./middleware/services/limiter");
 
 // View engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -84,9 +85,9 @@ app.use((req, res, next) => {
 // Routes
 app.use("/", indexRouter);
 
-app.use("/listings", listingRoute); //listing Route
-app.use("/listings/:id/reviews", reviewRoute); //Review route
-app.use("/", userRoute); //user router
+app.use("/listings",limiterConfig,  listingRoute); //listing Route
+app.use("/listings/:id/reviews",limiterConfig, reviewRoute); //Review route
+app.use("/",limiterConfig, userRoute); //user router
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
