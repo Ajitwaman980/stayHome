@@ -2,7 +2,7 @@ const ratelimt = require("express-rate-limit");
 
 const limiterConfig = ratelimt({
   windows: 10 * 60 * 1000, // 10 minutes
-  limit: 4, // 4time try  to login
+  limit: 100, // same ip only 100 req in 10 min 
   standardHeaders: false,
   legacyHeaders: false,
   handler: function (req, res, next) {
