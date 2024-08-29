@@ -9,6 +9,7 @@ const { populate } = require("dotenv");
 
 let mycache = new NodeCache(); //cache instance is created
 // working
+// get all data
 async function handleRetrieveData(req, res) {
   try {
     // let data;
@@ -30,7 +31,7 @@ async function handleRetrieveData(req, res) {
     res.render("../views/listing/error.ejs");
   }
 }
-
+// showing by id 
 async function GetlistingByid(req, res) {
   let { id } = req.params;
   try {
@@ -44,7 +45,7 @@ async function GetlistingByid(req, res) {
     // let data = await Listing.findById(id).populate("owner", "username");
     // console.log(data);
 
-    if (!listing_info) return res.status(4040).send("something went wrong");
+    if (!listing_info) return res.status(4040).send("Listing not found");
 
     return res.render("../views/listing/show.ejs", {
       listing_info,
@@ -53,10 +54,10 @@ async function GetlistingByid(req, res) {
     });
   } catch (e) {
     // console.log("error ", e);
-    res.render("../views/listing/error.ejs");
+    res.status(500).render("../views/listing/error.ejs");
   }
 }
-
+//new data insert
 async function ListingNewDataInsert(req, res) {
   try {
     
@@ -99,21 +100,12 @@ async function ListingEditDataById(req, res) {
     if (!id) {
       return res.status(404).send("Not Found");
     }
-
-    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight ,categories} = req.body;
+ console.log("this is ", req.body);
+    // const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight ,categories} = req.body;
     let Update_listing = await Listing.findByIdAndUpdate(
       id,
       {
-        title,
-        description,
-        price,
-        location,
-        country,
-        bed,
-        bathroom,
-        areaHousewidth,
-        areaHouseheight,
-        categories
+        ...req.body,//destructing used
       },
       { new: true }
     );
@@ -123,8 +115,9 @@ async function ListingEditDataById(req, res) {
       let Url = req.file.path;
       let fileName = req.file.filename;
       Update_listing.image = { Url, fileName };
-      await Update_listing.save();
     }
+    await Update_listing.save();
+
     // console.log("this is image ", image);
 
     req.flash("success", "Successfully Updated List");
@@ -132,11 +125,12 @@ async function ListingEditDataById(req, res) {
   } catch (error) {
     // console.log(error);
     // res.render("../views/listing/error.ejs");
+    console.log(error);
     req.flash("error", "something is wrong ");
     res.redirect("/listings");
   }
 }
-
+//delete by id 
 const ListingdeleteById = async (req, res) => {
   try {
     let id = req.params.id;
