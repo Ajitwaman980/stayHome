@@ -22,12 +22,12 @@
                                     <i class="fa-solid fa-house text-xl"></i>
                                     <span class="text-sm">House</span>
                                 </a>
-                                <a href="/user/search" data-category="Living" value="Living"
+                                <a data-category="Living" value="Living"
                                     class="category-link flex flex-col items-center text-black">
                                     <i class="fa-solid fa-couch text-xl"></i>
                                     <span class="text-sm">Living</span>
                                 </a>
-                                <a href="/user/search" data-category="Bungalow" value="Bungalow"
+                                <a data-category="Bungalow" value="Bungalow"
                                     class=" category-link flex flex-col items-center text-black">
                                     <i class="material-icons text-xl">home</i>
                                     <span class="text-sm">Bungalow</span>
@@ -39,48 +39,54 @@
                                 </a>
 
 
-                                <a href="/user/search" data-category="Mountain" value="Mountain"
+                                <a data-category="Mountain" value="Mountain"
                                     class="category-link flex flex-col items-center text-black">
                                     <i class="fa-solid fa-mountain text-xl"></i>
                                     <span class="text-sm">Mountain</span>
                                 </a>
-                                <a href="/user/search" data-category="Beach" value="Beach"
+                                <a data-category="Beach" value="Beach"
                                     class="category-link flex flex-col items-center text-black">
                                     <i class="fa-solid fa-umbrella-beach text-xl"></i>
                                     <span class="text-sm">Beach</span>
                                 </a>
-                                <a href="/user/search" data-category="Treehouse" value="Treehouse"
+                                <a data-category="Treehouse" value="Treehouse"
                                     class="category-link flex flex-col items-center text-black">
                                     <i class="fa-solid fa-tree text-xl"></i>
                                     <span class="text-sm">Treehouse</span>
                                 </a>
-                                <a href="/user/search" data-category="Cabin" value="Cabin"
+                                <a data-category="Cabin" value="Cabin"
                                     class="category-link flex flex-col items-center text-black">
                                     <i class="material-icons text-xl">home</i>
                                     <span class="text-sm">Cabin</span>
                                 </a>
-                                <a href="/user/search" value="Warehouse" data-category="warehouse"
+                                <a value="Warehouse" data-category="warehouse"
                                     class="category-link flex flex-col items-center text-black">
                                     <span class="material-icons text-xl">warehouse</span>
                                     <span class="text-sm">Warehouse</span>
                                 </a>
-                                <a href="/user/search" data-category="Studio" value="Studio"
+                                <a data-category="Studio" value="Studio"
                                     class="category-link flex flex-col items-center text-black">
                                     <i class="material-icons text-xl">business</i>
                                     <span class="text-sm">Studio</span>
                                 </a>
                             </div>
-                            <div class="flex items-center" id="taxes">
-                                <button id="taxToggle"
-                                    class="relative inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-white bg-blue-500 hover:bg-blue-600">
-                                    <i class="fas fa-calculator mr-2"></i> Show Total with Taxes
-                                </button>
+                            <div class="flex border-solid border-2 border-b-3 px-3 items-cente" for="sort">
+
+                                <select name="" id="sort"
+                                    class=" bg-gray-200   text-gray-500 w-20 flex justify-center h-auto ">
+                                    <option value="" class="font-bold">Sort By</option>
+                                    <option value="" class="font-bold">All</option>
+                                    <option value="" class="font-bold">Sell</option>
+                                    <option value="" class="font-bold">Rent</option>
+                                    <option value="" class="font-bold">New</option>
+
+                                </select>
                             </div>
                         </div>
                     </div>
                     <!-- discount pop show  -->
                     <!-- Listings -->
-                    <div id="cardmain" class="bg-gray-100 scroll-smooth px-2 py-4 ">
+                    <div id="cardmain" class="bg-gray-100 scroll-smooth px-4 py-4 ">
                         <div class="flex flex-wrap h-full justify-center gap-4  ">
                             <% for (const Listing of data) { %>
                                 <a href="/listings/<%= Listing._id %>"
@@ -173,7 +179,7 @@
                             <p>Your dream property is just a click away. Whether you're looking for a new
                                 home,
                                 a
-                                strategic investment, or expert real estate advice, Estatein is here to
+                                strategic investment, or expert real estate advice, SatyHome is here to
                                 assist
                                 you every
                                 step of the way. Take the first step towards your real estate goals and
