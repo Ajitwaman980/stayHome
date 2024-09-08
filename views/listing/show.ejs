@@ -15,7 +15,7 @@
           <div class="card information_showing_your_house">
 
             <!-- If the image is an external URL -->
-            <img src="<%= listing_info.image.Url %>" class="card-img-top" alt="Listing Image" />
+            <img src="<%= listing_info.image.Url %>" loading="lazy" class="card-img-top" alt="Listing Image" />
 
             <div class="card-body col-12">
               <span class="owner-info">Owner By: <%= listing_info.owner.username %></span>
@@ -180,6 +180,7 @@
             document.getElementById("map").innerHTML =
               "<p>Unable to display map location.</p>";
           }
+
 
         </script>
   </body>

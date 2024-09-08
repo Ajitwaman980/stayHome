@@ -73,12 +73,13 @@
                             <div class="flex border-solid border-2 border-b-3 px-3 items-cente" for="sort">
 
                                 <select name="" id="sort"
-                                    class=" bg-gray-200   text-gray-500 w-20 flex justify-center h-auto ">
+                                    class=" bg-gray-200   text-gray-500 w-20 flex justify-center h-auto "
+                                    onchange="navigateToPage()">
                                     <option value="" class="font-bold">Sort By</option>
                                     <option value="" class="font-bold">All</option>
                                     <option value="" class="font-bold">Sell</option>
                                     <option value="" class="font-bold">Rent</option>
-                                    <option value="" class="font-bold">New</option>
+                                    <option value="listings/category/cat/new" class="font-bold">New</option>
 
                                 </select>
                             </div>
@@ -92,7 +93,8 @@
                                 <a href="/listings/<%= Listing._id %>"
                                     class="block rounded-lg shadow-lg overflow-hidden "
                                     style="height: 25rem; width: 300px; ">
-                                    <img src="<%= Listing.image.Url %>" class="w-full h-64 object-cover" alt="image">
+                                    <img src="<%= Listing.image.Url %>" class="w-full h-64 object-cover" loading="lazy"
+                                        alt="image">
                                     <div class="p-1 px-2 py-2 bg-zinc-200 h-full w-full">
                                         <!-- ------------------------------check price -------------------------------------------- -->
                                         <% let basePrice; if (Listing.price> 2000) {
@@ -190,6 +192,17 @@
                             </p>
                         </div>
                     </div>
+                    <script>
+                        function navigateToPage() {
+                            const dropdown = document.getElementById('sort');
+                            const selectedValue = dropdown.value;
+                            console.log(selectedValue);
+                            if (selectedValue) {
+                                window.location.href = selectedValue; // Redirect 
+                            }
+                        }
 
-                    <script src="/javascripts/gst.js"></script>
+                    </script>
+                    <!-- <script src="/javascripts/gst.js"></script> -->
                     <script src="/javascripts/category.js"></script>
+                    <script src="/javascripts/category_new_data.js"></script>
