@@ -1,3 +1,4 @@
+const { types } = require("joi");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
@@ -34,6 +35,11 @@ const ListingSchema = mongoose.Schema({
   bathroom: {
     type: Number,
     min: 0,
+  },
+  // type add sell or rent
+  typeofhouse:{
+  type:String,
+  require:true,
   },
   areaHousewidth: {
     type: Number,
