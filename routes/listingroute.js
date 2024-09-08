@@ -69,11 +69,11 @@ router.put(
   upload.single("image"),
   ListingEditDataById
 );
-// searching data
+// searching data  used axios 
 
 router.get("/user/search/:category", async (req, res) => {
   const category = req.params.category;
-
+//  console.log(category);
   if (!category) {
       return res.redirect("/listings");
   }
@@ -104,9 +104,7 @@ router.post("/user/search", async (req, res) => {
   }
 
   let regex = new RegExp(search_content, "i");
-
   let search_content_new = await Listing.find({ title: regex });
-
   res.render("../views/listing/searchdata", { data: search_content_new });
 });
 
