@@ -21,6 +21,7 @@ const User_model = require("./model/user");
 const userRoute = require("./routes/usersRoute");
 const { env } = require("process");
 const ConnectDB = require("./config/mogoConnection_config");
+const categoryRoute=require("./routes/category");
 const app = express();
 // csp helmet
 
@@ -88,7 +89,7 @@ app.use("/", indexRouter);
 app.use("/listings",limiterConfig,  listingRoute); //listing Route
 app.use("/listings/:id/reviews",limiterConfig, reviewRoute); //Review route
 app.use("/",limiterConfig, userRoute); //user router
-
+app.use("/listings/category",limiterConfig, categoryRoute); //category route
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
