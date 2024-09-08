@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', function (event) {
             event.preventDefault();
             const category = this.getAttribute('data-category');
-
+        //  console.log(category)
             axios.get(`/listings/user/search/${category}`)
                 .then(function (response) {
                     const listings = response.data;
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 basePrice = listing.price - 100;
                             }
                             const card = `
-          <a href="/listings/${listing._id}" class="block rounded-lg shadow-lg overflow-hidden" style="height: 25.4rem; width: 310px;">
+          <a href="/listings/${listing._id}" class="block  rounded-lg shadow-lg overflow-hidden" style="height: 25.4rem; width: 310px;">
            <img src="${listing.image.Url}" class="w-full h-64 object-cover" alt="image">
             <div class="p-1 px-2 py-4 bg-zinc-200 h-full w-full">
             <p class="text-black text-xl font-bold mb-1">
