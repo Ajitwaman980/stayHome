@@ -7,7 +7,7 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "node server.js",
+    "dev": "nodemon server.js",
     
     
     "build:css": "npx tailwindcss -i ./src/styles/tailwind.css -o ./public/stylesheets/tailwind.css --watch"
