@@ -36,7 +36,7 @@ const ListingSchema = mongoose.Schema({
     type: Number,
     min: 0,
   },
-  // type add sell or rent
+  // type add sell or rent items
   typeofhouse:{
   type:String,
   require:true,
