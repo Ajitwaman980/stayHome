@@ -10,9 +10,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(function (response) {
                     const listings = response.data;
                     const cardContainer = document.getElementById('cardmain');
-                    cardContainer.innerHTML = '';
+                    // cardContainer.innerHTML = '';
+                    let card='';
 
-                    if (listings.length > 0) {
+                    if (Array.isArray(listings)&& listings.length > 0) {
                         listings.forEach(listing => {
 
                             // prices discount 2000
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             else {
                                 basePrice = listing.price - 100;
                             }
-                            const card = `
+                             card = card+`
           <a href="/listings/${listing._id}" class="block  rounded-lg shadow-lg overflow-hidden" style="height: 25.4rem; width: 310px;">
            <img src="${listing.image.Url}" class="w-full h-64 object-cover" alt="image">
             <div class="p-1 px-2 py-4 bg-zinc-200 h-full w-full">
