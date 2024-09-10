@@ -76,10 +76,12 @@
                                     class=" bg-gray-200   text-gray-500 w-20 flex justify-center h-auto "
                                     onchange="navigateToPage()">
                                     <option value="" class="font-bold">Sort By</option>
-                                    <option value="" class="font-bold">All</option>
-                                    <option value="" class="font-bold">Sell</option>
-                                    <option value="" class="font-bold">Rent</option>
-                                    <option value="listings/category/cat/new" class="font-bold">New</option>
+                                    <option value="all" class="font-bold">All</option>
+                                    <option value="sell" class="font-bold">Sell</option>
+                                    <option value="rent" class="font-bold">Rent</option>
+                                    <option value="new" class="font-bold">New</option>
+                                    <option value="low_to_high">Low to High</option>
+                                    <option value="high_to_low">High to Low</option>
 
                                 </select>
                             </div>
@@ -87,7 +89,7 @@
                     </div>
                     <!-- discount pop show  -->
                     <!-- Listings -->
-                    <div id="cardmain" class="bg-gray-100 scroll-smooth px-4 py-4 ">
+                    <div id="cardmain" class="bg-gray-100 flex flex-wrap gap-4 p-4 scroll-smooth px-4 py-4 ">
                         <div class="flex flex-wrap h-full justify-center gap-4  ">
                             <% for (const Listing of data) { %>
                                 <a href="/listings/<%= Listing._id %>"
@@ -193,14 +195,14 @@
                         </div>
                     </div>
                     <script>
-                        function navigateToPage() {
-                            const dropdown = document.getElementById('sort');
-                            const selectedValue = dropdown.value;
-                            console.log(selectedValue);
-                            if (selectedValue) {
-                                window.location.href = selectedValue; // Redirect 
-                            }
-                        }
+                        // function navigateToPage() {
+                        //     const dropdown = document.getElementById('sort');
+                        //     const selectedValue = dropdown.value;
+                        //     console.log(selectedValue);
+                        //     if (selectedValue) {
+                        //         window.location.href = selectedValue; // Redirect
+                        //     }
+                        // }
 
                     </script>
                     <!-- <script src="/javascripts/gst.js"></script> -->
