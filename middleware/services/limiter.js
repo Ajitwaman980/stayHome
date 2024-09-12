@@ -1,5 +1,5 @@
 const ratelimt = require("express-rate-limit");
-
+// prevetn dos attacker
 const limiterConfig = ratelimt({
   windows: 10 * 60 * 1000, // 10 minutes
   limit: 100, // same ip only 100 req in 10 min 
