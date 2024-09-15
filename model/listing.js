@@ -41,6 +41,7 @@ const ListingSchema = mongoose.Schema({
   type:String,
   require:true,
   },
+  
   areaHousewidth: {
     type: Number,
  
