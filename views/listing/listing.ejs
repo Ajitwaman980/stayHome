@@ -15,7 +15,7 @@
                 <% } %>
 
                     <!-- Navbar -->
-                    <div id="category" class="bg-gray-200  text-gray-500 p-2">
+                    <div id="category" class="bg-gray-200  p-3 text-gray-500 ">
                         <div class="flex justify-between bg-gray-200   gap-3 items-center">
                             <div class="flex gap-4 px-2">
                                 <a href="listings" class="flex flex-col items-center text-black">
@@ -70,18 +70,18 @@
                                     <span class="text-sm">Studio</span>
                                 </a>
                             </div>
-                            <div class="flex border-solid border-2 border-b-3 px-3 items-cente" for="sort">
+                            <div class="flex items-center border border-gray-300 rounded px-3 py-2" for="sort">
 
                                 <select name="" id="sort"
-                                    class=" bg-gray-200   text-gray-500 w-20 flex justify-center h-auto "
-                                    onchange="navigateToPage()">
-                                    <option value="" class="font-bold">Sort By</option>
-                                    <option value="all" class="font-bold">All</option>
-                                    <option value="sell" class="font-bold">Sell</option>
-                                    <option value="rent" class="font-bold">Rent</option>
-                                    <option value="new" class="font-bold">New</option>
-                                    <option value="low_to_high">Low to High</option>
-                                    <option value="high_to_low">High to Low</option>
+                                    class=" bg-gray-100 text-gray-600 py-1 px-2 rounded focus:outline-none "
+                                    onchange=" navigateToPage()">
+                                    <option value="" class="font-semibold">Sort By</option>
+                                    <option value="all" class="font-semibold">All</option>
+                                    <option value="sell" class="font-semibold">Sell</option>
+                                    <option value="rent" class="font-semibold">Rent</option>
+                                    <option value="new" class="font-semibold">New</option>
+                                    <option value="low_to_high_price" class="font-semibold">Low to High</option>
+                                    <option value="high_to_low_price" class="font-semibold">High to Low</option>
 
                                 </select>
                             </div>
@@ -89,12 +89,12 @@
                     </div>
                     <!-- discount pop show  -->
                     <!-- Listings -->
-                    <div id="cardmain" class="bg-gray-100 flex flex-wrap gap-4 p-4 scroll-smooth px-4 py-4 ">
+                    <div id="cardmain" class="bg-gray-100 flex flex-wrap gap-4 p-3 scroll-smooth px-3 py-4 ">
                         <div class="flex flex-wrap h-full justify-center gap-4  ">
                             <% for (const Listing of data) { %>
                                 <a href="/listings/<%= Listing._id %>"
                                     class="block rounded-lg shadow-lg overflow-hidden "
-                                    style="height: 25rem; width: 300px; ">
+                                    style="height: 26rem; width: 20rem; ">
                                     <img src="<%= Listing.image.Url %>" class="w-full h-64 object-cover" loading="lazy"
                                         alt="image">
                                     <div class="p-1 px-2 py-2 bg-zinc-200 h-full w-full">
@@ -127,7 +127,7 @@
                                                                 <% } %>
 
                                                                     <span
-                                                                        class="  text-gray-500 items-end px-8  line-through text-lg font-normal  justify-end inline-block">
+                                                                        class="  text-gray-500 items-end px-10   line-through text-lg font-normal  justify-end inline-block">
                                                                         <span>
                                                                             <%= Listing.price %>
                                                                                 &#8377;<span>Night</span>
@@ -144,10 +144,11 @@
                                             </p>
 
 
-                                            <p class="text-xl text-wrap  text-black font-bold ">
+                                            <p class="text-xl font-extrabold text-gray-800 break-words ">
                                                 <%= Listing.title %>
                                             </p>
-                                            <p class="text-sm  py-1 text-wrap  text-black font-semibold ">
+                                            <p class="text-base text-gray-600 py-2 flex items-center">
+                                                <i class="fa-solid fa-map-marker-alt text-red-500 mr-2"></i>
                                                 <%= Listing.location %>
                                             </p>
                                             <div
@@ -172,7 +173,7 @@
                     </div>
                     <!-- releted comapnay details -->
 
-                    <div class="flex flex-col text-wrap justify-start bg-gray-100 px-4 py-6">
+                    <div class="flex flex-col text-wrap  bg-gray-100 justify-start  px-4 py-8">
 
                         <div class="text-3xl justify-start font-bold mb-1 px-3">
                             <h3>Start Your Real Estate Journey Today</h3>
@@ -194,6 +195,57 @@
                             </p>
                         </div>
                     </div>
+
+                    <!-- questions -->
+                    <div class="bg-gray-100 py-5 px-4">
+                        <div class="container mx-auto max-w-4xl">
+                            <h2 class="text-3xl font-bold mb-4 text-center text-gray-800">FAQs</h2>
+
+                            <div class="space-y-4">
+                                <!-- Question 1 -->
+                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                    <summary class="text-xl font-semibold text-gray-800 cursor-pointer">1. What types of
+                                        properties are available?</summary>
+                                    <p class="text-gray-600 mt-2">We have homes, apartments, and vacation rentals for
+                                        you to choose from.</p>
+                                </details>
+
+                                <!-- Question 2 -->
+                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                    <summary class="text-xl font-semibold text-gray-800 cursor-pointer">2. How can I
+                                        book a property visit?</summary>
+                                    <p class="text-gray-600 mt-2">You can easily book a visit through our website or by
+                                        calling us.</p>
+                                </details>
+
+                                <!-- Question 3 -->
+                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                    <summary class="text-xl font-semibold text-gray-800 cursor-pointer">3. Do you offer
+                                        help with loans?</summary>
+                                    <p class="text-gray-600 mt-2">Yes, we can help you connect with loan advisors to get
+                                        financing.</p>
+                                </details>
+
+                                <!-- Question 3 -->
+                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                    <summary class="text-xl font-semibold text-gray-800 cursor-pointer">3. How do I
+                                        apply to rent a property?</summary>
+                                    <p class="text-gray-600 mt-2">Just fill out the simple application form on our
+                                        website.</p>
+                                </details>
+
+                                <!-- Question 5 -->
+                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                    <summary class="text-xl font-semibold text-gray-800 cursor-pointer">5. Can I list my
+                                        property for sale here?</summary>
+                                    <p class="text-gray-600 mt-2">Yes, you can contact us to add your property to our
+                                        listings.</p>
+                                </details>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <script>
                         // function navigateToPage() {
                         //     const dropdown = document.getElementById('sort');
