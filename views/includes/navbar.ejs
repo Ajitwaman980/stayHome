@@ -1,15 +1,20 @@
-<nav id="Navbar" class=" w-full h-20 bg-gray-100 text-gray-800">
+<nav id="Navbar" class=" w-full h-20 bg-white text-gray-800">
   <div id="mainnavbar" class="flex items-center justify-between w-full h-full px-3">
-    <a id="logo" class="text-xl font-bold flex items-center justify-center" href="/listings">
-      <i class="fa-solid fa-house logo_symbol text-3xl text-pink-400"></i>
-      <span class="ml-2 text-4xl">StayHome</span>
+    <a id="logo" class="flex items-center shadow-lg p-2 space-x-2 hover:text-blue-700 transition-all duration-200"
+      href="/listings">
+      <i class="fa-solid fa-house text-3xl text-blue-500"></i>
+      <span class="text-3xl font-bold text-gray-800">
+        <span class="text-blue-500">Stay</span>Home
+      </span>
     </a>
+
+
     <div class="search-container justify-center relative flex items-center w-2/3 h-full">
       <form action="/listings/user/search" method="post" class="flex items-center w-full max-w-lg">
         <input type="text" name="search_content"
-          class="flex-grow p-2 border border-gray-300 rounded-l-full focus:border-blue-500 outline-none"
+          class="flex-grow p-2 borderflex-grow  border border-gray-300 rounded-l-full focus:border-blue-500 outline-none shadow-md"
           placeholder="Search Your Hotel">
-        <button type="submit" class="p-2 border rounded-r-full hover:text-gray-800 focus:outline-none">
+        <button type="submit" class="p-2 border rounded-r-full bg-blue-500 text-white hover:bg-blue-700">
           <i class="fa-solid fa-search"></i>
         </button>
       </form>
@@ -17,7 +22,7 @@
     <div id="newlisting" class="flex gap-4 items-center justify-center">
       <!-- desktop view -->
       <% if (currentUsser) { %>
-        <a id="addlist" class="nav-link w-40 flex text-1xl font-sans font-bold text-gray-700 hover:text-black"
+        <a id="addlist" class="nav-link w-40 flex text-1xl font-sans font-bold bg-green-600 text-white p-2 rounded-lg"
           href="/listings/new">List Your Property</a>
 
         <a id="desklogout" class="nav-link  text-gray-700 hover:text-black" href="/logout">
@@ -30,7 +35,8 @@
 
           <% if (currentUsser) { %>
 
-            <a id="addlistmobile" class="nav-link w-40 flex text-1xl font-sans font-bold text-gray-700 hover:text-black"
+            <a id="addlistmobile"
+              class="nav-link w-40 flex text-1xl font-sans bg-green-600 text-white py-2 px-4 rounded-lg"
               href="/listings/new">Add</a>
 
             <a id="logoutmobile" class="nav-link text-gray-700 hover:text-black" href="/logout">
@@ -41,11 +47,12 @@
 
               <!-- user not login -->
               <% if (!currentUsser) { %>
-                <a id="login" class="nav-link border-black border-2 text-gray-700 text-xl" href="/login">Login</a>
+                <a id="login" class="nav-link bg-gray-800 text-white py-2 px-4 rounded-lg" href="/login">Login</a>
                 <a style="padding-left: 1rem; " id="loginmedia" class="nav-link" href="/login">
                   <i class="fa-regular fa-user text-2xl"></i>
                 </a>
-                <a id="singup" class="nav-link text-gray-700 text-xl" href="/signUp">Sign Up</a>
+                <a id="singup" class="nav-link font-bold bg-green-600 text-white py-2 px-4 rounded-lg"
+                  href="/signUp">Sign Up</a>
                 <% } %>
 
     </div>
