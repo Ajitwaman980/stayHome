@@ -61,7 +61,7 @@ async function GetlistingByid(req, res) {
 async function ListingNewDataInsert(req, res) {
   try {
     
-    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight,categories} = req.body;
+    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight,typeofhouse,categories} = req.body;
     if (req.file) {
       image = req.file.path;
     }
@@ -79,6 +79,7 @@ async function ListingNewDataInsert(req, res) {
       bathroom,
       areaHousewidth,
       areaHouseheight,
+      typeofhouse,
       categories,
       owner: req.user._id,
     });
