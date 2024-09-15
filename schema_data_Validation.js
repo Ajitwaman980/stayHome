@@ -13,6 +13,7 @@ module.exports.ListingSchema_validation = Joi.object({
   areaHousewidth: Joi.number().required(),
   areaHouseheight: Joi.number().required(),
   categories:Joi.string().required(),
+  typeofhouse:Joi.string().required(),
 }).required();
 module.exports.ReviewSchema_validation = Joi.object({
   Comment: Joi.string().required(),
