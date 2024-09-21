@@ -8,14 +8,15 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <% } %>
-        <h2 class="Details_Of_Hotel_titile">
+        <h2 class="text-3xl font-bold text-center mt-4 mb-4">
           <%= listing_info.title %>
         </h2>
-        <div class=" mb-3 continer_showing_card">
-          <div class="card information_showing_your_house">
+        <div class="w-full ">
+          <div class=" card information_showing_your_house">
 
             <!-- If the image is an external URL -->
-            <img src="<%= listing_info.image.Url %>" loading="lazy" class="card-img-top" alt="Listing Image" />
+            <img src="<%= listing_info.image.Url %>" loading="lazy" class=" w-full h-64 object-cover"
+              alt="Listing Image" />
 
             <div class="card-body col-12">
               <span class="owner-info">Owner By: <%= listing_info.owner.username %></span>
@@ -38,11 +39,60 @@
               <p class="price-location"><strong>Country:</strong>
                 <%= listing_info.country %>
               </p>
-              <!-- payment button -->
-              <div class="p-2 d-flex  flex-row-reverse">
+              <!-- booking and sell   -->
+              <!-- Booking and Selling Section -->
+              <div
+                class="flex justify-between items-center mt-4 mb-4 p-4 border-t border-gray-200 bg-gray-50 rounded-lg ">
+                <% if (listing_info.typeofhouse=="rent" ) { %>
+                  <div class="flex ">
+                    <a href="/listings/<%= listing_info._id %>/payment">
+                      <button
+                        class="bg-blue-600 text-white justify-end py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
+                        Book Now
+                      </button>
+                    </a>
+                  </div>
+                  <% } else { %>
+                    <div class="flex-1">
+                      <p class="font-semibold text-lg">Contact the owner for this house for sale:</p>
+                    </div>
+                    <div class="flex-none">
+                      <button id="ower_contact" class="bg-red-600 text-white py-2 px-4 rounded ">
+                        Contact
+                      </button>
+                    </div>
+                    <% } %>
+              </div>
+
+
+              <!-- Modal -->
+              <div id="contactModal"
+                class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 z-50">
+                <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+                  <span class="close-button absolute top-2 right-2 cursor-pointer text-xl">&times;</span>
+                  <h2 class="text-xl font-bold mb-4">Contact the Owner</h2>
+                  <form id="contactForm" action="/submit-contact" method="post">
+                    <label for="name" class="block text-sm font-medium text-gray-700">Your Name:</label>
+                    <input type="text" id="name" name="name" required
+                      class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+
+                    <label for="email" class="block text-sm font-medium text-gray-700 mt-4">Your Email:</label>
+                    <input type="email" id="email" name="email" required
+                      class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+
+                    <label for="message" class="block text-sm font-medium text-gray-700 mt-4">Message:</label>
+                    <textarea id="message" name="message" rows="4" required
+                      class="mt-1 block w-full border border-gray-300 rounded-md p-2"></textarea>
+
+                    <button type="submit" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded">Send</button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- <div class="p-2 d-flex  flex-row-reverse">
                 <a href="/listings/<%= listing_info._id %>/payment"><button class="btn btn-primary">Book
                     Now</button></a>
-              </div>
+              </div> -->
 
 
               <% if (currentUser && currentUser._id.equals(listing_info.owner._id)) { %>
@@ -54,73 +104,74 @@
                     data-listing-id="<%= listing_info._id %>">
                     Delete
                   </button>
-                  <button id="report_of_listing" data-listing-report="<%= listing_info._id %>">Report</button>
+                  <button id="report_of_listing" class="bg-green-400 p-2 rounded-lg"
+                    data-listing-report="<%= listing_info._id %>">Report</button>
                 </div>
                 <% } %>
 
-                  <% if (currentUser) { %>
-                    <div class="review-form">
-                      <h4>Give Review</h4>
-                      <form action="/listings/<%= listing_info._id %>/reviews" method="post">
-                        <div class="star-rating">
-                          <input type="radio" id="star5" name="Rating" value="5">
-                          <label for="star5">&#9733;</label>
-                          <input type="radio" id="star4" name="Rating" value="4">
-                          <label for="star4">&#9733;</label>
-                          <input type="radio" id="star3" name="Rating" value="3">
-                          <label for="star3">&#9733;</label>
-                          <input type="radio" id="star2" name="Rating" value="2">
-                          <label for="star2">&#9733;</label>
-                          <input type="radio" id="star1" name="Rating" value="1">
-                          <label for="star1">&#9733;</label>
-                        </div>
-                        <div class="mb-3">
-                          <textarea class="form-control review-comment" placeholder="Write your review here"
-                            name="Comment" id="comment" cols="20" rows="6"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-outline-info btn-review">Submit Review</button>
-                      </form>
-                    </div>
+
+                  <div class="review-form">
+                    <h4>Give Review</h4>
+                    <form action="/listings/<%= listing_info._id %>/reviews" method="post">
+                      <div class="star-rating">
+                        <input type="radio" id="star5" name="Rating" value="5">
+                        <label for="star5">&#9733;</label>
+                        <input type="radio" id="star4" name="Rating" value="4">
+                        <label for="star4">&#9733;</label>
+                        <input type="radio" id="star3" name="Rating" value="3">
+                        <label for="star3">&#9733;</label>
+                        <input type="radio" id="star2" name="Rating" value="2">
+                        <label for="star2">&#9733;</label>
+                        <input type="radio" id="star1" name="Rating" value="1">
+                        <label for="star1">&#9733;</label>
+                      </div>
+                      <div class="mb-3">
+                        <textarea class="form-control review-comment" placeholder="Write your review here"
+                          name="Comment" id="comment" cols="20" rows="6"></textarea>
+                      </div>
+                      <button type="submit" class="btn btn-outline-info btn-review">Submit Review</button>
+                    </form>
+                  </div>
+
+
+                  <% if ( listing_info.Reviews.length>0) { %>
+                    <hr class="all-reviews">
+                    <h3>All Reviews</h3>
                     <% } %>
 
-                      <% if ( listing_info.Reviews.length>0) { %>
-                        <hr class="all-reviews">
-                        <h3>All Reviews</h3>
-                        <% } %>
-
-                          <div class="container comment-container">
-                            <% for(let review of listing_info.Reviews) { %>
-                              <div class="card col-12 mb-4 review-card">
-                                <div class="card-body">
-                                  <p class="review-author">@<%= review.author.username %>
-                                  </p>
-                                  <p class="review-rating">
-                                    <% for(let i=0; i < review.Rating; i++) { %>
-                                      <span class="fa fa-star checked"></span>
-                                      <% } %>
-                                  </p>
-                                  <p class="review-comment">
-                                    <%= review.comment %>
-                                  </p>
-                                  <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
-                                    <form method="post"
-                                      action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                      class="delete-btn">
-                                      <button class="btn btn-sm btn-dark">Delete</button>
-                                    </form>
-                                    <% } %>
-                                </div>
-                              </div>
-                              <% } %>
+                      <div class="container comment-container">
+                        <% for(let review of listing_info.Reviews) { %>
+                          <div class="card col-12 mb-4 review-card">
+                            <div class="card-body">
+                              <p class="review-author">@<%= review.author.username %>
+                              </p>
+                              <p class="review-rating">
+                                <% for(let i=0; i < review.Rating; i++) { %>
+                                  <span class="fa fa-star checked"></span>
+                                  <% } %>
+                              </p>
+                              <p class="review-comment">
+                                <%= review.comment %>
+                              </p>
+                              <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
+                                <form method="post"
+                                  action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                  class="delete-btn">
+                                  <button class="btn btn-sm btn-dark">Delete</button>
+                                </form>
+                                <% } %>
+                            </div>
                           </div>
+                          <% } %>
+                      </div>
 
             </div>
           </div>
         </div>
 
         <!-- map -->
-        <div class="w-full" id="main_map">
-          <div id="map" style="height: 400px;"></div>
+        <div class="justify-end m-2 p-3 border-b-2" id="main_map">
+          <div class="w-30" id="map" style="height: 300px;"></div>
         </div>
 
         <script src="/javascripts/editbutton.js"></script>
@@ -155,7 +206,7 @@
 
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
               attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                'ajit waman',
             }).addTo(map);
 
             // Assuming listing_info.location is a string containing the location name
@@ -182,6 +233,36 @@
               "<p>Unable to display map location.</p>";
           }
 
+
+        </script>
+        <script>
+          const ower_contact = document.getElementById("ower_contact");
+          const contactModal = document.getElementById("contactModal");
+          const closeButton = document.querySelector(".close-button");
+
+          ower_contact.addEventListener("click", () => {
+            contactModal.classList.remove("hidden"); // Show the modal
+          });
+
+          // Close the modal when the close button is clicked
+          closeButton.addEventListener("click", () => {
+            contactModal.classList.add("hidden"); // Hide the modal
+          });
+
+
+          window.addEventListener("click", (event) => {
+            if (event.target === contactModal) {
+              contactModal.classList.add("hidden");
+            }
+          });
+
+
+          document.getElementById("contactForm").addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            alert("Message sent!");
+            contactModal.classList.add("hidden");
+          });
 
         </script>
   </body>
