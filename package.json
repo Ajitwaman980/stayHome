@@ -6,8 +6,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon ./bin/www",
+    "start": "node ./bin/www",
+    "dev": "node server.js",
     "build:css": "npx tailwindcss -i ./src/styles/tailwind.css -o ./public/stylesheets/tailwind.css --watch"
   },
   "dependencies": {
