@@ -15,7 +15,7 @@
                 <% } %>
 
                     <!-- Navbar -->
-                    <div id="category" class="bg-gray-200 p-3 text-gray-500">
+                    <div id="category" class="bg-gray-200 cursor-pointer p-3 text-gray-500">
                         <div class="flex justify-between bg-gray-200 gap-3 items-center">
                             <div class="flex gap-4 px-2">
                                 <a href="listings" class="flex flex-col items-center text-black">
@@ -49,7 +49,7 @@
                                     <i class="fa-solid fa-tree text-xl"></i>
                                     <span class="text-sm">Treehouse</span>
                                 </a>
-                                <a data-category="Cabin" class="category-link flex flex-col items-center text-black">
+                                <a data-category="Cabin" class="category-link  flex flex-col items-center text-black">
                                     <i class="material-icons text-xl">home</i>
                                     <span class="text-sm">Cabin</span>
                                 </a>
@@ -69,7 +69,7 @@
                                 <select id="sort" class="bg-gray-100 text-gray-600 py-1 px-2 rounded focus:outline-none"
                                     onchange="navigateToPage()">
                                     <option value="" class="font-semibold">Sort By</option>
-                                    <option value="all" class="font-semibold">All</option>
+                                    <!-- <option value="all" class="font-semibold">All</option> -->
                                     <option value="sell" class="font-semibold">Sell</option>
                                     <option value="rent" class="font-semibold">Rent</option>
                                     <option value="new" class="font-semibold">New</option>

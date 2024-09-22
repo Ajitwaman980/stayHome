@@ -66,104 +66,106 @@
 
 
               <!-- Modal -->
-              <div id="contactModal"
-                class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 z-50">
-                <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-                  <span class="close-button absolute top-2 right-2 cursor-pointer text-xl">&times;</span>
-                  <h2 class="text-xl font-bold mb-4">Contact the Owner</h2>
-                  <form id="contactForm" action="/submit-contact" method="post">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Your Name:</label>
-                    <input type="text" id="name" name="name" required
-                      class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+              <%if(currentUser) {%>
+                <div id="contactModal"
+                  class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 z-50">
+                  <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+                    <span class="close-button absolute top-2 right-2 cursor-pointer text-xl">&times;</span>
+                    <h2 class="text-xl font-bold mb-4">Contact the Owner</h2>
+                    <form id="contactForm" action="/submit-contact" method="post">
+                      <label for="name" class="block text-sm font-medium text-gray-700">Your Name:</label>
+                      <input type="text" id="name" name="name" required
+                        class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
 
-                    <label for="email" class="block text-sm font-medium text-gray-700 mt-4">Your Email:</label>
-                    <input type="email" id="email" name="email" required
-                      class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
+                      <label for="email" class="block text-sm font-medium text-gray-700 mt-4">Your Email:</label>
+                      <input type="email" id="email" name="email" required
+                        class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
 
-                    <label for="message" class="block text-sm font-medium text-gray-700 mt-4">Message:</label>
-                    <textarea id="message" name="message" rows="4" required
-                      class="mt-1 block w-full border border-gray-300 rounded-md p-2"></textarea>
+                      <label for="message" class="block text-sm font-medium text-gray-700 mt-4">Message:</label>
+                      <textarea id="message" name="message" rows="4" required
+                        class="mt-1 block w-full border border-gray-300 rounded-md p-2"></textarea>
 
-                    <button type="submit" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded">Send</button>
-                  </form>
+                      <button type="submit" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded">Send</button>
+                    </form>
+                  </div>
                 </div>
-              </div>
+                <%}%>
 
-              <!-- <div class="p-2 d-flex  flex-row-reverse">
+                  <!-- <div class="p-2 d-flex  flex-row-reverse">
                 <a href="/listings/<%= listing_info._id %>/payment"><button class="btn btn-primary">Book
                     Now</button></a>
               </div> -->
 
 
-              <% if (currentUser && currentUser._id.equals(listing_info.owner._id)) { %>
-                <div class="button_edit_delete">
-                  <button id="edit-button" class="btn btn-primary edit" data-listing-id="<%= listing_info._id %>">
-                    Edit
-                  </button>
-                  <button id="delete-button" class="btn btn-danger delete ms-2"
-                    data-listing-id="<%= listing_info._id %>">
-                    Delete
-                  </button>
-                  <button id="report_of_listing" class="bg-green-400 p-2 rounded-lg"
-                    data-listing-report="<%= listing_info._id %>">Report</button>
-                </div>
-                <% } %>
-
-
-                  <div class="review-form">
-                    <h4>Give Review</h4>
-                    <form action="/listings/<%= listing_info._id %>/reviews" method="post">
-                      <div class="star-rating">
-                        <input type="radio" id="star5" name="Rating" value="5">
-                        <label for="star5">&#9733;</label>
-                        <input type="radio" id="star4" name="Rating" value="4">
-                        <label for="star4">&#9733;</label>
-                        <input type="radio" id="star3" name="Rating" value="3">
-                        <label for="star3">&#9733;</label>
-                        <input type="radio" id="star2" name="Rating" value="2">
-                        <label for="star2">&#9733;</label>
-                        <input type="radio" id="star1" name="Rating" value="1">
-                        <label for="star1">&#9733;</label>
-                      </div>
-                      <div class="mb-3">
-                        <textarea class="form-control review-comment" placeholder="Write your review here"
-                          name="Comment" id="comment" cols="20" rows="6"></textarea>
-                      </div>
-                      <button type="submit" class="btn btn-outline-info btn-review">Submit Review</button>
-                    </form>
-                  </div>
-
-
-                  <% if ( listing_info.Reviews.length>0) { %>
-                    <hr class="all-reviews">
-                    <h3>All Reviews</h3>
+                  <% if (currentUser && currentUser._id.equals(listing_info.owner._id)) { %>
+                    <div class="button_edit_delete">
+                      <button id="edit-button" class="btn btn-primary edit" data-listing-id="<%= listing_info._id %>">
+                        Edit
+                      </button>
+                      <button id="delete-button" class="btn btn-danger delete ms-2"
+                        data-listing-id="<%= listing_info._id %>">
+                        Delete
+                      </button>
+                      <button id="report_of_listing" class="bg-green-400 p-2 rounded-lg"
+                        data-listing-report="<%= listing_info._id %>">Report</button>
+                    </div>
                     <% } %>
 
-                      <div class="container comment-container">
-                        <% for(let review of listing_info.Reviews) { %>
-                          <div class="card col-12 mb-4 review-card">
-                            <div class="card-body">
-                              <p class="review-author">@<%= review.author.username %>
-                              </p>
-                              <p class="review-rating">
-                                <% for(let i=0; i < review.Rating; i++) { %>
-                                  <span class="fa fa-star checked"></span>
-                                  <% } %>
-                              </p>
-                              <p class="review-comment">
-                                <%= review.comment %>
-                              </p>
-                              <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
-                                <form method="post"
-                                  action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                  class="delete-btn">
-                                  <button class="btn btn-sm btn-dark">Delete</button>
-                                </form>
-                                <% } %>
-                            </div>
+
+                      <div class="review-form">
+                        <h4>Give Review</h4>
+                        <form action="/listings/<%= listing_info._id %>/reviews" method="post">
+                          <div class="star-rating">
+                            <input type="radio" id="star5" name="Rating" value="5">
+                            <label for="star5">&#9733;</label>
+                            <input type="radio" id="star4" name="Rating" value="4">
+                            <label for="star4">&#9733;</label>
+                            <input type="radio" id="star3" name="Rating" value="3">
+                            <label for="star3">&#9733;</label>
+                            <input type="radio" id="star2" name="Rating" value="2">
+                            <label for="star2">&#9733;</label>
+                            <input type="radio" id="star1" name="Rating" value="1">
+                            <label for="star1">&#9733;</label>
                           </div>
-                          <% } %>
+                          <div class="mb-3">
+                            <textarea class="form-control review-comment" placeholder="Write your review here"
+                              name="Comment" id="comment" cols="20" rows="6"></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-outline-info btn-review">Submit Review</button>
+                        </form>
                       </div>
+
+
+                      <% if ( listing_info.Reviews.length>0) { %>
+                        <hr class="all-reviews">
+                        <h3>All Reviews</h3>
+                        <% } %>
+
+                          <div class="container comment-container">
+                            <% for(let review of listing_info.Reviews) { %>
+                              <div class="card col-12 mb-4 review-card">
+                                <div class="card-body">
+                                  <p class="review-author">@<%= review.author.username %>
+                                  </p>
+                                  <p class="review-rating">
+                                    <% for(let i=0; i < review.Rating; i++) { %>
+                                      <span class="fa fa-star checked"></span>
+                                      <% } %>
+                                  </p>
+                                  <p class="review-comment">
+                                    <%= review.comment %>
+                                  </p>
+                                  <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
+                                    <form method="post"
+                                      action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
+                                      class="delete-btn">
+                                      <button class="btn btn-sm btn-dark">Delete</button>
+                                    </form>
+                                    <% } %>
+                                </div>
+                              </div>
+                              <% } %>
+                          </div>
 
             </div>
           </div>
