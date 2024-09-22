@@ -27,7 +27,6 @@ router.get("/cat/sell", async (req, res) => {
   try {
     // const typeofhouse = await Listing.find({ typeofhouse: req.query.typeofhouse });
     const typeofhouse = await Listing.find({ typeofhouse: "sell" });
-
     // console.log(typeofhouse);
     res.status(200).json(typeofhouse);
   } catch (error) {

@@ -58,8 +58,14 @@ router.post(
 // Render edit form
 router.get("/:id/edit", isLogin, isOwner, async function (req, res) {
   let { id } = req.params;
+  try{
   const listing_info = await Listing.findById(id);
   res.render("../views/listing/edit.ejs", { listing_info });
+  }catch(e){
+    console.log(e);
+    req.flash("error", "Something went wrong");
+    res.redirect("/listings");
+  }
 });
 // Update data
 router.put(
@@ -80,13 +86,14 @@ router.get("/user/search/:category", async (req, res) => {
   // console.log("This is the query of category:", category);
 
 // insensitive regex for the category
-  const data_cat = new RegExp(category, "i");
+  
 
   try {
+    const data_cat = new RegExp(category, "i");
 
       const search_content_new = await Listing.find({ categories: { $all: [data_cat] } });
       // console.log("Searching content:", search_content_new);
-
+ 
       res.json(search_content_new);
   } catch (error) {
       console.error("Error fetching data:", error);
