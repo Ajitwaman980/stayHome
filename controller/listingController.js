@@ -1,6 +1,6 @@
 const error = require("mongoose/lib/error/index.js");
 const Listing = require("../model/listing.js"); // Listing is model
-const User=require("../model/user.js")// user model
+const User = require("../model/user.js"); // user model
 const flash = require("connect-flash");
 // loadsh
 const cloneDeep = require("lodash/cloneDeep"); //
@@ -21,6 +21,7 @@ async function handleRetrieveData(req, res) {
     // }
     // res.send(data);
     const data = await Listing.find({});
+    console.log("this is img", Listing.Url);
     //  const user=await User.find({});
     //  console.log("this is user mdel ",user);
 
@@ -31,7 +32,7 @@ async function handleRetrieveData(req, res) {
     res.render("../views/listing/error.ejs");
   }
 }
-// showing by id 
+// showing by id
 async function GetlistingByid(req, res) {
   let { id } = req.params;
   try {
@@ -60,8 +61,19 @@ async function GetlistingByid(req, res) {
 //new data insert
 async function ListingNewDataInsert(req, res) {
   try {
-    
-    const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight,typeofhouse,categories} = req.body;
+    const {
+      title,
+      description,
+      price,
+      location,
+      country,
+      bed,
+      bathroom,
+      areaHousewidth,
+      areaHouseheight,
+      typeofhouse,
+      categories,
+    } = req.body;
     if (req.file) {
       image = req.file.path;
     }
@@ -101,12 +113,12 @@ async function ListingEditDataById(req, res) {
     if (!id) {
       return res.status(404).send("Not Found");
     }
- console.log("this is ", req.body);
+    console.log("this is ", req.body);
     // const { title, description, price, location, country,bed,bathroom ,areaHousewidth,areaHouseheight ,categories} = req.body;
     let Update_listing = await Listing.findByIdAndUpdate(
       id,
       {
-        ...req.body,//destructing used
+        ...req.body, //destructing used
       },
       { new: true }
     );
@@ -131,7 +143,7 @@ async function ListingEditDataById(req, res) {
     res.redirect("/listings");
   }
 }
-//delete by id 
+//delete by id
 const ListingdeleteById = async (req, res) => {
   try {
     let id = req.params.id;
