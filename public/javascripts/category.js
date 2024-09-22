@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 basePrice = listing.price - 100;
                             }
                              card = card+`
-          <a href="/listings/${listing._id}" class="block  rounded-lg shadow-lg overflow-hidden" style="height: 25.4rem; width: 310px;">
+          <a href="/listings/${listing._id}" class="block  rounded-lg shadow-lg overflow-hidden" style="height: 26rem; width: 20.2rem;">
            <img src="${listing.image.Url}" class="w-full h-64 object-cover" alt="image">
             <div class="p-1 px-2 py-4 bg-zinc-200 h-full w-full">
             <p class="text-black text-xl font-bold mb-1">
@@ -37,8 +37,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 </span>
             </p>
             <p class="text-xl text-wrap text-black font-bold">${listing.title}</p>
-            <p class="text-sm py-1 text-wrap text-black font-semibold">${listing.location}</p>
-            <div class="flex justify-between w-full py-1 border-t-2 border-yellow-800">
+<p class="text-base text-gray-600 py-2 flex items-center">
+                                                <i class="fa-solid fa-map-marker-alt text-red-500 mr-2"></i>
+                                                ${ listing.location }
+                                            </p>            <div class="flex justify-between w-full py-1 border-t-2 border-yellow-800">
                 <div><i class="fas fa-bath text-green-500 mr-2"></i>${listing.bathroom}</div>
                 <div><i class="fas fa-bed text-purple-500 mr-2"></i>${listing.bed}</div>
                 <div><i class="fas fa-square text-blue-500 mr-2"></i>${listing.areaHousewidth} X ${listing.areaHouseheight}</div>
