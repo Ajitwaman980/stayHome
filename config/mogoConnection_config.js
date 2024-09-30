@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 // listing model
 require("dotenv").config();
 // console.log(process.env);
+// mongoose
+//   .connect("mongodb://localhost/stayhome")
+//   .then(() => console.log("Database connection established locally"))
+//   .catch((error) => console.error("Database connection error:", error));
 mongoose
   .connect(process.env.MongodbAtlas, {})
   .then(() => console.log("Database connection established"))
