@@ -18,7 +18,7 @@ const {
 // upload images
 const multer = require("multer"); //used to upload photo
 const upload = multer({ dest: "uploads/" });
-
+const statusCodes = require("../utility/statuscoded");
 // reviews for place using post request req->show.ejs
 router.post("", isLogin, async (req, res) => {
   try {
@@ -36,10 +36,10 @@ router.post("", isLogin, async (req, res) => {
     await listing.save();
     await New_review.save();
     // console.log("data stored in database");
-    res.redirect(`/listings/${req.params.id}`);
+    res.status(statusCodes.OK).redirect(`/listings/${req.params.id}`);
   } catch (e) {
     // console.log(e);
-    res.render("error.ejs");
+    res.status(statusCodes.BAD_REQUEST).json("something went wrong");
   }
 });
 // ---delete reviews
@@ -52,9 +52,9 @@ router.delete("/:reviewId", async (req, res) => {
     await Review.findByIdAndDelete(reviewId);
 
     // console.log("removed", id, reviewId);
-    res.redirect(`/listings/${id}`);
+    res.status(statusCodes.OK).redirect(`/listings/${id}`);
   } catch (e) {
-    res.redirect(`/listings/${id}`);
+    res.status(statusCodes.BAD_REQUEST).redirect(`/listings/${id}`);
   }
 });
 module.exports = router;

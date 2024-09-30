@@ -17,10 +17,16 @@ router.get("/signUp", async (req, res) => {
 // Get data from the client and handle sign-up
 router.post("/signUp", Limit, NewUserCrete);
 
-router.get("/login", async (req, res) => {
-  const error = req.flash("error");
-  res.cookie("__stripe_mid", "");
-  return res.render("../views/user/login.ejs", { error });
+router.get("/login", Limit, async (req, res) => {
+  try {
+    const error = req.flash("error");
+    res.cookie("xyz", "welcome to stayhome login");
+    return res.render("../views/user/login.ejs", { error });
+  } catch (e) {
+    console.log(e);
+    req.flash("error", "Something went wrong");
+    res.redirect("/listings");
+  }
 });
 
 router.post(
@@ -33,21 +39,33 @@ router.post(
   }),
 
   async (req, res) => {
-    req.flash("success", "User Login Success");
-    res.cookie("user", req.user);
-    res.redirect(res.locals.redirectUrl || "/listings");
+    try {
+      req.flash("success", "User Login Success");
+      res.cookie("user", req.user);
+      res.redirect(res.locals.redirectUrl || "/listings");
+    } catch (e) {
+      console.error(e);
+      req.flash("error", "Something went wrong");
+      res.redirect("/listings");
+    }
   }
 );
 
 router.get("/logout", isLogin, async (req, res, next) => {
-  req.logOut((err) => {
-    if (err) {
-      return next(err);
-    }
-    req.flash("success", "User Logged Out");
-    res.cookie("user", " ");
+  try {
+    req.logOut((err) => {
+      if (err) {
+        return next(err);
+      }
+      req.flash("success", "User Logged Out");
+      res.cookie("user", " ");
+      res.redirect("/listings");
+    });
+  } catch (e) {
+    console.error(e);
+    req.flash("error", "Something went wrong");
     res.redirect("/listings");
-  });
+  }
 });
 
 module.exports = router;
