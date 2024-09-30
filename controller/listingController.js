@@ -27,7 +27,7 @@ async function handleRetrieveData(req, res) {
 
     const success = req.flash("success");
     const error = req.flash("error");
-    res.render("../views/listing/listing.ejs", { data, success, error });
+    res.render("listing/listing.ejs", { data, success, error });
   } catch (e) {
     res.render("../views/listing/error.ejs");
   }
@@ -48,7 +48,7 @@ async function GetlistingByid(req, res) {
 
     if (!listing_info) return res.status(4040).send("Listing not found");
 
-    return res.render("../views/listing/show.ejs", {
+    return res.render("listing/show.ejs", {
       listing_info,
       error: req.flash("error"),
       success: req.flash("success"),
