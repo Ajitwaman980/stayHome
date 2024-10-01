@@ -4,18 +4,28 @@ const passport = require("passport");
 const isLogin = require("../middleware/LoginAuthenticate.js");
 
 const redirect_originalUrl = require("../middleware/redirect_originalUrl.js");
-const NewUserCrete = require("../controller/userController");
+const {
+  verifyCodeAndSignUp,
+  sendVerificationCode,
+} = require("../controller/userController");
+
 // limit
 const Limit = require("../middleware/services/limiter.js");
 
 // Sign-up routes to render the page
-router.get("/signUp", async (req, res) => {
+router.get("/signUp", Limit, async (req, res) => {
   const error = req.flash("error");
   return res.render("../views/user/signUp.ejs", { error });
 });
-
 // Get data from the client and handle sign-up
-router.post("/signUp", Limit, NewUserCrete);
+router.post("/signUp", Limit, sendVerificationCode);
+// verify user with verification code
+router.get("/user/verify_code", Limit, (req, res) => {
+  const error = req.flash("error");
+  const success = req.flash("success");
+  return res.render("../views/user/verifyCode.ejs", { error });
+});
+router.post("/user/verify_code", Limit, verifyCodeAndSignUp);
 
 router.get("/login", Limit, async (req, res) => {
   try {
