@@ -1,0 +1,17 @@
+<% layout("/layout/biolerplate.ejs") -%>
+
+    <% if (error && error.length> 0) { %>
+        <div class="alert alert-warning alert-dismissible fade show text-center mb-4 bg-red-500 text-white p-3 rounded">
+            <%= error %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>
+
+            <div class="w-full h-full flex py-48 justify-center bg-gray-200">
+                <form action="/user/verify_code" method="POST" class="p-6 space-y-4 bg-gray-100 rounded shadow-md">
+                    <h2 class="text-gray-900 text-xl text-center">Verify Your Code</h2>
+                    <input type="text" name="code" placeholder="Enter code" required
+                        class="w-full p-2 rounded bg-gray-200 text-gray-900 border">
+                    <button type="submit" class="w-full p-2 bg-blue-500 text-white rounded">Verify</button>
+                </form>
+            </div>
