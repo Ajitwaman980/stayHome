@@ -24,7 +24,9 @@ async function handleRetrieveData(req, res) {
     const data = await Listing.find({});
     const success = req.flash("success");
     const error = req.flash("error");
-    res.status(statusCodes.OK).render("listing/listing.ejs", { data, success, error });
+    res
+      .status(statusCodes.OK)
+      .render("listing/listing.ejs", { data, success, error });
   } catch (e) {
     res
       .status(statusCodes.INTERNAL_SERVER_ERROR)
@@ -44,16 +46,16 @@ async function GetlistingByid(req, res) {
     // console.log(listing_info);
     // let data = await Listing.findById(id).populate("owner", "username");
     // console.log(data);
- 
-    if (!listing_info) return res.status(4040).send("Listing not found");
 
-    return res.sataus().render("listing/show.ejs", {
+    if (!listing_info) return res.status(404).send("Listing not found");
+
+    return res.status(200).render("listing/show.ejs", {
       listing_info,
       error: req.flash("error"),
       success: req.flash("success"),
     });
   } catch (e) {
-    // console.log("error ", e);
+    console.log("error ", e);
     res
       .status(statusCodes.INTERNAL_SERVER_ERROR)
       .render("../views/listing/error.ejs");
@@ -104,7 +106,9 @@ async function ListingNewDataInsert(req, res) {
     res.status(statusCodes.OK).redirect("/listings");
   } catch (error) {
     // console.log(error);
-    res.status(statusCodes.INTERNAL_SERVER_ERROR).json("something went wrong please try again");
+    res
+      .status(statusCodes.INTERNAL_SERVER_ERROR)
+      .json("something went wrong please try again");
   }
 }
 // edit data
@@ -154,10 +158,12 @@ const ListingdeleteById = async (req, res) => {
     }
     let del = await Listing.findByIdAndDelete(id);
     req.flash("success", "Successfully Deleted");
-    res.sataus(statusCodes.OK).redirect("/listings");
+    res.status(statusCodes.OK).redirect("/listings");
     // console.log("this is delete data ", del);
   } catch (e) {
-    res.sataus(statusCodes.BAD_REQUEST).json("something happened when trying to delete ")
+    res
+      .status(statusCodes.BAD_REQUEST)
+      .json("something happened when trying to delete ");
   }
 };
 
