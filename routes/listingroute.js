@@ -30,20 +30,13 @@ router.get("", handleRetrieveData);
 // Render new data form
 router.get("/new", isLogin, function (req, res) {
   error = req.flash("error");
-  return res.status(statusCodes.OK).render("../views/listing/new.ejs", { error: error });
+  return res
+    .status(statusCodes.OK)
+    .render("../views/listing/new.ejs", { error: error });
 });
 
 // Show listing by id
 router.get("/:id", GetlistingByid);
-
-// payment
-router.get("/:id/payment", isLogin, Limit, function (req, res) {
-  res.status(statusCodes.OK).render("../views/payments/userpayment", { id: req.params.id });
-});
-router.post("/:id/create_customer", isLogin, Limit, verifyuser);
-
-// card details
-router.post("/:id/card_details", isLogin, Limit, card_details);
 
 // Insert new data into database
 router.post(
@@ -59,7 +52,9 @@ router.get("/:id/edit", isLogin, isOwner, async function (req, res) {
   let { id } = req.params;
   try {
     const listing_info = await Listing.findById(id);
-    res.status(statusCodes.OK).render("../views/listing/edit.ejs", { listing_info });
+    res
+      .status(statusCodes.OK)
+      .render("../views/listing/edit.ejs", { listing_info });
   } catch (e) {
     console.log(e);
     req.flash("error", "Something went wrong");
@@ -112,7 +107,9 @@ router.post("/user/search", async (req, res) => {
 
     let regex = new RegExp(search_content, "i");
     let search_content_new = await Listing.find({ title: regex });
-    res.status(statusCodes.OK).render("../views/listing/searchdata", { data: search_content_new });
+    res
+      .status(statusCodes.OK)
+      .render("../views/listing/searchdata", { data: search_content_new });
   } catch (e) {
     console.log(e);
     req.flash("error", "Something went wrong");
@@ -122,5 +119,16 @@ router.post("/user/search", async (req, res) => {
 
 // Delete operation
 router.get("/:id/delete", isLogin, isOwner, ListingdeleteById);
+
+// payment
+router.get("/:id/payment", isLogin, Limit, function (req, res) {
+  res
+    .status(statusCodes.OK)
+    .render("../views/payments/userpayment", { id: req.params.id });
+});
+router.post("/:id/create_customer", isLogin, Limit, verifyuser);
+
+// card details
+router.post("/:id/card_details", isLogin, Limit, card_details);
 
 module.exports = router;

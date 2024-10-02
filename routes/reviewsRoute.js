@@ -45,14 +45,14 @@ router.post("", isLogin, async (req, res) => {
 // ---delete reviews
 router.delete("/:reviewId", async (req, res) => {
   let { id, reviewId } = req.params;
-  // console.log("this is on");
-  // console.log(id,reviewId)
+
   try {
     await Listing.findByIdAndUpdate(id, { $pull: { Reviews: reviewId } });
     await Review.findByIdAndDelete(reviewId);
 
     // console.log("removed", id, reviewId);
-    res.status(statusCodes.OK).redirect(`/listings/${id}`);
+    // res.status(statusCodes.OK).redirect(`/listings/${id}`);
+    res.status(statusCodes.OK).json("successfully deleted review");
   } catch (e) {
     res.status(statusCodes.BAD_REQUEST).redirect(`/listings/${id}`);
   }
