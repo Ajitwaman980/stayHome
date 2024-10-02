@@ -8,14 +8,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
       <% } %>
+
         <h2 class="text-3xl font-bold text-center mt-4 mb-4">
           <%= listing_info.title %>
         </h2>
-        <div class="w-full ">
-          <div class=" card information_showing_your_house">
+
+        <div class="w-full">
+          <div class="card information_showing_your_house">
 
             <!-- If the image is an external URL -->
-            <img src="<%= listing_info.image.Url %>" loading="lazy" class=" w-full h-64 object-cover"
+            <img src="<%= listing_info.image.Url %>" loading="lazy" class="w-full h-64 object-cover"
               alt="Listing Image" />
 
             <div class="card-body col-12">
@@ -23,28 +25,27 @@
               <p class="description"><strong>Description:</strong>
                 <%= listing_info.description %>
               </p>
-              <p class="price-location"><strong>Price:</strong>
-                <%if(currentUsser && currentUsser.discountCode &&!currentUsser.discountUsed) {%>
-                  <%=(listing_info.price) /2 %>
-                    <span>&#8377;</span>
-                    <span>You get 50% off on </span>
-                    <%}%>
 
-                      <%=listing_info.price %>
-                        <span>&#8377;</span>
+              <p class="price-location"><strong>Price:</strong>
+                <% if (currentUsser && currentUsser.discountCode && !currentUsser.discountUsed) { %>
+                  <%= (listing_info.price) / 2 %><span>&#8377;</span>
+                    <span>You get 50% off on </span>
+                    <% } %>
+                      <%= listing_info.price %><span>&#8377;</span>
               </p>
+
               <p class="price-location"><strong>Location:</strong>
                 <%= listing_info.location %>
               </p>
               <p class="price-location"><strong>Country:</strong>
                 <%= listing_info.country %>
               </p>
-              <!-- booking and sell   -->
+
               <!-- Booking and Selling Section -->
               <div
-                class="flex justify-between items-center mt-4 mb-4 p-4 border-t border-gray-200 bg-gray-50 rounded-lg ">
+                class="flex justify-between items-center mt-4 mb-4 p-4 border-t border-gray-200 bg-gray-50 rounded-lg">
                 <% if (listing_info.typeofhouse=="rent" ) { %>
-                  <div class="flex ">
+                  <div class="flex">
                     <a href="/listings/<%= listing_info._id %>/payment">
                       <button
                         class="bg-blue-600 text-white justify-end py-2 px-4 rounded hover:bg-blue-700 transition duration-200">
@@ -57,75 +58,51 @@
                       <p class="font-semibold text-lg">Contact the owner for this house for sale:</p>
                     </div>
                     <div class="flex-none">
-                      <button id="ower_contact" class="bg-red-600 text-white py-2 px-4 rounded ">
-                        Contact
-                      </button>
+                      <button id="ower_contact" class="bg-red-600 text-white py-2 px-4 rounded">Contact</button>
                     </div>
                     <% } %>
               </div>
 
-
-              <!-- Modal -->
-              <%if(currentUser) {%>
+              <% if (currentUser) { %>
                 <div id="contactModal"
-                  class="fixed inset-0 flex items-center justify-center hidden bg-black bg-opacity-50 z-50">
-                  <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-                    <span class="close-button absolute top-2 right-2 cursor-pointer text-xl">&times;</span>
+                  class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 hidden">
+                  <div class="bg-white p-4 rounded shadow max-w-sm w-full">
+                    <span id="closeModal" class="text-right cursor-pointer text-red-600">&times;</span>
                     <h2 class="text-xl font-bold mb-4">Contact the Owner</h2>
-                    <form id="contactForm" action="/submit-contact" method="post">
-                      <label for="name" class="block text-sm font-medium text-gray-700">Your Name:</label>
-                      <input type="text" id="name" name="name" required
-                        class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
-
-                      <label for="email" class="block text-sm font-medium text-gray-700 mt-4">Your Email:</label>
-                      <input type="email" id="email" name="email" required
-                        class="mt-1 block w-full border border-gray-300 rounded-md p-2" />
-
-                      <label for="message" class="block text-sm font-medium text-gray-700 mt-4">Message:</label>
-                      <textarea id="message" name="message" rows="4" required
-                        class="mt-1 block w-full border border-gray-300 rounded-md p-2"></textarea>
-
-                      <button type="submit" class="mt-4 bg-blue-600 text-white py-2 px-4 rounded">Send</button>
+                    <form id="contactForm" action="">
+                      <input type="text" name="name" placeholder="Your Name" required
+                        class="w-full mb-3 p-2 border rounded" />
+                      <input type="email" name="email" placeholder="Your Email" required
+                        class="w-full mb-3 p-2 border rounded" />
+                      <textarea name="message" placeholder="Message" required
+                        class="w-full mb-3 p-2 border rounded"></textarea>
+                      <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Send</button>
                     </form>
                   </div>
                 </div>
-                <%}%>
-
-                  <!-- <div class="p-2 d-flex  flex-row-reverse">
-                <a href="/listings/<%= listing_info._id %>/payment"><button class="btn btn-primary">Book
-                    Now</button></a>
-              </div> -->
-
+                <% } %>
 
                   <% if (currentUser && currentUser._id.equals(listing_info.owner._id)) { %>
                     <div class="button_edit_delete">
-                      <button id="edit-button" class="btn btn-primary edit" data-listing-id="<%= listing_info._id %>">
-                        Edit
-                      </button>
+                      <button id="edit-button" class="btn btn-primary edit"
+                        data-listing-id="<%= listing_info._id %>">Edit</button>
                       <button id="delete-button" class="btn btn-danger delete ms-2"
-                        data-listing-id="<%= listing_info._id %>">
-                        Delete
-                      </button>
+                        data-listing-id="<%= listing_info._id %>">Delete</button>
                       <button id="report_of_listing" class="bg-green-400 p-2 rounded-lg"
                         data-listing-report="<%= listing_info._id %>">Report</button>
                     </div>
                     <% } %>
 
-
+                      <!-- Review Form -->
                       <div class="review-form">
                         <h4>Give Review</h4>
                         <form action="/listings/<%= listing_info._id %>/reviews" method="post">
                           <div class="star-rating">
-                            <input type="radio" id="star5" name="Rating" value="5">
-                            <label for="star5">&#9733;</label>
-                            <input type="radio" id="star4" name="Rating" value="4">
-                            <label for="star4">&#9733;</label>
-                            <input type="radio" id="star3" name="Rating" value="3">
-                            <label for="star3">&#9733;</label>
-                            <input type="radio" id="star2" name="Rating" value="2">
-                            <label for="star2">&#9733;</label>
-                            <input type="radio" id="star1" name="Rating" value="1">
-                            <label for="star1">&#9733;</label>
+                            <input type="radio" id="star5" name="Rating" value="5"><label for="star5">&#9733;</label>
+                            <input type="radio" id="star4" name="Rating" value="4"><label for="star4">&#9733;</label>
+                            <input type="radio" id="star3" name="Rating" value="3"><label for="star3">&#9733;</label>
+                            <input type="radio" id="star2" name="Rating" value="2"><label for="star2">&#9733;</label>
+                            <input type="radio" id="star1" name="Rating" value="1"><label for="star1">&#9733;</label>
                           </div>
                           <div class="mb-3">
                             <textarea class="form-control review-comment" placeholder="Write your review here"
@@ -135,20 +112,20 @@
                         </form>
                       </div>
 
-
-                      <% if ( listing_info.Reviews.length>0) { %>
+                      <% if (listing_info.Reviews.length> 0) { %>
                         <hr class="all-reviews">
                         <h3>All Reviews</h3>
                         <% } %>
 
+                          <!-- Reviews -->
                           <div class="container comment-container">
-                            <% for(let review of listing_info.Reviews) { %>
+                            <% for (let review of listing_info.Reviews) { %>
                               <div class="card col-12 mb-4 review-card">
                                 <div class="card-body">
                                   <p class="review-author">@<%= review.author.username %>
                                   </p>
                                   <p class="review-rating">
-                                    <% for(let i=0; i < review.Rating; i++) { %>
+                                    <% for (let i=0; i < review.Rating; i++) { %>
                                       <span class="fa fa-star checked"></span>
                                       <% } %>
                                   </p>
@@ -156,11 +133,9 @@
                                     <%= review.comment %>
                                   </p>
                                   <% if (currentUser && currentUser._id.equals(review.author._id)) { %>
-                                    <form method="post"
-                                      action="/listings/<%= listing_info._id %>/reviews/<%= review._id %>?_method=DELETE"
-                                      class="delete-btn">
-                                      <button class="btn btn-sm btn-dark">Delete</button>
-                                    </form>
+                                    <button class="delete-review btn btn-sm btn-dark"
+                                      data-listing-id="<%= listing_info._id %>"
+                                      data-review-id="<%= review._id %>">Delete</button>
                                     <% } %>
                                 </div>
                               </div>
@@ -171,16 +146,22 @@
           </div>
         </div>
 
+
         <!-- map -->
         <div class="justify-end m-2 p-3 border-b-2" id="main_map">
           <div class="w-30" id="map" style="height: 300px;"></div>
         </div>
 
+
+
         <script src="/javascripts/editbutton.js"></script>
         <script src="/javascripts/delete.js"></script>
+        <script src="/javascripts/delete_review_api.js"></script>
+        <script src="/javascripts/modalScript_contactowner.js">
+        </script>
 
         <!-- map locations code  -->
-        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>;
         <script>
           function geocodeLocation(locationName, callback) {
             const nominatimUrl = new URL("https://nominatim.openstreetmap.org/search");
@@ -207,8 +188,7 @@
             var map = L.map("map").setView([0, 0], 2);
 
             L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-              attribution:
-                'ajit waman',
+              attribution: "ajit waman",
             }).addTo(map);
 
             // Assuming listing_info.location is a string containing the location name
@@ -222,7 +202,6 @@
               } else {
                 map.setView(coordinates, 13);
 
-
                 L.marker(coordinates)
                   .addTo(map)
                   .bindPopup("<%= listing_info.location %>")
@@ -233,38 +212,12 @@
             console.error("Error:", error);
             document.getElementById("map").innerHTML =
               "<p>Unable to display map location.</p>";
+
           }
-
-
         </script>
-        <script>
-          const ower_contact = document.getElementById("ower_contact");
-          const contactModal = document.getElementById("contactModal");
-          const closeButton = document.querySelector(".close-button");
-
-          ower_contact.addEventListener("click", () => {
-            contactModal.classList.remove("hidden"); // Show the modal
-          });
-
-          // Close the modal when the close button is clicked
-          closeButton.addEventListener("click", () => {
-            contactModal.classList.add("hidden"); // Hide the modal
-          });
 
 
-          window.addEventListener("click", (event) => {
-            if (event.target === contactModal) {
-              contactModal.classList.add("hidden");
-            }
-          });
 
 
-          document.getElementById("contactForm").addEventListener("submit", (event) => {
-            event.preventDefault();
 
-            alert("Message sent!");
-            contactModal.classList.add("hidden");
-          });
-
-        </script>
   </body>

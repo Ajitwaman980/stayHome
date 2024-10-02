@@ -1,115 +1,80 @@
 <%- layout("/layout/biolerplate.ejs") %>
-    <!-- <link rel="stylesheet" href="/stylesheets/listing.css"> -->
-    <div id="category" class="bg-gray-200  text-gray-500 p-2">
-        <div class="flex justify-between bg-gray-200   gap-3 items-center">
-            <div class="flex gap-4 px-2">
-                <a href="/listings" class="flex flex-col items-center text-black">
-                    <i class="fa-solid fa-house text-xl"></i>
-                    <span class="text-sm">House</span>
-                </a>
-                <a rel="preload" data-category="Living" value="Living"
-                    class="category-link flex flex-col items-center text-black">
-                    <i class="fa-solid fa-couch text-xl"></i>
-                    <span class="text-sm">Living</span>
-                </a>
-                <a rel="preload" data-category="Bungalow" value="Bungalow"
-                    class=" category-link flex flex-col items-center text-black">
-                    <i class="material-icons text-xl">home</i>
-                    <span class="text-sm">Bungalow</span>
-                </a>
-                <a href="" rel="preload" data-category="Pool" value="Pool"
-                    class="category-link flex flex-col items-center text-black hover:text-violet-400">
-                    <i class="fa-solid fa-swimmer text-xl"></i>
-                    <span class="text-sm">Pool</span>
-                </a>
 
 
-                <a rel="preload" data-category="Mountain" value="Mountain"
-                    class="category-link flex flex-col items-center text-black">
-                    <i class="fa-solid fa-mountain text-xl"></i>
-                    <span class="text-sm">Mountain</span>
-                </a>
-                <a rel="preload" data-category="Beach" value="Beach"
-                    class="category-link flex flex-col items-center text-black">
-                    <i class="fa-solid fa-umbrella-beach text-xl"></i>
-                    <span class="text-sm">Beach</span>
-                </a>
-                <a rel="preload" data-category="Treehouse" value="Treehouse"
-                    class="category-link flex flex-col items-center text-black">
-                    <i class="fa-solid fa-tree text-xl"></i>
-                    <span class="text-sm">Treehouse</span>
-                </a>
-                <a rel="preload" data-category="Cabin" value="Cabin"
-                    class="category-link flex flex-col items-center text-black">
-                    <i class="material-icons text-xl">home</i>
-                    <span class="text-sm">Cabin</span>
-                </a>
-                <a value="Warehouse" rel="preload" data-category="warehouse"
-                    class="category-link flex flex-col items-center text-black">
-                    <span class="material-icons text-xl">warehouse</span>
-                    <span class="text-sm">Warehouse</span>
-                </a>
-                <a rel="preload" data-category="Studio" value="Studio"
-                    class="category-link flex flex-col items-center text-black">
-                    <i class="material-icons text-xl">business</i>
-                    <span class="text-sm">Studio</span>
-                </a>
-            </div>
-            <div class="flex border-solid border-2 border-b-3 px-3 items-cente" for="sort">
-
-                <select name="" id="sort" class=" bg-gray-200   text-gray-500 w-20 flex justify-center h-auto "
-                    onchange="navigateToPage()">
-                    <option value="" class="font-bold">Sort By</option>
-                    <option value="" class="font-bold">All</option>
-                    <option value="" class="font-bold">Sell</option>
-                    <option value="" class="font-bold">Rent</option>
-                    <option value="listings/category/cat/new" class="font-bold">New</option>
-
-                </select>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-pink-50 scroll-smooth px-10 py-5">
-        <div class="flex flex-wrap justify-center gap-4">
-
-            <% for (const Listing of data ) { %>
-                <a href="/listings/<%= Listing._id %>"
-                    class="block rounded-lg shadow-lg overflow-hidden h-96 w-80 bg-white">
-                    <img src="<%= Listing.image.Url %>" loading="lazy" class="w-full h-60 object-cover rounded-t-lg"
-                        alt="image">
-                    <div class="p-4 bg-zinc-200">
-                        <!-- ------------------------------check price -------------------------------------------- -->
+    <div id="cardmain" class="bg-gray-100 flex flex-wrap gap-4 p-3  scroll-smooth px-3 py-4">
+        <div class="flex flex-wrap h-full justify-center gap-4">
+            <% for (const Listing of data) { %>
+                <a href="/listings/<%= Listing._id %>" class="block rounded-lg shadow-lg overflow-hidden"
+                    style="height: 26.1rem; width: 21rem;">
+                    <div class="relative">
+                        <img src="<%= Listing.image.Url %>" class="w-full  object-cover" loading="lazy" alt="image"
+                            style="height:17rem ;">
+                        <!-- Indicator for Sell -->
+                        <% if (Listing.typeofhouse=="sell" ) { %>
+                            <p class="absolute top-2 right-2 bg-red-600 text-white px-2 py-1 rounded">
+                                Sell</p>
+                            <% } %>
+                    </div>
+                    <div class="p-1 px-2 py-2 bg-zinc-200 h-full w-full">
+                        <!-- Price Calculation -->
                         <% let bestPrice; if (Listing.price> 2000) {
                             bestPrice = Listing.price - 2000;
                             } else {
                             bestPrice = Listing.price - 100;
-                            }
-                            %>
-                            <!-- end -->
+                            } %>
                             <p class="text-black text-xl font-bold mb-1">
-                                <%= bestPrice %> &#8377;
-                                    <span class="text-sm text-gray-500 inline-block ml-1">
-                                        Night
-                                    </span>
-                                    <span class="text-gray-500 line-through text-lg font-normal inline-block ml-2">
-                                        <%= Listing.price %>&#8377;
-                                    </span>
-                                    <span class="text-green-600">
-                                        <!-- total price with gst -->
-                                        <p class="text-green-600 GST hidden">
-                                            <%= ((bestPrice * 18) / 100) + bestPrice %>
-                                                &#8377; With GST
-                                        </p>
-                                    </span>
+                                <!-- Listing Type -->
+                                <% if (Listing.typeofhouse=="sell" ) { %>
+                                    <%= Listing.price %>
+                                        <% } else { %>
+                                            <% if (currentUsser && currentUsser.discountCode &&
+                                                !currentUsser.discountUsed) { %>
+                                                <%= Math.trunc((Listing.price / 2)) %>&#8377;
+                                                    <span class="text-sm text-gray-500 inline-block"
+                                                        style="margin: -8px;">/Night</span>
+                                                    <% } else { %>
+                                                        <%= bestPrice %>&#8377;
+                                                            <span class="text-sm text-gray-500 inline-block"
+                                                                style="margin: -7px;">/Night</span>
+                                                            <span
+                                                                class="text-gray-500 items-end px-10 line-through text-lg font-normal justify-end inline-block">
+                                                                <span>
+                                                                    <%= Listing.price %>
+                                                                        &#8377;<span>Night</span>
+                                                                </span>
+                                                            </span>
+                                                            <% } %>
+                                                                <% } %>
+                                                                    <p class="text-green-600 GST hidden">
+                                                                        <%= ((bestPrice * 18) / 100) + bestPrice %>
+                                                                            &#8377;
+                                                                            With GST
+                                                                    </p>
                             </p>
-                            <p class="text-xl font-semibold text-black mt-2">
+
+                            <p class="text-xl font-bold text-gray-800 break-words">
                                 <%= Listing.title %>
                             </p>
+                            <p class="text-base text-gray-600 py-2 flex items-center">
+                                <i class="fa-solid fa-map-marker-alt text-red-500 mr-2"></i>
+                                <%= Listing.location %>
+                            </p>
+                            <div class="flex justify-between w-full py-1 border-t-2 border-yellow-800">
+                                <div>
+                                    <i class="fas fa-bath text-green-500 mr-2"></i>
+                                    <%= Listing.bathroom %>
+                                </div>
+                                <div>
+                                    <i class="fas fa-bed text-purple-500 mr-2"></i>
+                                    <%= Listing.bed %>
+                                </div>
+                                <div>
+                                    <i class="fas fa-square text-blue-500 mr-2"></i>
+                                    <%= Listing.areaHousewidth %>X<%= Listing.areaHouseheight %>
+                                </div>
+                            </div>
                     </div>
                 </a>
                 <% } %>
         </div>
     </div>
-
-    <script src="/javascripts/gst.js"></script>
