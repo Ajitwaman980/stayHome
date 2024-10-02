@@ -1,0 +1,64 @@
+<!-- Navbar -->
+<div id="category" class="bg-gray-200 cursor-pointer p-3 text-gray-500">
+    <div class="flex justify-between bg-gray-200 gap-3 items-center">
+        <div class="flex gap-4 px-2">
+            <a href="/listings" class="flex flex-col items-center text-black">
+                <i class="fa-solid fa-house text-xl"></i>
+                <span class="text-sm">House</span>
+            </a>
+            <!-- Category Links -->
+            <a data-category="Living" class="category-link flex flex-col items-center text-black">
+                <i class="fa-solid fa-couch text-xl"></i>
+                <span class="text-sm">Living</span>
+            </a>
+            <a data-category="Bungalow" class="category-link flex flex-col items-center text-black">
+                <i class="material-icons text-xl">home</i>
+                <span class="text-sm">Bungalow</span>
+            </a>
+            <a data-category="Pool" class="category-link flex flex-col items-center text-black hover:text-violet-400">
+                <i class="fa-solid fa-swimmer text-xl"></i>
+                <span class="text-sm">Pool</span>
+            </a>
+            <a data-category="Mountain" class="category-link flex flex-col items-center text-black">
+                <i class="fa-solid fa-mountain text-xl"></i>
+                <span class="text-sm">Mountain</span>
+            </a>
+            <a data-category="Beach" class="category-link flex flex-col items-center text-black">
+                <i class="fa-solid fa-umbrella-beach text-xl"></i>
+                <span class="text-sm">Beach</span>
+            </a>
+            <a data-category="Treehouse" class="category-link flex flex-col items-center text-black">
+                <i class="fa-solid fa-tree text-xl"></i>
+                <span class="text-sm">Treehouse</span>
+            </a>
+            <a data-category="Cabin" class="category-link  flex flex-col items-center text-black">
+                <i class="material-icons text-xl">home</i>
+                <span class="text-sm">Cabin</span>
+            </a>
+            <a data-category="Warehouse" class="category-link flex flex-col items-center text-black">
+                <span class="material-icons text-xl">warehouse</span>
+                <span class="text-sm">Warehouse</span>
+            </a>
+            <a data-category="Studio" class="category-link flex flex-col items-center text-black">
+                <i class="material-icons text-xl">business</i>
+                <span class="text-sm">Studio</span>
+            </a>
+        </div>
+
+        <!-- Sort Dropdown -->
+        <div class="flex items-center border border-gray-300 rounded px-3 py-2">
+            <select id="sort" class="bg-gray-100 text-gray-600 py-1 px-2 rounded focus:outline-none"
+                onchange="navigateToPage()">
+                <option value="" class="font-semibold">Sort By</option>
+                <!-- <option value="all" class="font-semibold">All</option> -->
+                <option value="sell" class="font-semibold">Sell</option>
+                <option value="rent" class="font-semibold">Rent</option>
+                <option value="new" class="font-semibold">New</option>
+                <option value="low_to_high_price" class="font-semibold">Low to High</option>
+                <option value="high_to_low_price" class="font-semibold">High to Low</option>
+            </select>
+        </div>
+    </div>
+</div>
+<script src="/javascripts/category.js"></script>
+<script src="/javascripts/category_new_data.js"></script>
