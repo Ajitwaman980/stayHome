@@ -1,32 +1,32 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const categoryLinks = document.querySelectorAll('.category-link');
+document.addEventListener("DOMContentLoaded", function () {
+  const categoryLinks = document.querySelectorAll(".category-link");
 
-    categoryLinks.forEach(link => {
-        link.addEventListener('click', function (event) {
-            event.preventDefault();
-            const category = this.getAttribute('data-category');
-        //  console.log(category)
-            axios.get(`/listings/user/search/${category}`)
-                .then(function (response) {
-                    const listings = response.data;
-                    const cardContainer = document.getElementById('cardmain');
-                    // cardContainer.innerHTML = '';
-                    let card='';
+  categoryLinks.forEach((link) => {
+    link.addEventListener("click", async function (event) {
+      event.preventDefault();
+      const category = this.getAttribute("data-category");
+      //  console.log(category)
+      axios
+        .get(`/listings/user/search/${category}`)
+        .then(function (response) {
+          const listings = response.data;
+          const cardContainer = document.getElementById("cardmain");
+          // cardContainer.innerHTML = '';
+          let card = "";
 
-                    if (Array.isArray(listings)&& listings.length > 0) {
-                        listings.forEach(listing => {
-
-                            // prices discount 2000
-                            let basePrice;
-                            if (listing.price > 2000) {
-                                basePrice = listing.price - 2000;
-
-                            }
-                            else {
-                                basePrice = listing.price - 100;
-                            }
-                             card = card+`
-          <a href="/listings/${listing._id}" class="block  rounded-lg shadow-lg overflow-hidden" style="height: 26rem; width: 20.2rem;">
+          if (Array.isArray(listings) && listings.length > 0) {
+            listings.forEach((listing) => {
+              // prices discount 2000
+              let basePrice;
+              if (listing.price > 2000) {
+                basePrice = listing.price - 2000;
+              } else {
+                basePrice = listing.price - 100;
+              }
+              card =
+                card +
+                `
+          <a href="/listings/${listing._id}" class="block  rounded-lg shadow-lg overflow-hidden" style="height: 26rem; width: 21rem;">
            <img src="${listing.image.Url}" class="w-full h-64 object-cover" alt="image">
             <div class="p-1 px-2 py-4 bg-zinc-200 h-full w-full">
             <p class="text-black text-xl font-bold mb-1">
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
             <p class="text-xl text-wrap text-black font-bold">${listing.title}</p>
 <p class="text-base text-gray-600 py-2 flex items-center">
                                                 <i class="fa-solid fa-map-marker-alt text-red-500 mr-2"></i>
-                                                ${ listing.location }
+                                                ${listing.location}
                                             </p>            <div class="flex justify-between w-full py-1 border-t-2 border-yellow-800">
                 <div><i class="fas fa-bath text-green-500 mr-2"></i>${listing.bathroom}</div>
                 <div><i class="fas fa-bed text-purple-500 mr-2"></i>${listing.bed}</div>
@@ -48,15 +48,16 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     </a>
 `;
-                            cardContainer.innerHTML = card;
-                        });
-                    } else {
-                        cardContainer.innerHTML = '<p class="w-full p-4 h-20 font-semibold bg-red-400 text-center ">No results found.</p>';
-                    }
-                })
-                .catch(function (error) {
-                    console.error('Error fetching data:', error);
-                });
+              cardContainer.innerHTML = card;
+            });
+          } else {
+            cardContainer.innerHTML =
+              '<p class="w-full p-4 h-20 font-semibold bg-red-400 text-center ">No results found.</p>';
+          }
+        })
+        .catch(function (error) {
+          console.error("Error fetching data:", error);
         });
     });
+  });
 });
