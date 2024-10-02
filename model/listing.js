@@ -7,9 +7,11 @@ const ListingSchema = mongoose.Schema(
     title: {
       type: String,
       required: true,
+      lowercase: true,
     },
     description: {
       type: String,
+      lowercase: true,
     },
     image: {
       Url: String,
@@ -20,9 +22,11 @@ const ListingSchema = mongoose.Schema(
     },
     location: {
       type: String,
+      lowercase: true,
     },
     country: {
       type: String,
+      lowercase: true,
     },
     Reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Review" }],
     owner: {
@@ -41,6 +45,8 @@ const ListingSchema = mongoose.Schema(
     typeofhouse: {
       type: String,
       require: true,
+      lowercase: true,
+      default: "rent",
     },
 
     areaHousewidth: {
