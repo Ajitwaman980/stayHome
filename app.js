@@ -83,13 +83,14 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user;
   next();
 });
+
 // Routes
 app.use("/", indexRouter);
-
 app.use("/listings", limiterConfig, listingRoute); //listing Route
 app.use("/listings/:id/reviews", limiterConfig, reviewRoute); //Review route
 app.use("/", limiterConfig, userRoute); //user router
 app.use("/listings/category", limiterConfig, categoryRoute); //category route
+
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -103,7 +104,6 @@ app.use(function (err, req, res, next) {
 
   // Render the error page
   res.status(err.status || 500);
-  // res.send("this is erroro");
   return res.render("listing/error.ejs");
 });
 // ........... cluster.........
