@@ -1,4 +1,4 @@
-<nav id="Navbar" class=" w-full h-20 bg-white text-gray-800">
+<nav id="Navbar" class=" w-full border-b-2 p-2  h-24 bg-zinc-200 text-gray-800">
   <div id="mainnavbar" class="flex items-center justify-between w-full h-full px-3">
     <a id="logo" class="flex items-center  p-2 space-x-2 hover:text-blue-700 transition-all duration-200"
       href="/listings">
@@ -22,14 +22,60 @@
     <div id="newlisting" class="flex gap-4 items-center justify-center">
       <!-- desktop view -->
       <% if (currentUsser) { %>
-        <a id="addlist" class="nav-link w-40 flex text-1xl font-sans font-bold bg-green-600 text-white p-2 rounded-lg"
-          href="/listings/new">List Your Property</a>
+        <a id="addlist"
+          class="nav-link w-40 flex text-1xl justify-center font-sans font-bold bg-green-600 text-white p-2 rounded-lg"
+          href="/listings/new">Add Property</a>
 
-        <a id="desklogout" class="nav-link  text-gray-700 hover:text-black" href="/logout">
-          <i class="fa-solid fa-right-to-bracket text-4xl text-red-600"></i>
-        </a>
+        <!-- <a class="nav-link text-gray-700 rounded-3xl " href="/logout"></a> -->
+        <div id="desklogout"
+          class="bg-black cursor-default rounded-full mr-2 w-12 h-12 flex items-center justify-center">
+          <span class="text-white  first_words">
+            <%=currentUsser.username[0].toUpperCase() %>
+          </span>
+          <div class="bg-white border w-auto  mt-48 mr-64   z-10  hidden" id="dropdown">
+            <ul class=" text-gray-700 font-semibold w-64 h-44 p-2 space-y-4">
+
+              <li class="flex w-full items-center py-1 border-b-2">
+                <!-- Initials Circle -->
+                <div
+                  class="bg-black cursor-default rounded-full mt-0 mr-4 w-7 h-7 border-b-black flex items-center justify-center">
+                  <span class="text-white text-sm">
+                    <%= currentUsser.username[0].toUpperCase() %>
+                  </span>
+                </div>
+
+                <!-- User Info (Username & Email) -->
+                <div class="flex flex-col">
+                  <span class="font-sans">
+                    <%= currentUsser.username %>
+                  </span>
+                  <span class="text-gray-600 font-thin">
+                    <%= currentUsser.email %>
+                  </span>
+                </div>
+              </li>
+              <!-- profile -->
+              <li class="flex items-center border-b-2 py-1 mb-2">
+                <span class="material-icons text-blue-400 mr-2">account_circle</span>
+                <a href="/user/v1/<%= currentUsser._id %>/profile" class=""><span
+                    class="font-thin text-xl">Profile</span></a>
+              </li>
+              <!-- logout -->
+              <li class="flex items-center hover:bg-zinc-400">
+                <span class="material-icons text-red-400 mr-2">logout</span>
+                <a href="/logout" class=" font-thin text-xl">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
         <% } %>
+          <script>
 
+
+            document.querySelector('#desklogout').addEventListener('click', () => {
+              document.getElementById('dropdown').classList.toggle('hidden');
+            });
+          </script>
 
           <!-- mobile view  -->
 
@@ -52,7 +98,8 @@
                   <i class="fa-regular fa-user text-2xl"></i>
                 </a>
                 <a id="singup" class="nav-link font-bold bg-green-600 text-white py-2 px-4 rounded-lg"
-                  href="/signUp">Sign Up</a>
+                  href="/signUp">Sign
+                  Up</a>
                 <% } %>
 
     </div>
