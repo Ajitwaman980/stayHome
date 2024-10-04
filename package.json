@@ -42,7 +42,7 @@
     "passport-local-mongoose": "^8.0.0",
     "path": "^0.12.7",
     "stripe": "^16.1.0",
-    "vercel": "^37.2.1"
+    "vercel": "^32.3.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
