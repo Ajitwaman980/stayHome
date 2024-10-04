@@ -1,8 +1,7 @@
-# StaySimple Rent Your House Easily
-Welcome to StaySimple, your trusted platform for effortlessly renting out your property.
-
-https://styesimple.onrender.com
- 
+# Express TypeScript CRUD API
+  Clone the repository:
+   git clone https://github.com/Ajitwaman980/Employee-management-demo.git
+   
    Install dependencies:
    ```
    npm install
@@ -12,3 +11,4 @@ https://styesimple.onrender.com
    ```
    npm start
    ```
+
