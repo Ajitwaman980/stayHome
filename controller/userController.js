@@ -60,6 +60,7 @@ const verifyCodeAndSignUp = async (req, res) => {
   }
   try {
     // Create new
+
     if (code == verification_code) {
       const newUser = new User_model({
         username,
