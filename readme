@@ -1,7 +1,8 @@
 # StaySimple: Rent Your House Easily
 Welcome to StaySimple, your trusted platform for effortlessly renting out your property.
 
-[Visit StaySimple](https://styesimple.onrender.com)
+https://styesimple.onrender.com
+``````
+npm i 
+`````
 
-```bash
-$ npm install <button onclick="navigator.clipboard.writeText('npm install')">📋</button>
