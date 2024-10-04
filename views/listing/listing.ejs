@@ -17,12 +17,12 @@
                     <!-- Navbar -->
 
                     <!-- Listings Section -->
-                    <div id="cardmain" class="bg-gray-100 flex flex-wrap gap-4 p-3  scroll-smooth px-3 py-4">
+                    <div id="cardmain" class=" bg-zinc-200 flex flex-wrap gap-4 p-3  scroll-smooth px-3 py-4">
                         <div class="flex flex-wrap h-full justify-center gap-4">
                             <% for (const Listing of data) { %>
                                 <a href="/listings/<%= Listing._id %>"
                                     class="block rounded-lg shadow-lg overflow-hidden"
-                                    style="height: 26.5rem; width: 23rem;">
+                                    style="height: 26.5rem; width: 21rem;">
                                     <div class="relative">
                                         <img src="<%= Listing.image.Url %>" class="w-full  object-cover" loading="lazy"
                                             alt="image" style="height:17.3rem ;">
@@ -98,13 +98,14 @@
                     </div>
 
                     <!-- Company Details -->
-                    <div class="flex flex-col text-wrap bg-gray-100 justify-start  px-4 py-8">
+                    <div class="flex flex-col text-wrap  mt-4 bg-zinc-200 justify-start  px-4 py-4">
                         <div class="text-3xl justify-start font-bold mb-2 px-3">
                             <h3>Start Your Real Estate Journey Today</h3>
                         </div>
                         <div class="text-xl font-Poppins mb-2 w-full text-gray-400 px-3">
                             <p>Your dream property is just a click away. Whether you're looking for a new home,
-                                a strategic investment, or expert real estate advice, SatyHome is here to assist
+                                a strategic investment, or expert real estate advice, <b>SatyHome</b> is here to
+                                assist
                                 you every step of the way. Take the first step towards your real estate goals and
                                 explore our available properties or get in touch with our team for personalized
                                 assistance.
@@ -113,36 +114,36 @@
                     </div>
 
                     <!-- FAQs Section -->
-                    <div class="bg-gray-100 py-4 px-4">
+                    <div class=" bg-zinc-200 py-4 px-4">
                         <div class="container mx-auto max-w-4xl">
-                            <h2 class="text-3xl font-bold mb-4 text-center text-gray-800">FAQs</h2>
+                            <h2 class="text-3xl font-semiblod mb-3 text-center text-gray-800">FAQs</h2>
                             <div class="space-y-4">
                                 <!-- FAQ Questions -->
-                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                <details class="bg-white p-3 rounded-lg  border">
                                     <summary class="text-xl font-semibold text-gray-800 cursor-pointer">1. What types of
                                         properties are available?</summary>
                                     <p class="text-gray-600 mt-2">We have homes, apartments, and vacation rentals for
                                         you to choose from.</p>
                                 </details>
-                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                <details class="bg-white p-3 rounded-lg  border">
                                     <summary class="text-xl font-semibold text-gray-800 cursor-pointer">2. How can I
                                         book a property visit?</summary>
                                     <p class="text-gray-600 mt-2">You can easily book a visit through our website or by
                                         calling us.</p>
                                 </details>
-                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                <details class="bg-white p-3 rounded-lg  border">
                                     <summary class="text-xl font-semibold text-gray-800 cursor-pointer">3. Do you offer
                                         help with loans?</summary>
                                     <p class="text-gray-600 mt-2">Yes, we can help you connect with loan advisors to get
                                         financing.</p>
                                 </details>
-                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                <details class="bg-white p-3 rounded-lg  border">
                                     <summary class="text-xl font-semibold text-gray-800 cursor-pointer">4. How do I
                                         apply to rent a property?</summary>
                                     <p class="text-gray-600 mt-2">Just fill out the simple application form on our
                                         website.</p>
                                 </details>
-                                <details class="bg-white p-3 rounded-lg shadow-md">
+                                <details class="bg-white p-3 rounded-lg  border">
                                     <summary class="text-xl font-semibold text-gray-800 cursor-pointer">5. Can I list my
                                         property for sale here?</summary>
                                     <p class="text-gray-600 mt-2">Yes, you can contact us to add your property to our
