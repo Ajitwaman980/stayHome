@@ -3,14 +3,15 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
+
+//routes
+
 const methodOverride = require("method-override");
-const indexRouter = require("./routes/index");
+
 const ejs = require("ejs");
 const ejsMate = require("ejs-mate"); // Boilerplate ejs
 const multer = require("multer");
 const upload = multer({ dest: "uploads/" });
-const listingRoute = require("./routes/listingroute");
-const reviewRoute = require("./routes/reviewsRoute");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
@@ -18,10 +19,8 @@ const passport = require("passport");
 const passport_local_mongoose = require("passport-local-mongoose");
 const Localpassport = require("passport-local");
 const User_model = require("./model/user");
-const userRoute = require("./routes/usersRoute");
 const { env } = require("process");
 const ConnectDB = require("./config/mogoConnection_config");
-const categoryRoute = require("./routes/category");
 const app = express();
 // csp helmet
 
@@ -45,10 +44,12 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
 // helmet csp  Content Security Policy
+// Session Setup
 
 // store in atlas
 const store = MongoStore.create({
-  mongoUrl: process.env.MongodbAtlas,
+  mongoUrl: process.env.mogodb_local,
+  collectionName: "sessions",
   crypto: {
     secret: process.env.SESSION_SCERT,
   },
@@ -69,14 +70,14 @@ app.use(
 // flash
 app.use(flash());
 
-// authentication middleware
+// authentication middleware  Passport Setup
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new Localpassport(User_model.authenticate()));
-
 passport.serializeUser(User_model.serializeUser());
 passport.deserializeUser(User_model.deserializeUser());
-//
+
+// middleware for local vriables stored in session
 app.use((req, res, next) => {
   console.log((res.locals.currentUsser = req.user));
   // stored the user data
@@ -84,12 +85,17 @@ app.use((req, res, next) => {
   next();
 });
 
-// Routes
-app.use("/", indexRouter);
-app.use("/listings", limiterConfig, listingRoute); //listing Route
-app.use("/listings/:id/reviews", limiterConfig, reviewRoute); //Review route
-app.use("/", limiterConfig, userRoute); //user router
-app.use("/listings/category", limiterConfig, categoryRoute); //category route
+// Routes middleware
+app.use("/", require("./routes/index"));
+app.use("/listings", limiterConfig, require("./routes/listingroute"));
+app.use(
+  "/listings/:id/reviews",
+  limiterConfig,
+  require("./routes/reviewsRoute")
+);
+app.use("/", limiterConfig, require("./routes/usersRoute"));
+app.use("/listings/category", limiterConfig, require("./routes/category"));
+app.use("/user/v1", limiterConfig, require("./routes/userprofileRoutes"));
 
 // Catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -101,7 +107,7 @@ app.use(function (err, req, res, next) {
   // Set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};
-
+  console.log(err);
   // Render the error page
   res.status(err.status || 500);
   return res.render("listing/error.ejs");
