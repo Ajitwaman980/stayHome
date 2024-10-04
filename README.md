@@ -6,3 +6,12 @@ git clone
 ```
 https://styesimple.onrender.com/
 ```
+Install dependencies:
+   ```
+   npm install
+   ```
+   
+   Build and run the server
+   ```
+   npm start
+   ```
