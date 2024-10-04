@@ -1,0 +1,25 @@
+<% layout("/layout/biolerplate.ejs") -%>
+
+    <body class="bg-gray-100 ">
+        <div class="container mx-auto w-full h-screen p-6">
+            <header class="mb-6 text-center">
+                <h1 class="text-3xl font-bold text-blue-600">User Profile</h1>
+            </header>
+
+            <div class="user-info bg-white shadow-md rounded-lg p-6">
+                <h2 class="text-xl font-semibold">Welcome, <%= user.username %>!</h2>
+                <div class="mt-4">
+                    <p class="mb-2"><strong>Username:</strong>
+                        <%= user.username %>
+                    </p>
+                    <p><strong>Email:</strong>
+                        <%= user.email %>
+                    </p>
+                </div>
+                <div class="mt-6">
+                    <a href="/edit-profile" class="text-blue-500 hover:underline">Edit Profile</a>
+                    <a href="/logout" class="text-red-500 hover:underline ml-4">Logout</a>
+                </div>
+            </div>
+        </div>
+    </body>
