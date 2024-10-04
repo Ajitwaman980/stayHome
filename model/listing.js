@@ -56,12 +56,11 @@ const ListingSchema = mongoose.Schema(
     },
     areaHouseheight: {
       type: Number,
-
       min: 0,
     },
     categories: {
       type: [String],
-      default: ["Home"],
+      default: ["home"],
     },
   },
   { timestamps: true }
