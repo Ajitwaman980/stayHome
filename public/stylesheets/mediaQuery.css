@@ -1,12 +1,12 @@
 #loginmedia {
   display: none;
 }
-#addlistmobile{
+#addlistmobile {
   display: none;
 }
 
-#logoutmobile{
-  display: none; 
+#logoutmobile {
+  display: none;
 }
 
 @media (max-width: 500px) {
@@ -43,57 +43,53 @@
   .search-container form {
     width: 100%;
   }
-  #signup_page{
-      padding: 0;
+  #signup_page {
+    padding: 0;
   }
-  #addlist{
-      display: none;
+  #addlist {
+    display: none;
   }
-  #desklogout{
-      display: none;
+  #desklogout {
+    display: none;
   }
-  #addlistmobile{
-      display: block;
-      justify-content: space-evenly;
-      align-items: center;
-      width: 100%;
-      font-size: 1rem;
-
+  #addlistmobile {
+    display: block;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    font-size: 1rem;
   }
-  #logoutmobile{
-      display: block;
-     
+  #logoutmobile {
+    display: block;
   }
   #newlisting {
-      display: flex !important;
-      justify-content: space-evenly !important;
-      align-items: center;
-      font-size: small;
-       }
-       #category {
-        display: flex;
-        overflow-x: auto; /* Enables horizontal scrolling */
-        white-space: nowrap; /* Prevents wrapping of items */
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
-      }
-      
-      /* Optional: Style for the scrollbar */
-      #category::-webkit-scrollbar {
-        width: 8px;
-      }
-      
-      #category::-webkit-scrollbar-thumb {
-        background-color: darkgrey;
-        border-radius: 4px;
-      }
-      #category::-webkit-scrollbar {
-        display: none;
-      }
-      #category::-webkit-scrollbar-track {
-        background-color: transparent;
-      }
+    display: flex !important;
+    justify-content: space-evenly !important;
+    align-items: center;
+    font-size: small;
+  }
+  #category {
+    display: flex;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents wrapping of items */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
+  }
 
+  /* Optional: Style for the scrollbar */
+  #category::-webkit-scrollbar {
+    width: 8px;
+  }
 
+  #category::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 4px;
+  }
+  #category::-webkit-scrollbar {
+    display: none;
+  }
+  #category::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 }
 /* 400 */
 
@@ -112,22 +108,23 @@
     box-sizing: border-box;
   }
 
-  #logo, #login, #singup {
+  #logo,
+  #login,
+  #singup {
     display: none;
   }
 
   #loginmedia {
     padding-left: 3.7rem !important;
-   
   }
 
   .search-container {
     display: flex;
-    width: 60% !important; 
+    width: 60% !important;
     justify-content: flex-start;
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   .search-container button {
@@ -138,24 +135,28 @@
     flex-grow: 1;
     border: none !important;
     box-sizing: border-box;
-    margin: 0; 
-    padding: 0; 
+    margin: 0;
+    padding: 0;
   }
 
   .search-container form {
     width: 100%;
     margin-right: 1rem;
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
-  #addlist, #desklogout {
+  #addlist,
+  #desklogout {
     display: none;
   }
 
   #addlistmobile {
-    width: 2rem !important;
+    width: 1rem !important;
+    display: flex;
+    justify-content: center;
+    margin-left: -1rem;
   }
 
   #logoutmobile {
@@ -182,9 +183,9 @@
     overflow-x: auto;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    box-sizing: border-box; 
-    margin: 0; 
-    padding: 0; 
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
   }
 
   #category::-webkit-scrollbar {
@@ -204,8 +205,9 @@
     background-color: transparent;
   }
   /* login pages */
-  #login_page , #signup_page{
- margin: 1rem;
- box-sizing: border-box ;
+  #login_page,
+  #signup_page {
+    margin: 1rem;
+    box-sizing: border-box;
   }
 }
