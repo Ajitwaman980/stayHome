@@ -11,3 +11,5 @@ logs
 .env
 #vs code 
 .vscode/
+# file
+documentaions.txt

@@ -96,6 +96,23 @@
                                 <% } %>
                         </div>
                     </div>
+                    <!-- pagination -->
+                    <div class="flex justify-center items-center my-4">
+                        <% if (page> 1) { %>
+                            <a href="/listings?page=<%= page - 1 %>"
+                                class="bg-blue-600 text-white px-4 py-2 rounded-l hover:bg-blue-700 transition duration-200">Previous</a>
+                            <% } %>
+
+                                <span class="mx-4 text-lg font-semibold">Page <%= page %></span>
+
+                                <% if (data.length===limit) { %>
+                                    <a href="/listings?page=<%= page + 1 %>"
+                                        class="bg-blue-600 text-white px-4 py-2 rounded-r hover:bg-blue-700 transition duration-200">Next</a>
+                                    <% } %>
+                    </div>
+
+                    <!-- Pagination Controls -->
+
 
                     <!-- Company Details -->
                     <div class="flex flex-col text-wrap  mt-4 bg-zinc-200 justify-start  px-4 py-4">

@@ -7,13 +7,13 @@ module.exports.ListingSchema_validation = Joi.object({
   price: Joi.number().required(),
   location: Joi.string().required(),
   country: Joi.string().required(),
-  image: Joi.string().uri().allow(''),
-  bed:Joi.number().required(),
+  image: Joi.string().uri().allow(""),
+  bed: Joi.number().required(),
   bathroom: Joi.number().required(),
   areaHousewidth: Joi.number().required(),
   areaHouseheight: Joi.number().required(),
-  categories:Joi.string().required(),
-  typeofhouse:Joi.string().required(),
+  categories: Joi.string().required(),
+  typeofhouse: Joi.string().required(),
 }).required();
 module.exports.ReviewSchema_validation = Joi.object({
   Comment: Joi.string().required(),

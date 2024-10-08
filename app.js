@@ -48,7 +48,7 @@ app.engine("ejs", ejsMate);
 
 // store in atlas
 const store = MongoStore.create({
-  mongoUrl: process.env.MongodbAtlas,
+  mongoUrl: process.env.mogodb_local,
   collectionName: "sessions",
   crypto: {
     secret: process.env.SESSION_SCERT,
