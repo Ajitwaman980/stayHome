@@ -33,6 +33,7 @@ const limiterConfig = require("./middleware/services/limiter");
 // View engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+app.set("trust proxy", 1);
 
 // Middleware
 app.use(logger("dev"));
