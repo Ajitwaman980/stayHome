@@ -7,15 +7,15 @@ async function sendVerificationEmail(to, code) {
     const transport = nodemailer.createTransport({
       service: "Gmail",
       auth: {
-        user: process.env.email_id,
-        pass: process.env.password,
+        user: process.env.EMAIL_ID,
+        pass: process.env.PASSWORD,
       },
       secure: true,
     });
 
     // Send email
     let mailData = await transport.sendMail({
-      from: process.env.email_id, // Sender email
+      from: process.env.EMAIL_ID, // Sender email
       to: to, // Receiver email
       subject: "verification account",
       text: `Your verification code is: ${code}.
