@@ -51,7 +51,7 @@ app.use(compression());
 
 // store in atlas
 const store = MongoStore.create({
-  mongoUrl: process.env.MongodbAtlas,
+  mongoUrl: process.env.MONGODB_ATLAS,
   collectionName: "sessions",
   crypto: {
     secret: process.env.SESSION_SCERT,
