@@ -17,7 +17,7 @@ let mycache = new NodeCache(); //cache instance is created
 async function handleRetrieveData(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = 4; // items per page
+    const limit = 8; // items per page
     const skip = (page - 1) * limit; // 2-1 *10 =10 3-1*10 =20 skip items
     let data;
     const data_retrieve = `page_${page}_limit_${limit}`;
