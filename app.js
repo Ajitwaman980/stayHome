@@ -21,6 +21,7 @@ const Localpassport = require("passport-local");
 const User_model = require("./model/user");
 const { env } = require("process");
 const ConnectDB = require("./config/mogoConnection_config");
+const compression = require("compression");
 const app = express();
 // csp helmet
 
@@ -43,6 +44,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
+app.use(compression());
 
 // helmet csp  Content Security Policy
 // Session Setup
