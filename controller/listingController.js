@@ -89,20 +89,19 @@ async function GetlistingByid(req, res) {
   let { id } = req.params;
   try {
     let listing_info;
-    const mycache_key = "getbyid";
-    if (mycache.has(mycache_key)) {
-      console.log("Cache hit for getbyid");
-      listing_info = await mycache.get(mycache_key);
-    } else {
-      listing_info = await Listing.findById(id)
-        .lean()
-        .populate({
-          path: "Reviews",
-          populate: { path: "author" },
-        })
-        .populate("owner", "username");
-      mycache.set(mycache_key, listing_info);
-    }
+    // const mycache_key = "getbyid";
+    // if (mycache.has(mycache_key)) {
+    //   console.log("Cache hit for getbyid");
+    //   listing_info = await mycache.get(mycache_key);
+    // } else {
+    listing_info = await Listing.findById(id)
+      .lean()
+      .populate({
+        path: "Reviews",
+        populate: { path: "author" },
+      })
+      .populate("owner", "username");
+
     // console.log(listing_info);
     // let data = await Listing.findById(id).populate("owner", "username");
     // console.log(data);
