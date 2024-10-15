@@ -1,8 +1,11 @@
 const Redis = require("redis");
 require("dotenv").config();
 //  "redis://localhost:6379"
+const redisUrl = process.env.NODE_ENV === "production";
+("redis://red-cs7bff8gph6c73fhppmg:6379"); // Internal URL
+
 const redisclient = Redis.createClient({
-  url: process.env.REDIS_URL || "redis://localhost:6379",
+  url: redisUrl,
 });
 
 redisclient.on("error", (err) => {
