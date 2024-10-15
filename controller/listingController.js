@@ -40,16 +40,16 @@ async function handleRetrieveData(req, res) {
     const data_retrieve = `page_${page}_limit_${limit}`;
 
     // redis
-    const cachedData = await redisclient.get(data_retrieve);
+    // const cachedData = await redisclient.get(data_retrieve);
 
-    if (cachedData) {
-      console.log("Cache hit");
-      data = JSON.parse(cachedData);
-    } else {
-      console.log("Cache miss, fetching from DB");
-      data = await Listing.find({}).skip(skip).limit(limit).lean();
-      redisclient.setEx(data_retrieve, 3600, JSON.stringify(data));
-    }
+    // if (cachedData) {
+    //   console.log("Cache hit");
+    //   data = JSON.parse(cachedData);
+    // } else {
+    //   console.log("Cache miss, fetching from DB");
+    data = await Listing.find({}).skip(skip).limit(limit).lean();
+    //   redisclient.setEx(data_retrieve, 3600, JSON.stringify(data));
+    // }
 
     const success = req.flash("success");
     const error = req.flash("error");
