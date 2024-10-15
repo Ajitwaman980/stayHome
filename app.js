@@ -20,7 +20,9 @@ const passport_local_mongoose = require("passport-local-mongoose");
 const Localpassport = require("passport-local");
 const User_model = require("./model/user");
 const { env } = require("process");
+// connections mongo and redis
 const ConnectDB = require("./config/mogoConnection_config");
+const connetRedis = require("./config/Redis_connections");
 const compression = require("compression");
 const app = express();
 // csp helmet

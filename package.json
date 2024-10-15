@@ -42,6 +42,7 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0",
     "path": "^0.12.7",
+    "redis": "^4.7.0",
     "stripe": "^16.1.0",
     "vercel": "^32.3.0"
   },
