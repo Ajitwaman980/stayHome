@@ -9,7 +9,7 @@ const statusCodes = require("../utility/statuscoded.js");
 const NodeCache = require("node-cache"); // Cache module
 let mycache = new NodeCache(); // Cache instance is created
 const Redis = require("redis");
-const redisclient = require("../config/Redis_connections.js");
+// const redisclient = require("../config/Redis_connections.js");
 // const redisclient = Redis.createClient({
 //   url: "redis://localhost:6379",
 // });
