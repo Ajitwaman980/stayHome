@@ -1,34 +1,12 @@
-const error = require("mongoose/lib/error/index.js");
 const Listing = require("../model/listing.js"); // Listing model
-const User = require("../model/user.js"); // User model
-const flash = require("connect-flash");
 
 const statusCodes = require("../utility/statuscoded.js");
 
 // Caching functions
-const NodeCache = require("node-cache"); // Cache module
-let mycache = new NodeCache(); // Cache instance is created
+// const NodeCache = require("node-cache"); // Cache module
+// let mycache = new NodeCache(); // Cache instance is created
 const Redis = require("redis");
-// const redisclient = require("../config/Redis_connections.js");
-// const redisclient = Redis.createClient({
-//   url: "redis://localhost:6379",
-// });
-
-// redisclient.on("error", (err) => {
-//   console.error("Redis error:", err);
-// });
-// async function connect() {
-//   try {
-//     await redisclient.connect();
-//     console.log("Connected to Redis");
-//   } catch (err) {
-//     console.error("Error connecting to Redis:", err);
-//     process.exit(1);
-//   }
-// }
-
-// // Call the connect function
-// connect();
+const redisclient = require("../config/Redis_connections.js");
 
 // Get all listings with pagination
 async function handleRetrieveData(req, res) {
@@ -40,16 +18,16 @@ async function handleRetrieveData(req, res) {
     const data_retrieve = `page_${page}_limit_${limit}`;
 
     // redis
-    // const cachedData = await redisclient.get(data_retrieve);
+    const cachedData = await redisclient.get(data_retrieve);
 
-    // if (cachedData) {
-    //   console.log("Cache hit");
-    //   data = JSON.parse(cachedData);
-    // } else {
-    //   console.log("Cache miss, fetching from DB");
-    data = await Listing.find({}).skip(skip).limit(limit).lean();
-    //   redisclient.setEx(data_retrieve, 3600, JSON.stringify(data));
-    // }
+    if (cachedData) {
+      console.log("Cache hit");
+      data = JSON.parse(cachedData);
+    } else {
+      console.log("Cache miss, fetching from DB");
+      data = await Listing.find({}).skip(skip).limit(limit).lean();
+      redisclient.setEx(data_retrieve, 3000, JSON.stringify(data));
+    }
 
     const success = req.flash("success");
     const error = req.flash("error");
