@@ -3,7 +3,7 @@ require("dotenv").config();
 //  "redis://localhost:6379"
 
 const redisclient = Redis.createClient({
-  url: process.env.REDIS_URL || process.env.REDIS_URL_LOCALHOST,
+  url: process.env.REDIS_URL,
   socket: {
     keepAlive: 10000,
   },
