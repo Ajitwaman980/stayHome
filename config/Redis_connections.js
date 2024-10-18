@@ -4,6 +4,9 @@ require("dotenv").config();
 
 const redisclient = Redis.createClient({
   url: process.env.REDIS_URL,
+  socket: {
+    keepAlive: 10000,
+  },
 });
 
 redisclient.on("error", (err) => {
