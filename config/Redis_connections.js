@@ -3,7 +3,7 @@ require("dotenv").config();
 //  "redis://localhost:6379"
 
 const redisclient = Redis.createClient({
-  url: process.env.REDIS_URL,
+  url: process.env.REDIS_URL || process.env.REDIS_URL_LOCALHOST,
   socket: {
     keepAlive: 10000,
   },
@@ -18,7 +18,7 @@ async function connect() {
     console.log("Connected to Redis");
   } catch (err) {
     console.error("Error connecting to Redis:", err);
-    process.exit(1);
+    setTimeout(connectRedis, 5000); // 5 seconds retry to connect
   }
 }
 connect();
