@@ -9,7 +9,7 @@ check -  https://styesimple.onrender.com/
 
 git clone 
 ```
-https://styesimple.onrender.com/
+https://styesimple.onrender.com/](https://github.com/Ajitwaman980/stayHome.git
 ```
 Install dependencies:
    ```
