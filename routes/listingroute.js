@@ -73,6 +73,7 @@ router.put(
 
 router.get("/user/search/:category", async (req, res) => {
   const category = req.params.category;
+  console.log("category", category);
   //  console.log(category);
   if (!category) {
     return res.status(statusCodes.BAD_REQUEST).redirect("/listings");
@@ -96,7 +97,7 @@ router.get("/user/search/:category", async (req, res) => {
   }
 });
 
-// /listings/user/search
+// /listings/user/search serch bar serching data
 router.post("/user/search", async (req, res) => {
   try {
     let { search_content } = req.body;
@@ -106,7 +107,9 @@ router.post("/user/search", async (req, res) => {
     }
 
     let regex = new RegExp(search_content, "i");
+    // console.log("this is regex", regex);
     let search_content_new = await Listing.find({ title: regex });
+    // console.log("this is serch", search_content_new);
     res
       .status(statusCodes.OK)
       .render("../views/listing/searchdata", { data: search_content_new });
