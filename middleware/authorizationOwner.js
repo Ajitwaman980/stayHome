@@ -6,7 +6,7 @@ const statuscode = require("../utility/statuscoded");
 const isOwner = async (req, res, next) => {
   try {
     let { id } = req.params;
-    console.log("owner id is ..............", id);
+    // console.log("owner id is ..............", id);
     const listing = await Listing.findById(id);
     if (!listing.owner._id.equals(res.locals.currentUser._id)) {
       req.flash("success", "Only owner permission to edit");

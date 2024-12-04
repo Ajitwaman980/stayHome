@@ -12,32 +12,32 @@ const redisclient = require("../config/Redis_connections.js");
 async function handleRetrieveData(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = 4; // Items per page
-    const skip = (page - 1) * limit; // Skip items for pagination
-    let data;
+    const limit = 8;
+    const skip = (page - 1) * limit;
     const data_retrieve = `page_${page}_limit_${limit}`;
-    // console.log(data_retrieve);
-    // redis
-    const cachedData = await redisclient.get(data_retrieve);
-    // console.log(cachedData);
-    if (cachedData) {
-      console.log("Cache hit");
-      data = JSON.parse(cachedData);
-    } else {
-      console.log("Cache miss, fetching from DB");
-      data = await Listing.find({}).skip(skip).limit(limit).lean();
-      // data_retrived is key
-      redisclient.setEx(data_retrieve, 3000, JSON.stringify(data));
-    }
-    // console.log(data);
 
-    const success = req.flash("success");
-    const error = req.flash("error");
-    res
-      .status(statusCodes.OK)
-      .render("listing/listing.ejs", { data, success, error, page, limit });
+    const cachedData = await redisclient.get(data_retrieve);
+    if (cachedData) {
+      return res.status(statusCodes.OK).render("listing/listing.ejs", {
+        data: JSON.parse(cachedData),
+        success: req.flash("success"),
+        error: req.flash("error"),
+        page,
+        limit,
+      });
+    }
+
+    const data = await Listing.find({}).skip(skip).limit(limit).lean();
+    await redisclient.setEx(data_retrieve, 3000, JSON.stringify(data));
+
+    return res.status(statusCodes.OK).render("listing/listing.ejs", {
+      data,
+      success: req.flash("success"),
+      error: req.flash("error"),
+      page,
+      limit,
+    });
   } catch (e) {
-    console.log("error ", e);
     res
       .status(statusCodes.INTERNAL_SERVER_ERROR)
       .render("../views/listing/error.ejs");

@@ -1,25 +1,82 @@
 <% layout("/layout/biolerplate.ejs") -%>
 
-    <body class="bg-gray-100 ">
-        <div class="container mx-auto w-full h-screen p-6">
-            <header class="mb-6 text-center">
-                <h1 class="text-3xl font-bold text-blue-600">User Profile</h1>
+    <body class="bg-gray-100">
+        <div class="container mx-auto p-6 max-w-lg">
+            <header class="mb-4 text-center">
+                <h1 class="text-2xl font-bold text-blue-500">User Profile</h1>
             </header>
 
-            <div class="user-info bg-white shadow-md rounded-lg p-6">
-                <h2 class="text-xl font-semibold">Welcome, <%= user.username %>!</h2>
-                <div class="mt-4">
-                    <p class="mb-2"><strong>Username:</strong>
+            <div class="bg-white rounded shadow p-4">
+                <h2 class="text-lg font-semibold mb-2">Welcome, <%= user.username %>!</h2>
+                <div class="text-sm text-gray-700 space-y-2">
+                    <p><strong>Username:</strong>
                         <%= user.username %>
                     </p>
                     <p><strong>Email:</strong>
                         <%= user.email %>
                     </p>
                 </div>
-                <div class="mt-6">
-                    <a href="/edit-profile" class="text-blue-500 hover:underline">Edit Profile</a>
-                    <a href="/logout" class="text-red-500 hover:underline ml-4">Logout</a>
+
+                <!-- Set New Password -->
+                <div class="mt-4">
+                    <label for="new_password" class="block text-sm font-medium text-gray-700 mb-1">New Password</label>
+                    <input type="password" id="new_password" placeholder="Enter new password"
+                        class="w-full border rounded px-2 py-1 text-sm text-gray-700">
+                    <button id="upadtepass"
+                        class="mt-2  bg-blue-500 text-white text-sm px-4 py-1 rounded hover:bg-blue-600 transition">
+                        Set Password
+                    </button>
                 </div>
+                <!--  -->
+                <script>
+                    const updatePasswordButton = document.getElementById("upadtepass");
+
+                    updatePasswordButton.addEventListener("click", async () => {
+                        try {
+
+                            const password = document.getElementById("new_password").value;
+                            if (!password) {
+                                alert("Please enter your new password")
+                                return;
+                            }
+                            const response = await axios.post("/user/v1/password/update", { New_password: password });
+                            alert("Password updated successfully!");
+                        } catch (err) {
+                            // Handle request errors
+                            alert("Password updated successfully!");
+
+                        }
+                    });
+                </script>
+
+
+                <!-- Additional Details -->
+                <div class="mt-4">
+                    <h3 class="text-sm font-semibold mb-2">Add More Details</h3>
+                    <form class="space-y-2">
+                        <div>
+                            <label for="address" class="block text-sm text-gray-700">Address</label>
+                            <input type="text" name="Useraddress" id="address" placeholder="Enter address"
+                                class="w-full border rounded px-2 py-1 text-sm text-gray-700">
+                        </div>
+                        <div>
+                            <label for="city" class="block text-sm text-gray-700">City</label>
+                            <input type="text" name="Usercity" id="city" placeholder="Enter city"
+                                class="w-full border rounded px-2 py-1 text-sm text-gray-700">
+                        </div>
+                        <div>
+                            <label for="phone" class="block text-sm text-gray-700">Phone Number</label>
+                            <input type="text" name="Userphone" id="phone" placeholder="Enter phone number"
+                                class="w-full border rounded px-2 py-1 text-sm text-gray-700">
+                        </div>
+                        <div class="mt-6 flex justify-between text-sm">
+                            <button class="bg-green-500 px-3 py-2 hover:underline">Save</a></button>
+                            <a href="/logout" class="bg-red-500 px-3 py-2  hover:underline">Logout</a>
+                        </div>
+                    </form>
+                </div>
+
+
             </div>
         </div>
     </body>

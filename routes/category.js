@@ -31,8 +31,11 @@ router.get("/cat/sell", async (req, res) => {
     // console.log(typeofhouse);
     res.status(statusCodes.OK).json(typeofhouse);
   } catch (error) {
-    console.error(error);
-    res.status(statusCodes.NOT_FOUND).json({ message: "Error fetching listings" });
+    // console.error(error);
+
+    res
+      .status(statusCodes.NOT_FOUND)
+      .json({ message: "Error fetching listings" });
   }
 });
 // rent
@@ -44,8 +47,10 @@ router.get("/cat/rent", async (req, res) => {
     // console.log(typeofhouse);
     res.status(statusCodes.OK).json(typeofhouse);
   } catch (error) {
-    console.error(error);
-    res.status(statusCodes.NOT_FOUND).json({ message: "Error fetching listings" });
+    // console.error(error);
+    res
+      .status(statusCodes.NOT_FOUND)
+      .json({ message: "Error fetching listings" });
   }
 });
 // low to high prices
@@ -56,8 +61,10 @@ router.get("/cat/low_to_high_price", async function (req, res) {
 
     res.status(statusCodes.OK).json(low_to_high_price);
   } catch (error) {
-    console.error(error);
-    res.status(statusCodes.NOT_FOUND).json({ message: "Error fetching listings" });
+    // console.error(error);
+    res
+      .status(statusCodes.NOT_FOUND)
+      .json({ message: "Error fetching listings" });
   }
 });
 router.get("/cat/high_to_low_price", async function (req, res) {
@@ -66,8 +73,10 @@ router.get("/cat/high_to_low_price", async function (req, res) {
     // console.log(high_to_low_price);
     res.status(statusCodes.OK).json(high_to_low_price);
   } catch (error) {
-    console.error(error);
-    res.status(statusCodes.NOT_FOUND).json({ message: "Error fetching listings" });
+    // console.error(error);
+    res
+      .status(statusCodes.NOT_FOUND)
+      .json({ message: "Error fetching listings" });
   }
 });
 

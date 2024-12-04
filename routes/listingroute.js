@@ -56,7 +56,7 @@ router.get("/:id/edit", isLogin, isOwner, async function (req, res) {
       .status(statusCodes.OK)
       .render("../views/listing/edit.ejs", { listing_info });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     req.flash("error", "Something went wrong");
     res.status(statusCodes.UNAUTHORIZED).redirect("/listings");
   }
@@ -92,7 +92,7 @@ router.get("/user/search/:category", async (req, res) => {
 
     res.status(statusCodes.OK).json(search_content_new);
   } catch (error) {
-    console.error("Error fetching data:", error);
+    // console.error("Error fetching data:", error);
     res.status(statusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
   }
 });
@@ -114,7 +114,7 @@ router.post("/user/search", async (req, res) => {
       .status(statusCodes.OK)
       .render("../views/listing/searchdata", { data: search_content_new });
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     req.flash("error", "Something went wrong");
     res.status(statusCodes.NOT_FOUND).redirect("/listings");
   }
