@@ -6,7 +6,7 @@ const sendVerificationEmail = require("../utility/sendmail.js");
 //crete new user
 const sendVerificationCode = async (req, res) => {
   const { username, email, password } = req.body;
-
+  console.log("sendVerificationCode", username, email, password);
   try {
     const existing_user_email = await User_model.findOne({ email });
     if (existing_user_email) {
@@ -16,6 +16,7 @@ const sendVerificationCode = async (req, res) => {
     // verification code
     const verification_code = Math.floor(1000 + Math.random() * 9000);
     // Store the username, email, password, and verification code in the session
+    console.log(verification_code);
     req.session.tempUser = {
       username,
       email,
