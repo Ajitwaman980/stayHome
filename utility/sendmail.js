@@ -10,7 +10,7 @@ async function sendVerificationEmail(to, code) {
         user: process.env.EMAIL_ID,
         pass: process.env.PASSWORD,
       },
-      secure: true,
+      secure: false,
     });
 
     // Send email
